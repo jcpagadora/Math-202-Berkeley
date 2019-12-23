@@ -1,0 +1,205 @@
+\chapter{Introduction to Topology}
+\section{Fundamentals}
+\begin{defn}
+Let $X$ be a set. A \ub{topology} on $X$ is a collection $\TT\subseteq\mathcal{P}(X)$ that satisfies:
+\begin{enumerate}
+\item[(1)] For any arbitrary family $\{\OO_{\alpha}\}\subseteq\TT,$ we have $\bigcup\limits_{\alpha}\OO_{\alpha} \in\TT.$
+\item[(2)] For $\OO_1,\hdots,\OO_n\in\TT,$ we have $\bigcap\limits_{j=1}^n \OO_j\in\TT.$
+\item[(3)] $X\in\TT, \varnothing\in\TT.$
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+\begin{itemize}
+\item If $\TT$ is a topology on $X,$ then $(X,\TT)$ is a \ub{topological space}. The sets in $\TT$ are called \ub{open}, and the complements of the sets in $\TT$ are \ub{closed}.
+\item For any $A\subseteq X,$ there is a smallest closed set containing $A,$ namely, the intersection of all closed sets containing $A$ (by DeMorgan's Laws, the arbitrary intersection of closed sets is closed). We denote such a set by the \ub{closure} of $A,$ denoted $\overline{A}.$
+\item If $\TT_1$ and $\TT_2$ are topologies on $X,$ and $\TT_1\subseteq\TT_2,$ we say that $\TT_1$ is \ub{weaker/coarser} than $\TT_2.$ $\TT_2$ is \ub{stronger/finer} than $\TT_1.$
+\end{itemize}
+\end{defn}
+
+\begin{prop}
+For any sets $A,B$ in a topological space, $\overline{A\cup B}=\overline{A}\cup\overline{B}.$ \\ \\
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\noindent Let $\CC$ be a collection of topologies on $X.$ It can be shown that $\bigcap\limits_{\TT\in\CC}\TT$ is a topology on $X.$ From this fact, it follows that for any non-empty collection $\mathcal{S}$ of subsets of $X,$ there is a smallest topology on $X$ that contains $\mathcal{S}.$
+
+\begin{defn}
+Let $\mathcal{B}\subseteq\TT.$ We say that $\mathcal{B}$ is a \ub{base} for $\TT$ if every element of $\TT$ is a union of elements in $\mathcal{B}.$
+\end{defn}
+
+\begin{prop}
+Let $X$ be a set, and let $\mathcal{B}$ be a collection of subsets of $X.$ If $\mathcal{B}$ has the property that for any $U,V\in\mathcal{B},$ $U\cap V$ is a union of elements of $\mathcal{B},$ then the collection of unions of elements of $\mathcal{B},$ then the collection of unions of elements in $\mathcal{B}$ is a topology for which $\mathcal{B}$ is a base. \\ \\
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\begin{defn}
+Let $\mathcal{S}$ be any collection of subsets of $X$ such that $\bigcup\limits_{V\in\mathcal{S}} V=X,$ and the set of finite intersections of elements of $\mathcal{S}$ is a base for a topology, then $\mathcal{S}$ is a \ub{sub-base} for that topology.
+\end{defn}
+
+\noindent \Ex The standard metric topology on $\R{n}$ has the base $\{B_r(x):r>0,\;x\in\R{n}\}.$ \\ A sub-base for $\R{}$ with the metric topology is the collection of open rays: $(-\infty,a)$ and $(b,\infty).$ \\
+\Ex Given a metric space $(X,d),$ we will always assume that it has a standard topology whose base consists of the open balls: $\{B_r(x):r>0,\;x\in X\}.$
+
+\section{Continuity}
+
+\begin{defn}
+Let $(X,\TT_x)$ and $(Y,\TT_y)$ be topological spaces. A function $f:X\rightarrow Y$ is \ub{continuous} for $\TT_x$ and $\TT_y$ if for any $U\in\TT_y,$ we have $f^{-1}(U)\in\TT_x.$
+\end{defn}
+
+\noindent\begin{itemize}
+\item It is clear that any composition of continuous functions on topological spaces is continuous.
+\item For any topological space $(X,\TT),$ the identity map $\iota:X\rightarrow X$ is continuous.
+\item The collection of topological spaces with continuous functions between them is a category.
+\end{itemize}
+
+\begin{defn}
+$f:X\rightarrow Y$ is \ub{homeomorphic} if $f$ is continuous, bijective, and has a continuous inverse.
+\end{defn}
+
+\begin{prop}
+$f:(X,\TT_x)\rightarrow (Y,\TT_y)$ is continuous iff for a base or sub-base $\CC$ for $\TT_y,$ we have $f^{-1}(U)\in\TT_x$ for $U\in\CC.$ \\ \\
+\pf{The forward direction is obvious. For the converse, we prove the case for $\CC$ a base. The case for $\CC$ a sub-base follows similarly (add on finite intersections). \\ Suppose $f^{-1}(U)\in\TT_x$ for any $U\in\CC.$ Let $V\in\TT_y.$ Since $\CC$ is a base, there is a collection of open sets $\mathcal{B}\subseteq\CC$ such that $V=\bigcup\limits_{A\in\mathcal{B}} A.$ Then $f^{-1}(V)=f^{-1}\Big(\bigcup\limits_{A\in\mathcal{B}} A\Big)=\bigcup\limits_{A\in\mathcal{B}} f^{-1}(A)\in\TT_x,$ since each $f^{-1}(A)$ is open.}
+\end{prop}
+
+\noindent\begin{itemize}
+\item Let $X$ be a set and let $(Y_{\alpha},\TT_{\alpha})$ be a collection of topological spaces, and for each $\alpha,$ let $f_{\alpha}:X\rightarrow Y_{\alpha}$ be a function. Then there is a smallest topology on $X$ for which each $f_{\alpha}$ is continuous, namely, the smallest topology having as sub-base all sets $f^{-1}_{\alpha}(U),$ where $U\in\TT_{\alpha}$ for all $\alpha.$
+\item Let $(X,\TT_x)$ be a topological space, and let $Y$ be a set with $f:X\rightarrow Y$ a function. What is the strongest topology on $Y$ making $f$ continuous?
+\begin{itemize}
+\item We need that if $A\subseteq Y$ is open, then $f^{-1}(A)\in\TT_x.$ \\ Let $\TT:=\{A\subseteq Y: f^{-1}(A)\in\TT_x\}.$ Then $\TT$ is easily seen to be a topology on $Y.$ This is called the \ub{quotient topology} on $Y$ for $f.$
+\end{itemize}
+\item Note that if $y\not\in f(X),$ then $f^{-1}(\{y\})=\varnothing,$ so $\{y\}$ is open. Also, $f^{-1}(\{y\}^c)=X,$ so $\{y\}$ is also closed. Therefore, on $f(X)^c,$ the quotient topology is discrete. Thus, we usually require $f:X\rightarrow Y$ to be onto.
+\end{itemize}
+
+\section{Quotient and Product Topologies}
+Let $f:X\rightarrow Y$ be onto, and define the equivalence relation on $X$ by $x_1\sim x_2$ iff $f(x_1)=f(x_2).$ Conversely, given any set $X,$ and an equivalence relation on $X,$ let $Y$ be the set of equivalence classes for $\sim.$ We often denote $Y$ by $X/\sim.$ Thus, given a topology on $X,$ we get the \ub{quotient topology} on $X/\sim.$ \\ \\
+Given a collection $\{(X_{\alpha},\TT_{\alpha})\}$ of topological spaces and a set $Y,$ and for each $\alpha$ a function $f_{\alpha}:X_{\alpha}\rightarrow Y,$ the strongest topology on $Y$ making all $f_{\alpha}$ continuous is the intersection of all quotient topologies for each $f_{\alpha}.$ This is called the \ub{final topology}. \\ \\
+\Ex Let $X=[0,1].$ Define the equivalence relation $s\sim t$ iff $s=t,$ and have $0\sim 1.$ That is, $\{0,1\}$ is an equivalence class.
+\begin{center}
+\begin{tikzpicture}
+\node[circle, fill=black, inner sep=0pt, minimum size=0.5pt, scale = 1, label = left:{$0$}] (a) at (-4,0) {};
+\node[circle, fill=black, inner sep=0pt, minimum size=0.5pt, scale = 1, label = right:{$1$}] (b) at (-2,0) {};
+\draw[-] (a) -- (b) node[midway, above] {$X$};
+\draw[fill=black] (-4,0) circle (1pt);
+\draw[fill=black] (-2,0) circle (1pt);
+\node (c) at (-1,0) {};
+\node (d) at (1,0) {};
+\draw[->] (c) to [bend left] (d);
+\draw (3,0) circle (1.3cm);
+\node at (3,1.8) {$X/\sim$};
+\draw[fill=black] (4.3,0) circle (1pt);
+\node at (5,0) {$\{0,1\}$};
+\end{tikzpicture}
+\end{center}
+
+\noindent Define $f:X\rightarrow\{z\in\C{}:|z|=1\}$ by $f(t)=e^{2\pi it},$ for $t\in[0,1].$ \\ Note that $f$ is continuous but $f^{-1}$ is not: there is a discontinuity at $1\in\C{}$. However, the corresponding function $f:X/\sim\rightarrow\{z\in\C{}:|z|=1\}$ is a homeomorphism with the usual topology from $\C{}.$ \\ \\
+
+\Ex Let $X_1=\{x\in\R{2}:\norm{x}_2\leq 1\},$ the closed unit disk in $\R{2}.$ Let $X_2$ be a copy of $X_1.$ Consider the disjoint union $X_1\cup X_2,$ and consider the following equivalence relation. Let $x,y$ be interior points of the same disk. Then $x\sim y$ iff $x=y.$ If $x$ is a boundary point of $X_1,$ and $y$ is a boundary point of $X_2,$ then $x\sim y$ iff they correspond to the same point in the plane. Similarly as in the previous example, one can visualize that $X_1\cup X_2/\sim$ is homeomorphic to the 2-sphere.
+
+\begin{defn}
+Let $X$ be a set, and let $\{Y_{\alpha}\}$ be a family of topological spaces. For each $\alpha,$ let $f_{\alpha}:X\rightarrow Y_{\alpha}$ be a function. The corresponding \ub{weak topology} on $X$ is the smallest topology making each $f_{\alpha}$ continuous. \\
+Fact: The weak topology has as sub-base all sets of the form $f_{\alpha}^{-1}(U),$ where $U$ is open in $Y_{\alpha}.$
+\end{defn}
+
+\begin{defn}
+Given $(X,\TT),$ and a subset $Y\subseteq X,$ the topology on $Y$ induced by $\TT$ is the \ub{relative topology}, which has $\{Y\cap\OO:\OO\in\TT\}$ as open sets.
+\end{defn}
+
+\begin{prop}
+If $A\subseteq X$ is closed, and $C\subseteq A$ is closed in the relative topology of $A,$ then $C$ is closed in $X.$ \\ \\
+\pf{$A\setminus C$ is open in $A.$ There is an open set $\OO\in\TT$ such that $A\setminus C=A\cap\OO\in\TT,$ so $C=A\cap\OO^c$ which is closed in $X.$}
+\end{prop}
+
+\begin{defn}
+Let $\{(X_{\alpha},\TT_{\alpha}\}$ be a collection of topological spaces indexed by $A.$ The \ub{product} space is defined by $\prod\limits_{\alpha\in A} X_{\alpha}:=\{h:A\rightarrow \bigcup\limits_{\alpha}X_{\alpha}\;|\; h(\alpha)\in X_{\alpha},\;\forall\alpha \}.$ \\ 
+The \ub{$\alpha$-th projection map} is $\pi_{\alpha}:\prod\limits_{\beta\in A} X_{\beta}\rightarrow X_{\alpha},$ defined by $\pi_{\alpha}(h)=h(\alpha).$
+\end{defn}
+
+\begin{defn}
+The \ub{product topology} on $\prod\limits_{\alpha\in A} X_{\alpha}$ is the weakest topology making all projections continuous. That is, it is the weak topology with respect to all the projection maps.
+\end{defn}
+
+\noindent Fact: In general, the product topology will have as a base all sets of the form $\prod_{\alpha\in A} U_{\alpha},$ where $U_{\alpha}\in\TT_{\alpha},$ and also $U_{\alpha}=X_{\alpha}$ for all but finitely-many $\alpha.$
+
+\begin{prop}
+Consider $f_{\alpha}:X\rightarrow Y_{\alpha}$ for $\alpha\in A.$ Let $\TT_x$ be the corresponding weak topology on $X.$ Let $(Z,\TT_z)$ be a topological space, and let $g:Z\rightarrow X.$ Then $g$ is continuous iff $f_{\alpha}\circ g$ is continuous for all $\alpha.$ \\ \\
+\pf{Suppose $f_{\alpha}\circ g$ is continuous for all $\alpha.$ It suffices to check on the sub-base. Let $\OO\in\TT_{\alpha}.$ Then $g^{-1}(f_{\alpha}^{-1}(\OO))=(f_{\alpha}\circ g)^{-1}(\OO)$ is open, hence $g$ is continuous. \\ Conversely, if $g$ is continuous, then $(f_{\alpha}\circ g)^{-1}(\OO)=g^{-1}(f_{\alpha}^{-1}(\OO))$ is open since $f_{\alpha}^{-1}(\OO)$ is open in $\TT_x,$ thus $(f_{\alpha}\circ g)$ is continuous.}
+\end{prop}
+
+\section{Special Topological Spaces}
+\begin{defn}
+\begin{itemize}
+\item A topological space $X$ is \ub{Hausdorff} if for any two distinct points $x_1,x_2\in X,$ there are disjoint open sets $\OO_1$ and $\OO_2$ such that $x_1\in\OO_1,$ and $x_2\in\OO_2.$
+\item $X$ is \ub{normal} if for any two disjoint closed sets $C_1,C_2,$ there are disjoint open sets $\OO_1,\OO_2$ such that $C_1\subseteq\OO_1,$ and $C_2\subseteq\OO_2.$
+\item A topological space is \ub{metrizable} if its topology comes from a metric, i.e., its base consists of open balls from some metric.
+\end{itemize}
+\end{defn}
+
+\noindent Clearly, every metrizable space with more than one element is Hausdorff. Suppose the topology is induced by a metric $d,$ and take two distinct points $x,y.$ Let $r=d(x,y).$ Then the open balls $B_{r/3}(x)$ and $B_{r/3}(y)$ are disjoint. More is true:
+
+\begin{prop}
+Every metrizable topological space is normal. \\ \\
+\pf{It suffices to consider a metric space $(X,d).$ Let $C_1,C_2$ be disjoint closed subsets of $X.$ For each $x\in C_1$ choose $\epsilon_x>0$ such that $B_{\epsilon_x}(x)\subseteq C_2^c,$ and for each $y\in C_2,$ choose $\epsilon_y>0$ such that $B_{\epsilon_y}(y)\subseteq C_1^c.$ \\ Let $\OO_1=\bigcup\limits_{x\in C_1} B_{\epsilon_x/3}(x),$ and $\OO_2=\bigcup\limits_{y\in C_2} B_{\epsilon_y/3}(y).$ Clearly, $\OO_1$ and $\OO_2$ are open. \\ Since $C_1\subseteq C_2^c,$ and $C_2\subseteq C_1^c,$ we have $C_1\subseteq\OO_1$ and $C_2\subseteq\OO_2.$ Toward contradiction, suppose $z\in\OO_1\cap\OO_2.$ Then there are $x'\in C_1$ and $y'\in C_2$ such that $z\in B_{\epsilon_{x'}/3}(x')$ and $z\in B_{\epsilon_{y'}/3}(y').$ But then 
+$$d(x',y')\leq d(x',z)+d(z,y')<\frac{\epsilon_{x'}}{3}+\frac{\epsilon_{y'}}{3}\leq \frac{2}{3}\max(\epsilon_{x'},\epsilon_{y'}).$$ This implies that $C_1\cap C_2\neq\varnothing,$ a contradiction, hence $\OO_1\cap\OO_2=\varnothing,$ as desired.}
+\end{prop}
+
+\noindent We now develop two important results: Urysohn's Lemma and Tietze's Theorem. Given topological spaces, there may not be many continuous functions between them, but in the case of normal spaces, these results demonstrate their abundance.
+
+\begin{frame*}
+\noindent\ub{Urysohn's Lemma}: Let $(X,\TT)$ be a normal topological space. Then for any two disjoint closed sets $C_0,C_1\subseteq X,$ there exists a continuous function $f:X\rightarrow\R{}$ such that $f(x)=0$ for $x\in C_0,$ and $f(x)=1$ for $x\in C_1.$
+\end{frame*}
+
+\noindent Urysohn's Lemma is easy for metric spaces. Let $d$ denote the metric, and let $A,B$ be disjoint closed subsets. For \textit{any} non-empty subset $E,$ we can define $\rho_E(x)=\inf\{d(x,y):y\in E\},$ which can be shown to be continuous. Furthermore, $\rho_E(x)=0$ iff $x\in \overline{E}.$ \\
+Define $\displaystyle f(x)=\frac{\rho_{A}(x)}{\rho_A(x)+\rho_B(x)}.$ One can easily check that this function yields the desired result of Urysohn's Lemma for metric spaces.
+
+\begin{lemma}
+Let $(X,\TT)$ be a normal space, and let $C$ be a closed subset. Let $\OO$ be an open subset such that $C\subseteq\OO.$ Then there exists an open set $U$ such that $C\subseteq U\subseteq \overline{U}\subseteq \OO.$ \\ \\
+\pf{$C$ and $\OO^c$ are disjoint closed sets, so there are disjoint open sets $U,V$ such that $C\subseteq U$ and $\OO^c\subseteq V.$ Then $C\subseteq U\subseteq V^c\subseteq \OO.$ $V^c$ is a closed set containing $U$; it therefore contains the closure $\overline{U},$ so that $C\subseteq U\subseteq\overline{U}\subseteq\OO.$}
+\end{lemma}
+
+\begin{frame*}
+\noindent \ub{Proof of Urysohn's Lemma}: By the lemma, there is an open set $\OO_{1/2}$ such that \\ $C_0\subseteq \OO_{1/2}\subseteq\overline{O}_{1/2}\subseteq C_1^c.$ Applying the lemma again, there are open sets $\OO_{1/4}$ and $\OO_{3/4}$ such that $C_0\subseteq\OO_{1/4}\subseteq\overline{\OO}_{1/4}\subseteq\OO_{1/2}\subseteq\overline{O}_{1/2}\subseteq\OO_{3/4}\subseteq\overline{\OO}_{3/4}\subseteq C_1^c.$ 
+Then there are open sets $\OO_{1/8},\OO_{3/8},\OO_{5/8},\OO_{7/8}$ such that $C_0\subseteq\OO_{1/8}\subseteq\overline{\OO}_{1/8}\subseteq\OO_{1/4}\subseteq\cdots\subseteq\overline{\OO}_{7/8}\subseteq C_1^c.$
+Continuing the pattern, for each dyadic rational number (numbers of the form $k2^{-n},$ for $n\in\mathbb{N},\; 0<k\leq 2^n-1$), we get an open set $\OO_{k2^{-n}},$ and if $s,t$ are dyadic rationals in $(0,1)$ such that $s<t,$ then $\overline{\OO}_s\subseteq\OO_t.$ \\
+Define $f:X\rightarrow[0,1]$ by $f(x)=\inf\{r: r\text{ is a dyadic rational},\; x\in\OO_r\}.$ \\
+Clearly, if $x\in C_0,$ then $x\in\OO_{2^{-n}}$ for any $n\in\mathbb{N},$ so it follows that $f(x)=0.$ On the other hand, if $x\in C_1,$ then $x\not\in \OO_{k2^{-n}}$ for any $n,k,$ hence $f(x)=1$ on $C_1.$ Thus, it remains to show that $f$ is continuous. Recall that it suffices to consider the sub-base of open rays. \\ \\ For $a\leq 0$ and $b\geq 1,$ we get $f^{-1}((-\infty,a))=f^{-1}((b,\infty))=\varnothing.$ For $a>1$ and $b<0,$ $f^{-1}((-\infty,a))=f^{-1}((b,\infty))=X.$ \\ Suppose $0\leq a<1.$ If $x\in X$ and $f(x)<a,$ then there is a dyadic rational $r$ such that $f(x)<r<a,$ so $x\in\OO_r,$ so $f^{-1}((-\infty,a))=\bigcup_{r<a}\OO_r,$ which is open. \\ Similarly, suppose $0\leq b<1.$ If $f(x)>b,$ then there is a dyadic rational $r$ such that $b<r<f(x),$ so $x\not\in\OO_r,$ so there is a dyadic rational $s$ such that $b<s<r,$ so $\overline{\OO}_s\subseteq\OO_r,$ so $x\not\in\overline{\OO}_s,$ so $x\in\overline{\OO}_s^c,$ which is open. Then $f^{-1}((b,\infty))=\bigcup_{s<b}\overline{\OO}_s^c,$ which is open. \;\; $\blacksquare$
+\end{frame*}
+
+\noindent Before we discuss Tietze's Theorem, we digress to talk about Banach spaces.
+\begin{defn}
+A \ub{Banach space} is a complete, normed vector space.
+\end{defn}
+
+\noindent Let $X$ be a set, and let $V$ be a normed vector space. Let $B(X,V)$ denote the set of all bounded functions from $X$ to $V,$ that is, functions whose range is contained in an open ball. Then it can easily be checked that $B(X,V)$ is a vector space for pointwise operations, and that $\norm{f}_{\infty}:=\sup\{\norm{f(x)}_V:\;x\in X\}$ is a norm on $B(X,V).$
+
+\begin{prop}
+If $V$ is a Banach space, then $B(X,V)$ with $\norm{\cdot}_{\infty}$ is a Banach space.\\ \\
+\pf{
+	Let $\{f_n\}$ be a Cauchy sequence in $B(X,V).$ For each $x\in X,$ the sequence $\{f_n(x)\}$ is Cauchy in $V,$ so by the completeness of $V,$ call the limit $f(x)=\lim f_n(x).$ It is easy to see that since all the $f_n$'s are bounded, the limit $f$ is bounded as well. We need to show that $f_n\rightarrow f$ in norm. Let $\epsilon>0.$ There exists $N_1\in\mathbb{N}$ such that for $n,m\geq N_1,$ we have $\norm{f_n-f_m}_{\infty}<\epsilon/2.$ For fixed $x\in X,$ there exists $N_2\in\mathbb{N}$ such that for $n\geq N_2,$ we have $\norm{f_n(x)-f(x)}<\epsilon/2.$ Then for $n\geq\max(N_1,N_2),$ we have $\norm{f_n(x)-f(x)}_{\infty}\leq\norm{f_n-f_{n+1}}_{\infty}+\norm{f_{n+1}(x)-f(x)}<\epsilon.$ Therefore $\norm{f_n-f}<\epsilon.$
+}
+\end{prop}
+
+\begin{prop}
+Let $(X,\TT)$ be a topological space, and let $C_b(X,V)$ be the set of bounded continuous functions from $X$ to $V.$ Then $C_b(X,V)$ is a closed subspace. \\ \\
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\begin{frame*}
+\noindent \ub{Tietze Extension Theorem}: Let $(X,\TT)$ be a normal topological space, and let $A$ be a closed subset of $X.$ Let $f:A\rightarrow\R{}$ be continuous. Then $f$ has a continuous extension $\tilde{f}:X\rightarrow\R{},$ i.e., $\tilde{f}|_A=f.$ If $f:A\rightarrow[a,b],$ then we can arrange the extension $\tilde{f}:X\rightarrow[a,b].$ \\ \\
+\pf{First, we will prove the case $f:A\rightarrow[0,1].$ For $E_0, F_0$ disjoint closed sets in $X,$ by Urysohn's Lemma, let $h_{E_0,F_0}:X\rightarrow[0,1]$ be a continuous function such that $h_{E_0,F_0}|_{E_0}=0$ and $h_{E_0,F_0}|_{F_0}=1.$ \\
+Let $f_0=f,$ and let $A_0=\{x\in A: f_0(x)\leq 1/3\}, \; B_0=\{x\in A: f_0(x)\geq 2/3\}.$ \\
+Clearly $A_0$ and $B_0$ are disjoint. Let $g_1=\frac{1}{3}h_{A_0,B_0}.$ \\
+Now let $f_1=f_0-g_1|_A.$ That is, $f_1:A\rightarrow[0,2/3],$ and $g_1:X\rightarrow[0,1/3].$ \\
+Inductively, let $f_n:A\rightarrow[0,(2/3)^n].$ Let $A_n=\{x\in A: f(x)\leq\frac{1}{3}(2/3)^n\},$ \\
+$B_n=\{x\in A: f(x)\geq\frac{2}{3}(2/3)^n\},$ with $g_{n+1}=\frac{1}{3}\Big(\frac{2}{3}\Big)^n h_{A_n,B_n},$ so \\ $g_{n+1}:X\rightarrow \Big[0,\frac{1}{3}\Big(\frac{2}{3}\Big)^n\Big].$  Let $f_{n+1}=f_n-g_{n+1}|_A,$ so $f_{n+1}:A\rightarrow\Big[0,\frac{1}{3}\Big(\frac{2}{3}\Big)^{n+1}\Big].$ \\
+Note that $\norm{g_n}_{\infty}=\frac{1}{3}\Big(\frac{2}{3}\Big)^{n-1}.$ Let $g=\sum\limits_{n=1}^{\infty}g_n.$ We will show that the sequence of partial sums is Cauchy in $C_b(X,\R{}),$ thus $\sum\limits_{n=1}^{\infty}g_n$ converges. \\
+Let $k_n=\sum\limits_{j=1}^n g_j.$ For $m<n,$ consider $k_n-k_m=\sum\limits_{j=m+1}^n g_j.$ \\
+Then $\norm{k_n-k_m}_{\infty}\leq\sum\limits_{j=m+1}^n \norm{g_j}_{\infty}=\sum_{j=m+1}^n\frac{1}{3}\Big(\frac{2}{3}\Big)^{j-1}.$ \\
+Clearly, for large enough $n,m,$ we can get this arbitrarily small. Therefore $g$ is well-defined and continuous, by the previous proposition. Then 
+$$f_n=f_{n-1}-g_n=f_{n-2}-g_{n-1}-g_n=\cdots=f_0-\sum\limits_{j=1}^n g_j,$$
+so $\norm{f_n}_{\infty}=\Big(\frac{2}{3}\Big)^n,$ so $\norm{f_n}_{\infty}\rightarrow 0,$ thus $f-g|_A=0,$ i.e., $g|_A=f.$ \\
+Finally, we want to check that the range of $g$ is contained in $[0,1].$ Note that
+$$g(x)=\sum\limits_{n=1}^{\infty}g_n(x)\leq\frac{1}{3}\sum\limits_{n=1}^{\infty}\Big(\frac{2}{3}\Big)^{n-1}=\frac{1}{3}\sum\limits_{n=0}^{\infty}\Big(\frac{2}{3}\Big)^n=\frac{1}{3}\cdot\frac{1}{1-2/3}=1.$$
+Therefore $0\leq g(x)\leq 1$ for all $x\in X.$ \\ \\
+Now suppose that $f:A\rightarrow\R{}$ is unbounded. Let $h$ be a homeomorphism of $\R{}$ with $(0,1).$ Let $g=h\circ f,$ so $g:A\rightarrow(0,1)\subset[0,1].$ By the arguments above, we can find an extension $\tilde{g}:X\rightarrow[0,1].$ Let $D=\tilde{g}^{-1}(\{0,1\}).$ Since $\tilde{g}$ is continuous, $D$ is closed in $X$ and is disjoint from $A.$ By Urysohn's Lemma, there exists a continuous function $k:X\rightarrow[0,1]$ such that $k|_D=0$ and $k|_A=1.$ Define $\tilde{f}=\tilde{g}k$ (pointwise product). Then the function $h^{-1}\circ\tilde{f}$ is a continuous extension of $f$ to $X.$
+}
+\end{frame*}

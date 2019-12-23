@@ -1,0 +1,246 @@
+\chapter{Compactness}
+
+\section{Fundamentals}
+
+\begin{defn}
+\begin{itemize}
+\item Let $X$ be a set, and let $\CC$ be a collection of subsets of $X.$ We say $\CC$ \ub{covers} $X$ if $\bigcup\limits_{A\in\CC}A=X.$
+\item If $\CC$ is a cover of $X,$ and $\mathcal{D}\subseteq\CC$ is also a cover of $X,$ then $\mathcal{D}$ is a \ub{subcover} of $X.$
+\item For a topological space $(X,\TT),$ an \ub{open cover} is a cover of $X$ that is contained in $\TT.$
+\end{itemize}
+\end{defn}
+
+\begin{defn}
+$(X,\TT)$ is \ub{compact} if every open cover of $X$ has a finite subcover.
+\end{defn}
+
+\begin{defn}
+Let $\mathcal{F}$ be a collection of subsets of $X.$ Then $\mathcal{F}$ has the \ub{finite intersection property} if the intersection of any finite collection of sets in $\mathcal{F}$ is nonempty.
+\end{defn}
+
+\begin{prop}
+$(X,\TT)$ is compact iff it has the property that whenever $\mathcal{F}$ is a collection of closed subsets of $X$ with the finite intersection property, then $\bigcap\limits_{A\in\mathcal{F}}A\neq\varnothing.$ \\ \\
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\begin{prop}
+Let $(X,\TT)$ be a topological space. Then $A\subseteq X$ is compact for the relative topology iff for any open cover of $A,$ there is a finite subcover of $A.$ \\ \\
+\pf{The open sets in the relative topology are exactly the sets of the form $A\cap\OO,$ where $\OO\in\TT.$}
+\end{prop}
+
+\begin{prop}
+If $(X,\TT_x)$ is compact, and $(Y,\TT_y)$ is a topological space, and $f:X\rightarrow Y$ is continuous, then $f(X)$ is compact in $Y.$ \\ \\
+\pf{Let $\CC\subseteq\TT_y$ be an open cover of $f(X).$ Then $\{f^{-1}(\OO)\}_{\OO\in\CC}$ is an open cover of $X,$ so there is a finite subcover $\{f^{-1}(\OO_1),...,f^{-1}(\OO_n)\}$ of $X.$ It follows that $f^{-1}(\OO_1)\cup\cdots\cup f^{-1}(\OO_n)=f^{-1}(\OO_1\cup\cdots\cup\OO_n)=X,$ so $\{\OO_1,\hdots,\OO_n\}$ is an open cover of $f(X).$}
+\end{prop}
+
+\begin{prop}
+If $(X,\TT)$ is compact, and $A\subseteq X$ is closed, then $A$ is compact. \\ \\
+\pf{
+	Let $\CC$ be an open cover of $A.$ Since $A^c$ is open, $\CC\cup\{A^c\}$ covers $X,$ and since $(X,\TT)$ is compact, there is a finite subcover of $X,$ so clearly there is a finite subcover for $A.$
+}
+\end{prop}
+
+\begin{prop}
+If $(X,\TT)$ is Hausdorff, then any compact subset is closed. \\ \\
+\pf{Let $A\subseteq X$ be compact, and let $x^*\not\in A.$ For any $y\in A,$ there are disjoint open sets $\OO_y,U_y$ such that $y\in\OO_y$ and $x^*\in U_y.$ Then $\{\OO_y:\;y\in A\}$ is an open cover of $A,$ so by compactness there is a finite subcover $\{\OO_{y_1},\hdots,\OO_{y_n}\}.$ Let $U=\bigcap\limits_{j=1}^n U_{y_j}.$ Then $U$ is open and covers $A^c$ and is also disjoint from $A.$ It follows that $U=A^c,$ and so $A$ is closed.
+}
+\end{prop}
+
+\noindent Recall from standard real analysis the fact that in $\R{n},$ a subset is compact iff it is closed and bounded (Heine-Borel).
+
+\begin{defn}
+$(X,\TT)$ is \ub{regular} if for any closed set $A\subseteq X$ and any $x\not\in A,$ there are disjoint open sets $\OO, U$ such that $A\subseteq\OO$ and $x\in U.$
+\end{defn}
+
+\section{Tychonoff's Theorem}
+We now develop an important compactness theorem of Tychonoff, which says that a product of compact spaces is compact in the product topology. In order to start, we need some set theory.
+
+\begin{frame*}
+\noindent \ub{Axiom of Choice}: Given any family of non-empty sets, there is a set containing an element from each of these sets.
+\end{frame*}
+\noindent We will see later that the axiom of choice is in fact equivalent to Tychonoff's Theorem.
+
+\begin{defn}
+A \ub{partially-ordered set} $P$ is a set with a partial order $\leq,$ which is a relation that satisfies
+\begin{enumerate}
+\item[(i)] $x\leq x$ for all $x\in P$
+\item[(ii)] $x\leq y$ and $y\leq z$ implies $x\leq z$
+\item[(iii)] If $x\leq y,$ and $y\leq x,$ then $x=y.$
+\end{enumerate}
+A \ub{totally/linearly-ordered} set satisfies the extra condition
+\begin{enumerate}
+\item[(iv)] For any $x,y\in P,$ either $x\leq y$ or $y\leq x.$
+\end{enumerate}
+\end{defn}
+
+\noindent\Ex If $X$ is a set, consider its power set $\mathcal{P}(X).$ Then the relation $A\leq B$ iff $A\subseteq B$ is a partial order on $\mathcal{P}(X)$ but not a total order. \\
+\Ex In the plane $\R{2},$ the relation $x\leq y$ iff $\norm{x}_2\leq\norm{y}_2$ is \textit{not} a partial order, since two points could have the same norm, but be unequal. \\
+\Ex The usual relation $\leq$ on $\R{}$ is a total order.
+
+\begin{defn}
+\begin{itemize}
+\item A \ub{chain} in $P$ is a totally-ordered subset of $P.$
+\item A \ub{maximal element} in $P$ is an element $x\in P$ such that if $y\geq x,$ then $y=x.$
+\item An \ub{upper bound} for a subset $A\subseteq P$ is an element $x\in P$ such that $y\leq x$ for all $y\in A.$
+\item $P$ is \ub{inductively ordered} if every chain in $P$ has an upper bound.
+\end{itemize}
+\end{defn}
+
+\begin{frame*}
+\noindent \ub{Zorn's Lemma}: If $P$ is inductively ordered, then every chain $C$ has a maximal element $b$ for $C$ with $a\leq b$ for all $a\in C.$
+\end{frame*}
+
+\noindent Zorn's Lemma seems quite obscure, but it is incredibly practical in many important results in mathematics and particularly in analysis.
+
+\begin{frame*}
+\noindent \ub{Tychonoff's Theorem}: Let $\{(X_{\alpha},\TT_{\alpha})\}$ be a family of compact spaces indexed by $A.$ Then $X=\prod_{\alpha} X_{\alpha}$ with the product topology is compact. \\ \\
+\pf{We will show compactness of $X$ through the finite intersection property. Let $\CC$ be a collection of closed subsets of $X$ with the finite intersection property. We wish to show that $\bigcap_{C\in\CC} C\neq\varnothing.$ \\ \\
+	Let $\Theta=\{\mathcal{D}\subseteq \mathcal{P}(X): \CC\subseteq\mathcal{D},\; \mathcal{D}\text{ has finite intersection property}\}.$ \\
+	Then $\Theta$ is partially ordered by set inclusion. To show that $\Theta$ is inductively ordered, let $\Phi\subseteq\Theta$ be a chain, and let $\mathcal{E}=\bigcup_{\mathcal{D}\in\Phi}\mathcal{D}.$ We show that $\mathcal{E}$ has the finite intersection property so that $\mathcal{E}\in\Theta$ and is thus an upper bound for $\Phi.$ \\
+	Let $Z_1,\hdots,Z_n\in\mathcal{E}.$ Then there are $\mathcal{D}_1,\hdots,\mathcal{D}_n\in\Phi$ with $Z_j\in\mathcal{D}_j.$ Since $\Phi$ is totally ordered, one of the $\mathcal{D}_j$'s will be the largest, say, $\mathcal{D}_n,$ and each $\mathcal{D}_j\subseteq\mathcal{D}_n.$ Then $Z_1,\hdots,Z_n\in\mathcal{D}_n.$ But $\mathcal{D}_n$ has the finite intersection property, so $\bigcap\limits_{j=1}^n Z_j\neq\varnothing.$ Clearly $\CC\subseteq\mathcal{E},$ so $\mathcal{E}\in\Theta,$ and $\mathcal{E}$ is an upper bound for $\Phi.$ Thus $\Theta$ is inductively ordered, as desired. \\ \\
+	By Zorn's Lemma, $\Theta$ contains a maximal element, say, $\mathcal{D}^*,$ which will have the following properties:
+	\begin{itemize}
+	\item If $Z_1,Z_2\in\mathcal{D}^*,$ then $Z_1\cap Z_2\in\mathcal{D}^*.$ \\ Indeed, for $Y_1,\hdots,Y_n\in\mathcal{D}^*,$ we have $(Z_1\cap Z_2)\cap(Y_1\cap\cdots\cap Y_n)\neq\varnothing.$ Therefore $\mathcal{D}^*\cup\{Z_1\cap Z_2\}$ has the finite intersection property. But by maximality of $\mathcal{D}^*,$ in fact $\mathcal{D}^*=\mathcal{D}^*\cup\{Z_1\cap Z_2\},$ therefore $Z_1\cap Z_2\in\mathcal{D}^*.$
+	\item For $Y\subseteq X,$ if $Y\cap Z\neq\varnothing$ for all $Z\in\mathcal{D}^*,$ then $Y\in\mathcal{D}^*.$ \\ Indeed, for $Z_1,\hdots,Z_n\in Z,$ we have $Y\cap(Z_1\cap\cdots\cap Z_n)=\bigcap\limits_{j=1}^n (Y\cap Z_j)\neq\varnothing,$ and by maximality, $Y\in\mathcal{D}^*.$
+	\end{itemize}
+	For any $\mathcal{D}\in\Theta$ and for any $\alpha\in A,$ we claim that $\mathcal{F}_{\alpha}:=\{\pi_{\alpha}(Y):\;Y\in\mathcal{D}\}$ has the finite intersection property. By the finite intersection property of $\mathcal{D},$ for any $Z_1,\hdots,Z_n\in\mathcal{D},$ there exists $x\cap Z_1,\hdots\cap Z_n.$ Then $\pi_{\alpha}(x)\in\pi_{\alpha}(Z_1)\cap\cdots\cap\pi_{\alpha}(Z_n),$ thus $F_{\alpha}$ has the finite intersection property. It follows that $\Big\{\overline{\pi_{\alpha}(Z)}:\;Z\in\mathcal{D}\Big\}$ has the finite intersection property. This is a collection of closed subsets with the finite intersection property in $X_{\alpha},$ which is compact, so $\bigcap\limits_{Z\in\mathcal{D}}\overline{\pi_{\alpha}(Z)}\neq\varnothing.$ \\
+	Apply this to each $\mathcal{D}\subseteq\mathcal{D}^*.$ For each $\alpha\in A,$ by the axiom of choice, pick $x_{\alpha}\in X_{\alpha}.$ \\
+	Let $x=(x_{\alpha})\in\prod_{\alpha\in A} X_{\alpha}.$ We claim that $x\in\bigcap\limits_{C\in\CC}C.$ \\
+	It suffices to show that if $\OO$ is an open set containing $x,$ then $\OO\cap C\neq\varnothing$ for all $C\in\CC.$ It further suffices to have $\OO$ be a basis element for the product topology. That is, suppose $x\in\OO=U_{\alpha_1}\times\cdots\times U_{\alpha_n}\times\prod\limits_{\alpha\neq \alpha_i\;\forall i} X_{\alpha}.$ \\
+	Note that $x_{\alpha_j}\in U_{\alpha_j}$ for $j=1,\hdots,n.$ Then $x_{\alpha_j}\in\overline{\pi_{\alpha_j}(Z)}$ for all $Z\in\mathcal{D}^*,$ so $U_{\alpha_j}\cap\pi_{\alpha}(Z)\neq\varnothing$ for all $Z\in\mathcal{D}^*$ and for all $1\leq j\leq n.$ So $\pi_{\alpha_j}^{-1}(U_{\alpha_j})\cap Z\neq\varnothing$ for all $Z\in\mathcal{D}^*,$ so by maximality, $\pi_{\alpha_j}^{-1}(U_{\alpha_j})\in\mathcal{D}^*,$ thus $\bigcap\limits_{j=1}^n \pi_{\alpha_j}^{-1}(U_{\alpha_j})\in\mathcal{D}^*,$ so $\OO\in\mathcal{D}^*.$ \\
+	This proves that $\bigcap_{C\in\CC} C\neq\varnothing,$ hence $X$ is compact.
+}
+\end{frame*}
+
+\noindent\Ex Here is an interesting application of Tychonoff's Theorem. \\ Let $\mathcal{H}$ be a Hilbert space (complete inner product space) with its norm induced by its inner product. Given $\eta\in\mathcal{H},$ define $\phi_{\eta}:\mathcal{H}\rightarrow\R{}$ by $\phi_{\eta}(\xi)=\inp{\eta}{\xi},$ and thus we can put on $\mathcal{H}$ the weakest topology making all $\{\phi_{\eta}\}_{\eta\in\mathcal{H}}$ continuous. The closed unit ball $B:=\{\xi\in\mathcal{H}:\;\norm{\xi}\leq 1\}$ is compact with the relative weak topology. The proof of this uses Tychonoff's Theorem. To start, for each $\eta\in\mathcal{H},$ let $D_{\eta}=\{r\in\R{}:\;|r|\leq\norm{\xi}\},$ with the usual topology. Then form $\prod_{\eta\in\mathcal{H}} D_{\eta},$ and one can show that this product is equal to $B.$ Clearly each $D_{\eta}$ is compact, so $B$ is thus compact. \\ \\
+Tychonoff's Theorem uses the axiom choice for its proof, but in fact, it is equivalent to the axiom of choice as well! Note that the axiom of choice essentially says that the product of non-empty sets is non-empty.
+\begin{thm}
+Let $\{X_{\alpha}\}_{\alpha\in A}$ be any collection of non-empty sets. Then without the axiom of choice, and assuming Tychonoff's Theorem, $\prod_{\alpha\in A} X_{\alpha}\neq\varnothing.$ \\ \\
+\pf{Let $X=\bigcup_{\alpha\in A} X_{\alpha}.$ Now let $\omega$ be some set not in $\bigcup_{\alpha\in A} X_{\alpha}.$ For each $\alpha,$ let $Y_{\alpha}=X_{\alpha}\cup\{\omega\},$ and define the topology $\TT_{\alpha}$ for $Y_{\alpha}$ by $\TT_{\alpha}=\{X_{\alpha},\{\omega\},Y_{\alpha},\varnothing\}.$ Clearly, $(Y_{\alpha},\TT_{\alpha})$ is compact. Then $Y:=\prod_{\alpha\in A} Y_{\alpha}$ with the product topology is compact. For each $\alpha,$ let $C_{\alpha}=\pi_{\alpha}^{-1}(X_{\alpha}),$ where $\pi_{\alpha}:Y\rightarrow Y_{\alpha}$ is the standard projection map. Note that $C_{\alpha}$ is closed. \\
+	We will show that $\{C_{\alpha}\}$ has the finite intersection property. Given $C_{\alpha_1},\hdots,C_{\alpha_n},$ where $x_{\alpha_j}\in X_{\alpha_j},$ define $y\in Y$ by
+	$$y_{\alpha}=
+	\begin{cases}
+	x_{\alpha_j},\text{ if } \alpha=\alpha_j, \\
+	\omega,\text{ if } \alpha\neq\alpha_j\;\forall j
+	\end{cases}
+	$$
+	Then $y\in\bigcap_{j=1}^n C_{\alpha_j},$ so $\{C_{\alpha}\}$ has the finite intersection property, as desired. By compactness, $\bigcap_{\alpha\in A} C_{\alpha}\neq\varnothing.$ Let $z\in\bigcap_{\alpha\in A} C_{\alpha}.$ Then $z\in X_{\alpha}$ for all $\alpha,$ so $z\in\prod_{\alpha\in A} X_{\alpha}.$ Thus we can deduce the axiom of choice from Tychonoff's Theorem.
+}
+\end{thm}
+
+\section{Compact and Hausdorff}
+\begin{prop}
+If $(X,\TT)$ is compact and Hausdorff, then it is normal. \\ \\
+\pf{Let $C,D$ be disjoint closed sets of $X.$ Since $X$ is compact, $C$ and $D$ are also compact, and since $X$ is Hausdorff, it follows that it is regular. Therefore, for any $x\in D,$ there are disjoint open sets $\OO_x, U_x$ with $x\in U_x$ and $C\subseteq\OO_x.$ Then $\{U_x\}_{x\in D}$ is an open cover for $D,$ so there is a finite subcover. That is, there are points $x_1,\hdots,x_n\in D$ such that $\{U_{x_1},\hdots, U_{x_n}\}$ covers $D.$ Then $U:=\bigcup_{j=1}^n U_{x_j}$ is an open set containing $D,$ and $\OO:=\bigcap_{j=1}^n \OO_{x_j}$ is an open set containing $C,$ and $U\cap C=\varnothing.$}
+\end{prop}
+
+\begin{prop}
+Let $X$ be a set, and let $\TT_1,\TT_2$ be topologies on $X$ with $\TT_1\supseteq\TT_2.$ Then
+\begin{enumerate}
+\item[(i)] If $(X,\TT_1)$ is compact, so is $(X,\TT_2).$
+\item[(ii)] If $(X,\TT_2)$ is Hausdorff, so is $(X,\TT_1).$
+\end{enumerate}
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\begin{cor}
+If $(X,\TT_1)$ and $(X,\TT_2)$ are both compact and Hausdorff, then $\TT_1=\TT=2.$ \\ \\
+\pf{If $C$ is closed for $\TT_,$ then it is compact for $\TT_1,$ so is compact for $\TT_2,$ so is closed for $\TT_2.$}
+\end{cor}
+
+\begin{prop}
+Let $(X,\TT_x)$ and $(Y,\TT_y)$ be compact Hausdorff spaces. If $f:X\rightarrow Y$ is continuous and bijective, then it is a homeomorphism. \\ \\
+\pf{It suffices to show that $f(C)$ is closed for any closed set $C\subseteq X.$ Since $X$ is compact, $C$ is compact, so $f(C)$ is compact by continuity of $f.$ Now since $Y$ is Hausdorff, it follows that $f(C)$ is closed.}
+\end{prop}
+
+
+\section{Compactness for Metric Spaces}
+We now study specifically the importance of compactness for metric spaces, starting with a simple necessary and sufficient condition for a metric space to be compact, and leading to the Arzela-Ascoli theorem. \\ \\
+First, observe that if $(X,d)$ is a compact metric space, and if $A\subseteq X$ is dense in $X,$ then the balls $B_{\epsilon}(y)$ for $\epsilon>0$ and $y\in A$ form an open cover for $X,$ so there is a finite subcover. 
+\begin{defn}
+A metric space $(X,d)$ is \ub{totally bounded} if for any $\epsilon>0,$ there is a finite collection of open balls of radius $\epsilon$ that covers $X.$
+\end{defn}
+\begin{prop}
+Let $(X,d)$ be a metric space, and let $A\subseteq X.$ If $A$ is totally bounded, then so is $\overline{A}.$ \\ \\
+\pf{Let $\epsilon>0.$ Then there are points $y_1,\hdots,y_n\in A$ such that $\{B_{\epsilon/2}(y_j)\}_{j=1}^n$ covers $A.$ For each $z\in \overline{A},$ there exists $y\in A$ such that $z\in B_{\epsilon/2}(y),$ and there is some $j$ such that $y\in B_{\epsilon/2}(y_j).$ Therefore $z\in B_{\epsilon}(y_j),$ so that $\{B_{\epsilon}(y_j)\}_{j=1}^n$ covers $\overline{A}.$}
+\end{prop}
+
+\begin{prop}
+Let $(X,d)$ be a metric space. If $X$ is compact, then it is complete. \\ \\
+\pf{We prove the contrapositive. Suppose $X$ is not complete. Let $\{x_n\}$ be a Cauchy sequence that does not converge. For any $x\in X,$ there exists $\epsilon_x>0$ such that for any $N\in\mathbb{N},$ there exists $n\geq N$ such that $d(x_n,x)\geq\epsilon_x.$ But since $\{x_n\}$ is Cauchy, there is $M\in\mathbb{N}$ such that for any $n,m\geq M,$ we have $d(x_n,x_m)<\epsilon_x.$ Pick $M_x>M$ such that there is $n_x\geq M_x$ with $d(x,x_{n_x})\geq\epsilon_x.$ So for $n>M_x,$ we have $d(x,x_n)\geq\epsilon/2.$ Therefore for each $x\in X,$ $B_{\epsilon_x}(x)$ contains at most a finite number of elements in the sequence $\{x_n\}.$ Clearly, the balls $\{B_{\epsilon_x}(x)\}$ cover $X,$ and no finite subcollection can cover $X.$}
+\end{prop}
+
+\noindent Compactness clearly implies totally bounded, but the converse is not true. The following theorem says that a metric space must be both totally bounded \textit{and} complete. For example, the non-compact space $(0,1)$ is totally bounded, but not complete. Furthermore, $\R{}$ is complete, but not totally bounded.
+
+\begin{thm}
+Let $(X,d)$ be a complete metric space. If $X$ is totally bounded, then it is compact. \\ \\
+\pf{Let $\CC$ be an open cover of $X,$ and let $B_1^1,\hdots,B_n^1$ be a finite cover of $X$ by closed balls of radius $1.$ Toward contradiction, suppose $X$ is not compact, so at least one of these closed balls, denote it by $A^1,$ has no finite subcover. Let $B_1^2,\hdots,B_{n_2}^2$ be closed balls of radius $1/2$ that cover $A^1.$ One of these, say, $B_*^2$ has no finite subcover. Let $A^2=A^1\cap B_*^2.$ Let $B_1^3,\hdots,B_{n_3}^3$ be balls of radius $1/4$ that cover $A^2.$ One of these has no finite subcover, etc. By continuing this process, we get a sequence $\{A^n\}$ of non-empty closed sets with $A^{n+1}\subseteq A^n$ for all $n.$ Furthermore, by construction, diam$(A^n)\rightarrow 0.$ \\ For each $n,$ choose $x_n\in A^n.$ Then $\{x_n\}$ is a Cauchy sequence, and by completeness, there is $x\in X$ such that $x_n\rightarrow x.$ Since $\CC$ is a cover, there is $\OO\in\CC$ with $x\in\OO,$ and then there is $\epsilon>0$ such that $B_{\epsilon}(x)\subseteq\OO.$ There is also $N\in\mathbb{N}$ such that for $n\geq N,$ $x_n\in B_{\epsilon/2}(x).$ For large $n,$ we can get diam$(A_n)<\epsilon/2,\; A^n\subseteq B_{\epsilon}(x_n)\subseteq\OO,$ so $A^n$ is covered by $\CC,$ a contradiction.}
+\end{thm}
+
+\noindent Recall that for a set $X$ and normed vector space $V,$ $B(X,V)$ denotes the set of bounded functions from $X$ to $V.$ 
+
+\begin{defn}
+Let $X$ be a set, and let $(Y,d)$ be a metric space. A function $f:X\rightarrow Y$ is \ub{bounded} if its range is bounded in $Y.$
+\end{defn}
+
+\noindent Let $B^*(X,Y)$ denote the set of bounded functions from $X$ to $Y$ ($Y$ is not necessarily a normed vector space). One can verify that $d_{\infty}(f,g)=\sup\limits_{x\in X}\{d(f(x),g(x))\}$ is a metric on $B^*(X,Y).$ Furthermore, one can check that the bounded continuous functions, denoted by $C_b(X,Y),$ is a closed subspace of $B^*(X,Y).$ Given a collection $\FF\se C_b(X,Y),$ when is $\FF$ totally bounded?
+\begin{itemize}
+\item Suppose it is. Then for $\epsilon>0,$ there are $g_1,\hdots,g_n\in C_b(X,Y)$ such that the balls $B_{\epsilon}(g_j)$ cover $\FF.$ Let $x\in X.$ Then for each $j,$ there is $\OO_j\se\TT_x$ such that $x\in\OO_j$ and $y\in\OO_j$ imply $d(g_j(x),g_j(y))<\epsilon.$ \\
+Let $\OO_x=\bigcap\limits_{j=1}^n\OO_j\in\TT_x,$ where clearly $x\in\OO_x,$ and if $y\in\OO_x,$ then $d(g_j(x),g_j(y))<\epsilon$ for all $j=1,\hdots,n.$ For any $f\in\FF$ there is $j$ such that $d_{\infty}(f,g)<\epsilon.$ Then for any $y\in\OO_x,$ we have
+$$d(f(x),f(y))\leq d(f(x),g(x))+d(g(x),g(y))+d(g(y),f(y))<3\epsilon.$$
+Then for each $x$ and each $\epsilon'>0,$ there is an open set $\OO_x$ such that if $y\in\OO_x,$ then $d(f(x),f(y))<\epsilon'$ for all $f\in\FF.$
+\end{itemize}
+
+\begin{defn}
+Let $(X,\TT)$ be a topological space, and let $(Y,d)$ be a metric space. Let $\FF\se C(X,Y)$ (a collection of continuous functions from $X$ to $Y$). $\FF$ is \ub{equicontinuous at $x$} if for any $\epsilon>0,$ there exists an open set $\OO_x$ in $X$ such that for all $f\in\FF$ and any $x'\in\OO_x,$ we have $d(f(x),f(x'))<\epsilon.$ \\
+$\FF$ is \ub{equicontinuous} if it is equicontinuous at every $x\in X.$
+\end{defn}
+\noindent Continuing the previous argument, note that $d(f(x),g_j(x))<\epsilon,$ i.e., the open balls $B_{\epsilon}(g_j(x))$ cover $\{f(x):f\in\FF\},$ so $\FF$ is \ub{``pointwise totally bounded.''}
+
+\begin{frame*}
+\noindent \ub{Arzela-Ascoli Theorem}: If $(X,\TT)$ is compact, $(M,d)$ is a metric space, and $\FF\se C_b(X,Y),$ and if $\FF$ is equicontinuous and pointwise totally bounded, then $\FF$ is totally bounded for $d_{\infty}.$ \\ \\
+\pf{Let $\epsilon>0.$ Since $\FF$ is equicontinuous, for each $x\in X$ there is an open set $\OO_x$ with $x\in\OO_x$ such that for $y\in\OO_x,$ we have $d(f(x),f(y))<\epsilon$ for all $f\in\FF.$ Since $X$ is compact, there are points $x_1,\hdots,x_n$ such that $X\se \bigcup_{j=1}^n\OO_{x_j}.$ For each $j,$ $\{f(x):f\in\FF\}$ is totally bounded since $\FF$ is pointwise totally bounded. Let $S_j\se\{f(x_j):f\in\FF\}\se M$ be a finite subset of $M$ such that the balls of radius $\epsilon$ about the points of $S_j$ cover $\{f(x_j):f\in\FF\}.$ Let $S=\bigcup_{j=1}^n S_j,$ and let $\Psi=\{\psi:\{1,\hdots,n\}\rightarrow S\},$ a finite set. Let $B_{\psi}=\{f\in\FF:\;d(f(x_j),\psi(j))<\epsilon,\;\forall j\}.$ Then $\FF=\bigcup_{\psi\in\Psi} B_{\psi}.$ \\
+Let $\psi$ be given. Let $f,g\in B_{\psi},$ and let $x\in X,$ so that $x\in\OO_{x_j}$ for some $j.$ Then 
+$$d(f(x),g(x))\leq d(f(x),f(x_j))+d(f(x_j),g(x_j))+d(g(x_j), g(x))\leq$$
+$$\leq d(f(x),f(x_j))+ d(f(x_j),\psi(j)) + d(\psi(j),g(x_j)) +d(g(x_j), g(x))<4\epsilon.$$
+Therefore $B_{\psi}$ is contained in the ball of radius $4\epsilon$ about any of its points. Since $\Psi$ is finite, it follows at once that $\FF$ is totally bounded for $d_{\infty}.$
+}
+\end{frame*}
+
+\begin{cor}
+Let $M$ be a complete metric space, so that $C(X,M)$ is complete. Then \\ $\FF\se C(X,M)$ is compact iff $\FF$ is equicontinuous, pointwise totally bounded, and closed in $C(X,M).$
+\end{cor}
+
+
+\section{Locally Compact Spaces}
+Although compact spaces form a nice class of topological spaces with many properties, there are many important spaces that share a similar structure: these are the locally compact spaces. Even more important are the locally compact Hausdorff spaces, which we discuss.
+\begin{defn}
+A topological space $(X,\TT)$ is \ub{locally compact} if for each $x\in X,$ there is an open set $\OO$ containing $x$ such that $\overline{\OO}$ is compact.
+\end{defn}
+
+\begin{prop}
+Let $(X,\TT)$ be locally compact, and let $C$ be a compact subset of $X.$ Then there exists an open set $\OO$ such that $C\se\OO,$ and $\OO$ is compact.\\ \\
+\pf{For each $x\in C,$ there is $\OO_x\in\TT$ such that $x\in\OO_x$ and $\overline{\OO}_x$ is compact. $\{\OO_x\}_{x\in X}$ covers $C,$ so there is a finite subcover, say, $\OO_1,\hdots,\OO_n.$ Then $C\se\overline{\OO}_1\cup\cdots\cup\overline{\OO}_n=\overline{\OO_1\cup\cdots\cup\OO_n},$ which is compact.}
+\end{prop}
+
+\noindent From here, let LCH mean locally compact Hausdorff.
+
+\begin{prop}
+Let $(X,\TT)$ be a LCH space, let $C\se X$ be compact, and let $\OO\in\TT, C\se\OO.$ Then there is an open set $U$ such that $C\se U\se\overline{U}\se\OO$ and $\overline{U}$ is compact. \\ \\
+\pf{We know that we can find an open set $V$ such that $C\se V$ and $\overline{V}$ is compact. Let $W=V\cap\OO.$ Then $C\se W,$ and $W$ is open. Furthermore, $\overline{W}$ is compact, and so the relative topology of $\overline{W}$ makes $\overline{W}$ compact and Hausdorff, hence normal. Let $B=\overline{W}\setminus W,$ so $B$ is closed and disjoint from $C,$ so by normality, there are disjoint open sets $U,Z$ such that $C\se U$ and $B\se Z.$ Then $U\se Z^c\cap\overline{W},$ so $\overline{U}\se Z^c\cap\overline{W},$ so $\overline{U}\se B^c=(\overline{W}\setminus W)^c\cap\overline{W}=W.$ Thus $\overline{U}\se W\se\OO$ and $\overline{U}$ is compact.}
+\end{prop}
+
+\begin{defn}
+For a continuous function $f$ on $X$ to a normed vector space, its \ub{support} is the set supp$(f):=\overline{\{x:f(x)\neq 0\}}.$ \\
+$f$ has \ub{compact support} if its support is compact. \\
+\end{defn}
+
+\noindent Let $V$ be a normed vector space. We will let $C_c(X,V)$ denote the set of all continuous functions from $X$ to $V$ with compact support.
+
+\begin{prop}
+Let $(X,\TT)$ be a LCH space. Let $C\se X$ be compact, and let $\OO$ be open with $C\se\OO.$ Then there is a continuous function $f:X\rightarrow[0,1]$ such that $f=1$ on $C,$ and $f=0$ outside $\OO,$ and $f$ has compact support. \\ \\
+\pf{There exists $U\in\TT$ such that $C\se U$ and $\overline{U}$ is compact, and $\overline{U}\se\OO.$ There also exists $V\in\TT$ with $C\se V\se\overline{V}\se U.$ Let $B=\overline{U}\setminus V,$ so that $B$ is closed and disjoint from $C.$ Since $\overline{U}$ is compact and Hausdorff, we apply Urysohn's Lemma to obtain a continuous function $f:\overline{U}\rightarrow [0,1]$ such that $f=1$ on $C,$ and $f=0$ on $B.$ For $x\not\in U,$ set $f(x)=0.$ Since $U\se\OO,$ it follows that $f=0$ outside $\OO,$ as desired. It remains to show that $f:X\rightarrow[0,1]$ is continuous, but this is left as an exercise.}
+\end{prop}
+
+\noindent Remark: $C_c(X)\se C_b(X),$ which denotes the set of bounded continuous functions. Equip $C_b(X)$ with the norm $\norm{\cdot}_{\infty},$ so that $\norm{fg}_{\infty}\leq\norm{f}_{\infty}\norm{g}_{\infty},$ making $C_b(X)$ a Banach algebra. One can verify that the closure of $C_c(X)$ in $C_b(X)$ is the space of all continuous functions that vanish at $\infty,$ denote $C_{\infty}(X).$ \\
+$f$ \ub{vanishes at $\infty$} if for any $\epsilon>0$ there exists a compact $K$ such that $\norm{f(x)}<\epsilon$ for $x\not\in K.$

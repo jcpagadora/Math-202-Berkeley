@@ -1,0 +1,366 @@
+\chapter{Integration}
+\section{Fundamentals}
+Let $(X,\Sm,\mu)$ be a measure space, and let $B$ be a Banach space. \\
+To start simply, suppose $\Sm$ is a ring, and $\mu$ is finitely-additive. \\
+Let $f=b\chi_E,$ for $b\in\R{},$ and $E\in\Sm.$ That is, $f(x)=\begin{cases}
+b, \text{ if } x\in E \\
+0, \text{ if } x\not\in E
+\end{cases}.$
+
+\begin{defn}
+Given $(X,\Sm),$ a function $f:X\rightarrow B$ is a \ub{simple $\Sm$-measurable function} if its range is finite, and for each $b\in\text{Im}(f),$ we have $\{x:\;f(x)=b\}\in\Sm.$ Then $f$ can be written as $f=\sum_{j=1}^n b_j\chi_{E_j},$ where the $b_j$'s are distinct, and the $E_j$'s are disjoint.
+\end{defn}
+
+\noindent It is clear that if $f=\sum_{j=1}^{\infty}b_j\chi_{E_j},$ where the $E_j$'s are disjoint, but the $b_j$'s are not all distinct, then $f$ is simple $\Sm$-measurable.
+
+\begin{prop}
+If $f,g$ are simple $\Sm$-measurable, then so is $f+g.$ \\ \\
+\pf{Suppose $f=\sum_{j=1}^{\infty} b_j\chi_{E_j},$ and for simplicity, $g=c\chi_F.$ The general case follows easily. \\
+Let $E_{n+1}=F\setminus\bigoplus_{j=1}^n E_j,$ and let $b_{n+1}=0,$ so $f=\sum_{j=1}^{n+1}b_j\chi_{E_j}$ with $F\se\bigoplus_{j=1}^{n+1}E_j.$ Therefore $F=\bigoplus_{j=1}^{n+1}(F\cap E_j).$ \\
+Then $f=\sum_{j=1}^{n+1}b_j(\chi_{F\cap E_j}+\chi_{E_j\setminus F}),$ so that
+$$f+g=\sum_{j=1}^{n+1}(b_j+c)\chi_{E_j\cap F}+\sum_{j=1}^nb_j\chi_{E_j\setminus F}.$$
+Then $f+g$ is simple $\Sm$-measurable.
+}
+\end{prop}
+
+\begin{defn}
+The \ub{integral} (with respect to the measure $\mu$) of a simple $\Sm$-measurable function $f=\sum_{j=1}^n b_j\chi_{E_j}$ is $$\int f\;d\mu=\sum_{j=1}^n b_j\mu(E_j).$$
+\end{defn}
+
+\noindent Simple measurable function will be abbreviated as SMF.
+\begin{defn}
+If a simple measurable function has a finite integral with respect to the measure $\mu,$ it is called a \ub{simple $\mu$-integrable function}, abbreviated as SIF.
+\end{defn}
+\noindent The following facts have easy proofs.
+
+\begin{prop}
+\begin{enumerate}
+\item[(1)] If $f,g$ are SIFs and $c\in\R{},$ then $\bint(cf+g)\;d\mu=c\bint f\;d\mu+\bint g\;d\mu.$
+\item[(2)] If $f$ is a SMF, then the map $x\mapsto\norm{f(x)}_B$ is a SMF.
+\item[(3)] If $f$ is a real-valued SIF, and if $f\geq 0,$ then $\bint f\;d\mu\geq 0.$
+\item[(4)] If $f,g$ are real-valued SIFs with $f\geq g,$ then $\bint f\;d\mu\geq\bint g\;d\mu.$
+\end{enumerate}
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\noindent Observe that the simple measurable functions form a vector space (closed under addition and scalar multiplication). Also, $f\mapsto\bint f\;d\mu$ is a linear functional.
+
+\begin{defn}
+The \ub{$L^1$ norm} of a measurable function is $\norm{f}_1:=\bint\norm{f(x)}_B\;d\mu(x).$
+\end{defn}
+
+\begin{prop}
+If $f,g$ are $B$-valued SIFs, then $\norm{f+g}_1\leq\norm{f}_1+\norm{g}_1.$ \\ \\
+\pf{$$\bint\norm{f(x)+g(x)}_B\;d\mu(x)\leq\bint\norm{f(x)}_B\;d\mu(x)+\bint\norm{g(x)}_B\;d\mu(x)=\norm{f}_1+\norm{g}_1.$$}
+\end{prop}
+
+\section{Towards $\mathcal{L}^1$}
+
+\noindent Let $\sif$ denote the vector space of simple $\mu$-integrable functions.
+
+\begin{itemize}
+\item If $f$ is a SIF, and $r\in\R{},$ then $\norm{rf}_1=|r|\cdot\norm{f}_1.$ Therefore $\norm{\cdot}_1$ is a seminorm on $\sif.$ 
+\item For any $f:X\rightarrow B,$ let $\CC(f)=\{x:f(x)\neq 0\}.$ If $f$ is a SIF, then $\CC(f)\in\Sm.$
+\item Let $\mathcal{N}=\{f\in\sif:\;\mu(\CC(f))=0\}.$ Then $\mathcal{N}$ is a vector subspace of $\sif.$
+\item If $f\in\mathcal{N},$ then clearly $\bint f\;d\mu=0.$ Conversely, if $f\in\sif,$ and $\norm{f}_1=0,$ then $\sum\norm{b_j}\chi_{E_j}=0$ iff $\mu(E_j)=0$ whenever $b_j\neq 0,$ implying that $f\in\mathcal{N}.$
+\item Thus, on $\sif/\mathcal{N},$ $\norm{\cdot}_1$ becomes a norm, and $f\mapsto\bint f\;d\mu$ is well-defined. Therefore, $\sif/\mathcal{N}$ is a normed vector space, so we can then consider its abstract completion (recall this is done by equivalence classes of Cauchy sequences).
+\item We will try to find a useful ``concrete realization'' of the elements of the completion, which we will see is the space $L^1(X,\Sm,\mu).$
+\item Let $\{b_n\}$ be a Cauchy sequence in $B,$ and let $E\in\Sm$ with $0<\mu(E)<\infty.$ Then $\{b_n\chi_E\}$ is a Cauchy sequence in $\sif/\mathcal{N}.$
+\item Suppose $\{E_j\}$ is a sequence of disjoint sets with $0<\mu(E_j)<2^{-j}.$ Let $E=\bigoplus_{j=1}^{\infty} E_j$ and let $F_n=\bigoplus_{j=1}^n E_j.$ \\
+Let $b\in B,\;b\neq 0.$ Suppose $\{b\chi_{F_n}\}$ is a Cauchy sequence. Then $\bint b\chi_{F_n}\;d\mu=b\;\mu(F_n),$ so that $\bint b\chi_{F_n}\;d\mu\rightarrow\bint b\chi_E\;d\mu=b\;\mu(E).$
+\end{itemize}
+
+\begin{defn}
+Given a measurable space $(X,\Sm),$ let $f:X\rightarrow B.$ We say that $f$ is \ub{$\Sm$-measurable} if there is a sequence of SMFs $\{f_n\}$ converging pointwise to $f.$
+\end{defn}
+
+\begin{defn}
+Let $(X,\Sm,\mu)$ be a measure space. $A\se X$ is a \ub{null set} if there is a set $E\in\Sm$ such that $A\se E$ and $\mu(E)=0.$ The $\mu$-null sets form a $\sigma$-ring. \\ \\
+We say $f_n\rightarrow f$ $\mu$-almost everywhere (a.e.) if $f_n\rightarrow f$ pointwise, except on a null set.
+\end{defn}
+
+\begin{defn}
+Let $B$ be a Banach space. Let $f:X\rightarrow B$ (or at least $f$ is defined on $X\setminus A,$ for a null set $A$). We say that $f$ is \ub{$\mu$-measurable} if there is a sequence $\{f_n\}$ of $B$-valued SMFs such that $f_n\rightarrow f$ $\mu$-almost everywhere.
+\end{defn}
+
+\noindent\begin{itemize}
+\item The $\Sm$-measurable or $\mu$-measurable functions form a vector space.
+\item The function $x\mapsto\norm{f(x)}$ is $\Sm$-or-$\mu$-measurable.
+\item If $f,g$ are measurable real-valued functions, then $\max(f,g)$ and $\min(f,g)$ are measurable.
+\item If $f,g$ are measurable, $f$ is real-valued and $g$ is $B$-valued, then $fg$ is measurable.
+\end{itemize}
+
+\noindent Let $\MM(X,\Sm,B)$ denote the vector space of $\Sm$-measurable functions from $X$ to $B.$ \\ Let $\MM(X,\Sm,\mu,B)$ denote the vector space of $\mu$-measurable functions from $X$ to $B.$ \\ \\
+Note: If $\{f_n\}$ is a sequence of SMFs, and if $f_n\rightarrow f$ pointwise, then the closure of the range of $f$ contains a countably-dense subset.
+
+\begin{defn} 
+Let $(X,\TT)$ be a topological space. A subset $A\se X$ is \ub{separable} if it contains a countably-dense subset, or its closure contains a countably-dense subset.
+\end{defn}
+
+\noindent Then if $f$ is measurable, range$(f)$ is separable.
+
+\begin{prop}
+If $\{f_n\}$ is a sequence of functions such that range$(f_n)$ is separable for all $n,$ and if $f_n\rightarrow f$ pointwise, then range$(f)$ is separable. \\ \\
+\pf{Let $E=\overline{\Big(\bigcup_{n=1}^{\infty}\text{range}(f_n)\Big)}.$ Then clearly $E$ is separable, and furthermore range$(f)\se E,$ so range$(f)$ is separable.}
+\end{prop}
+
+\noindent Observe that if $f$ is a $B$-valued SMF, and if $\OO\se B$ is open with $0\not\in\OO,$ then $f^{-1}(\OO)\in\Sm.$
+
+\begin{lemma}
+Let $\{f_n\}$ be a sequence of $B$-valued functions, and assume that each $f_n$ has the property that $f_n^{-1}(\OO)\in\Sm$ for every open $\OO\se B,$ $0\not\in\OO.$ If $f_n\rightarrow f$ pointwise, then $f$ has this same property. \\ \\
+\pf{Let $x\in X.$ Then $x\in f^{-1}(\OO)$ iff $f(x)\in\OO.$ \\
+For each $n,$ let $\OO_n=\{b\in\OO:\;\text{distance}(b,\OO^c)>1/n\}.$ \\ Observe that $\overline{O_n}\se\OO_{n+1}.$ Then $f(x)\in\OO$ iff there exists $n$ such that $f(x)\in\OO_n,$ and there is $K>0$ such that for all $k\geq K,\;$ $f_k(x)\in\OO_n$ iff there exist $n,K$ such that $x\in\bigcap\limits_{k\geq K} f_k^{-1}(\OO_n)$ iff $\bigcup\limits_{n\in\mathbb{N}}\bigcup\limits_{K\in\mathbb{N}}\bigcap\limits_{k\geq K} f_k(\OO_n)\in\Sm.$ This implies that $x\in f^{-1}(\OO)$ iff $x\in\bigcup\limits_{n\in\mathbb{N}}\bigcup\limits_{K\in\mathbb{N}}\bigcap\limits_{k\geq K} f_k^{-1}(\OO),$ thus $f^{-1}(\OO)\in\Sm.$}
+\end{lemma}
+
+\begin{cor}
+If $\{f_n\}$ is a sequence of measurable functions and $f_n\rightarrow f$ pointwise, then for any open $\OO\in B$ with $0\not\in\OO,$ we have $f^{-1}(\OO)\in\Sm.$ That is, if $f$ is $\Sm$-measurable, then $f$ satisfies the above property.
+\end{cor}
+
+\begin{thm}
+Let $f:X\rightarrow B$ satisfy (i) for any open $\OO\in B,\;$ $0\not\in\OO,$ we have $f^{-1}(\OO)\in\Sm,\;$ (ii) range$(f)$ is separable. Then $f$ is $\Sm$-measurable. \\ \\
+\pf{Let $\{b_n\}_{n=1}^{\infty}$ be a sequence of points in $B$ that is dense in the range of $f.$ For $i,j,$ let $C_{j,i}=\{x:\norm{f(x)-b_j}<1/j\}=f^{-1}\Big(B_{1/j}(b_i)\Big)\setminus\{0\},$ where $f(x)\neq 0.$ Order the pairs $(i,j)$ lexicographically, i.e.,
+$$(j,i)\leq(k,n)\text{ if }\begin{cases}
+j<k,\text{ or } \\
+j=k\text{ and } i<n
+\end{cases}.$$ This is a total order. Given $n,$ consider the pairs $(i,j)\leq(n,n),$ and disjointize the $C_{ji}$'s. \\ 
+Set $E_{ji}=C_{ji}\setminus\bigcup\{C_{k\ell}:\;(j,i)<(k,\ell)\leq(n,n)\}\se\Sm.$ \\
+Let $f_n=\sum_{j,i=1}^n b_i\chi_{E_{ji}}$ be a SMF. We claim that $f_n\rightarrow f$ pointwise. Suppose $x$ satisfies $f(x)\neq 0.$ Let $\epsilon>0.$ Choose $j_0$ such that $j_0^{-1}<\epsilon.$ \\
+Then choose $i_0$ such that $\norm{f(x)-b_{i_0}}<j_0^{-1}>$ Let $N=\max(i_0,j_0),$ and let $n\geq N.$ To show $\norm{f_n(x)-f(x)}<\epsilon,$ given $n\geq N$ we claim that $x\in C_{j_0,i_0}.$ \\
+Let $(\ell,k)=\max\{(j,i):\;x\in C_{ji},\;j\leq n,\;i\leq n\}.$ \\
+Then $x\in E_{\ell k},$ so $\norm{f(x)-b_k}<\ell^{-1}\leq j_0^{-1}<\epsilon.$ \\
+Therefore $f_n(x)=b_k,$ so $\norm{f(x)-f_n(x)}<\epsilon.$}
+\end{thm}
+
+\noindent Before continuing, it is important to introduce and discuss the different modes of convergence of functions.
+
+\begin{frame*}
+\noindent\ub{Egoroff's Theorem}: Let $\xsm$ be a measure space. Let $\{f_n\}$ be a sequence of $\mu$-measurable functions. Let $E\in\Sm,\;$ $\mu(E)<\infty.$ Assume that $f_n\rightarrow f$ pointwise on $E.$ Then for any $\epsilon>0,$ there is a subset $F\se E,$ with $F\in\Sm,$ such that $\mu(E\setminus F)<\epsilon$ and $f_n\rightarrow f$ uniformly on $F.$ That is, given $\delta>0,$ there is $N$ such that for $n>N,$ we have $\norm{f_n(x)-f(x)}<\delta$ for all $x\in F.$ \\ \\
+\pf{For $m,k,$ let $G_m^k=\{x\in E:\;\norm{f(x)-f_k(x)}>m^{-1}\}\in\Sm.$ \\
+Let $F_m^n=\bigcup\limits_{k\geq n}G_m^k\in\ Sm.$ \\ \\
+Fix $m.$ As $n\rightarrow\infty,\;$ $F_m^n\downarrow\varnothing.$ Since $F_m^n\se E,\;$ $\mu(E)<\infty,$ we have $\mu(F_m^n)\rightarrow 0.$ \\
+Let $\epsilon>0.$ For each $m,$ choose $n_m$ such that $\mu(F_m^{n_m})<\epsilon 2^{-m}.$ \\
+Let $H=\bigcup\limits_{m=1}^{\infty}.$ Then $\mu(E)<\epsilon,$ and let $F=E\setminus H,$ so that $\mu(E\setminus F)<\epsilon.$ We claim that $\{f_n\}$ converges uniformly to $f$ on $F.$ \\
+Let $\delta>0.$ Choose $m_0$ such that $m_0^{-1}<\delta.$ Then for $x\in F,\;$ $x\not\in H,$ so $x\not\in F_{m_0}^{n_{m_0}},$ so for all $k\geq n_{m_0},$ we have $\norm{f(x)-f_k(x)}\leq m_0^{-1}<\delta.$}
+\end{frame*}
+
+\noindent Note: The result does not hold for $\mu(E)=\infty.$ Let $X=\R{}$ with Lebesgue measure. Then $f_n=\chi_{[n,n+1]}$ converges pointwise to $f=0,$ but not uniformly.
+
+\begin{defn}
+Given $\xsm$ and measurable function $\{f_n\},\; f,$ and $E\in\Sm,$ we say that $\{f_n\}$ converges to $f$ \ub{almost uniformly} on $E$ if for any $\epsilon>0,$ there is $F\in\Sm,\;$ $F\se E,$ such that $\mu(E\setminus F)<\epsilon,$ and $f_n\rightarrow f$ uniformly on $F.$
+\end{defn}
+
+\noindent Note: Almost uniform convergence implies converges a.e.
+
+\begin{prop}
+If $\{f_n\}$ converges to $f$ uniformly on $E,$ then $f_n\rightarrow f$ pointwise except possibly on a null set. \\ \\
+\pf{For each $n,$ let $F_n\se E$ be such that $\mu(E\setminus F_n)<1/n,$ and $f_m\rightarrow f$ uniformly on $F_n.$ Let $G=\bigcup_{n=1}^{\infty} F_n,$ so $E\setminus G\se E\setminus F_n$ for each $n,\;$ $\mu(E\setminus G)=0.$ But $f_m\rightarrow f$ uniformly, hence pointwise, on each $F_n$ so $f_m\rightarrow f$ pointwise on $G.$}
+\end{prop}
+
+\begin{defn}
+Let $\xsm$ be a measure space, and let $B$ be a Banach space. Let $E\in\Sm.$ Let $\{f_n:X\rightarrow B\}$ be a sequence of $\mu$-measurable functions. We say that $\{f_n\}$ is \ub{almost uniformly Cauchy} on $E$ if for any $\epsilon>0,$ there is $F\se E$ such that $\mu(E\setminus F)<\epsilon,$ and $\{f_n\}$ is Cauchy on $F,$ i.e., for any $\delta>0,$ there is $N$ such that for $m,n\geq N,$ we have $\norm{f_n(x)-f_m(x)}<\delta$ for all $x\in F.$
+\end{defn}
+
+\begin{prop}
+If $\{f_n\}$ is almost uniformly Cauchy on $E,$ then there is $f$ on $E$ such that $f_n\rightarrow f$ almost uniformly. \\ \\
+\pf{Given $\epsilon>0,$ find $F\se E$ with $\mu(E\setminus F)<\epsilon,$ and $\{f_n\}$ is uniformly Cauchy on $F.$ By completeness, there is a limist $f,$ but this depends on $f.$ Take $F_n,\;$ $\mu(E\setminus F_n)<1/n,$ so we get $f$ defined on all of $G:=\bigcup_{n=1}^{\infty} F_n.$ Therefore $\mu(E\setminus G)=0.$}
+\end{prop}
+
+\begin{defn}
+Let $\xsm$ be a measure space, and let $\{f_n\}$ be a sequence of measurable functions, and let $f$ be a measurable function. We say that $\{f_n\}$ \ub{converges in measure} to $f$ if for any $\epsilon>0,$
+$$\mu\Big(\{x:\;\norm{f(x)-f_n(x)}\geq\epsilon\}\Big)\rightarrow 0\text{ as }n\rightarrow\infty.$$
+\end{defn}
+
+\begin{prop}
+If $\{f_n\}$ converges to $f$ almost uniformly on $E,$ then $\{f_n\}$ converges to $f$ in measure. \\ \\
+\pf{Let $\epsilon,\delta>0.$ Choose $N\in\mathbb{N}$ such that for $n\geq N,$ we have $\mu\Big(\{x:\;\norm{f(x)-f_n(x)}\geq\epsilon\}\Big)<\delta.$ Let $F\se E$ satisfy
+\begin{itemize}
+\item[(i)] $\mu(E\setminus F)<\delta$
+\item[(ii)] $f_n\rightarrow f$ uniformly on $F.$
+\end{itemize}
+Now ``update'' $N$ so that for $n\geq N,$ we also $\norm{f_n(x)-f(x)}<\epsilon$ for all $x\in F.$ Then for $n\geq N,$ we have 
+$$\{x\in E:\;\norm{f(x)-f_n(x)}\geq\epsilon\}\se E\setminus F\implies \mu\Big(\{x\in E:\;\norm{f(x)-f_n(x)}\geq\epsilon\}\Big).$$}
+\end{prop}
+
+\begin{prop}
+Suppose there are two measurable functions $f,g$ such that $f_n\rightarrow f$ and $f_n\rightarrow g$ in measure on $E.$ Then $f=g$ a.e. \\ \\
+\pf{Let $\epsilon>0.$ Then for $n\in\mathbb{N},$ the set $\{x\in E:\;\norm{f(x)-g(x)}\geq\epsilon\}$ is contained in the set $\{x\in E:\;\norm{f_n(x)-f(x)}\geq\frac{\epsilon}{2}\}\cup\{x\in E:\;\norm{f_n(x)-g(x)}\geq\frac{\epsilon}{2}\}.$
+By monotonicity and subadditivity of measure, it follows that \\ $\mu\Big(\{x\in E:\;\norm{f(x)-g(x)}>0\}\Big)=0,$ by letting $\epsilon\rightarrow 0,$ since $f_n\rightarrow f$ and $f_n\rightarrow g$ converge in measure.}
+\end{prop}
+
+\begin{defn}
+$\{f_n\}$ is \ub{Cauchy in measure} on $E$ if for any $\epsilon>0,$ 
+$$\mu\Big(\{x:\;\norm{f_n(x)-f_m(x)}\geq\epsilon\}\Big)\rightarrow 0\text{ as } n,m\rightarrow\infty.$$
+\end{defn}
+
+\begin{prop}
+Let $\{f_n\}$ be a sequence of SIFs that is Cauchy for $\norm{\cdot}_1.$ Then $\{f_n\}$ is Cauchy in measure. \\ \\
+\pf{Given $\epsilon>0,$ let $A_{\epsilon}=\{x\in E:\;\norm{f_n(x)-f_m(x)}\geq\epsilon\}.$ Then
+$$\mu(A_{\epsilon})=\bint\chi_{A_{\epsilon}}(x)\;d\mu(x)\leq\frac{1}{\epsilon}\bint\norm{f_n(x)-f_m(x)}\;d\mu(x)\rightarrow 0$$
+as $n,m\rightarrow\infty.$}
+\end{prop}
+
+\begin{frame*}
+\noindent\ub{Riesz-Weyl Theorem}: If $\{f_n\}$ is a sequence Cauchy in measure on $E,$ then there is a subsequence that is almost uniformly Cauchy. \\ \\
+\pf{Define $\{n_k\}$ as follows: \\
+Let $n_1=1.$ Given $n_{k-1},$ consider $E_{m,\ell}=\{x\in E:\;\norm{f_m(x)-f_{\ell}(x)}\geq 2^{-k}\}.$ \\ Then choose $n_k$ such that for $m,\ell>n_k,$ we have $\mu(E_{m,\ell})<2^{-k}$ and $n_k>n_{k-1}.$ We now show that $\{f_{n_k}\}$ is uniformly Cauchy. \\
+Let $\epsilon>0.$ Choose $K$ such that $\sum_{k=K}^{\infty} 2^{-k}<\epsilon.$ \\
+Let $F=E\setminus\bigcup_{k=K}^{\infty}\{x:\;\norm{f_{n_k}(x)-f_{n_{k+1}}(x)}\geq 2^{-k}\}.$ \\
+For $k\geq K,$ we have $\mu\Big(\{x:\;\norm{f_{n_k}(x)-f_{n_{k+1}}(x)}\geq 2^{-k}\}\Big)<2^{-k},$ so $\mu(E\setminus F)<\sum_{k=K}^{\infty}2^{-k}<\epsilon.$ \\
+It remains to show that $\{f_{n_k}\}$ is Cauchy on $F.$ \\
+Let $\delta >0.$ Choose $N>K$ such that $\sum_{n=N}^{\infty} 2^{-n}<\delta.$ \\
+Then for $j>\ell>N,$ and for $x\in F,$ 
+$$\norm{f_{n_j}(x)-f_{n_{\ell}}(x)}\leq\sum_{i=\ell}^{j-1}\norm{f_{n_{i+1}}(x)-f_{n_i}(x)}\leq\sum_{i=\ell+1}^j 2^{-i}<\delta.$$
+}
+\end{frame*}
+
+\begin{prop}
+Let $\{f_n\}$ be Cauchy in measure, and suppose it has a subsequence $\{f_{n_k}\}$ that converges almost uniformly to some $f.$ Then $\{f_n\}$ converges to $f$ in measure. \\ \\
+\pf{Given $\epsilon>0,$ consider $\{x\in E:\;\norm{f(x)-f_n(x)}>\epsilon\}.$ Observe that this set is contained in \\ $\{x\in E:\norm{f(x)-f_{n_k}(x)}>\epsilon/2\}\cup\{x\in E:\norm{f_{n_k}(x)-f_n(x)}>\epsilon/2\}.$ Since $f_{n_k}\rightarrow f$ almost uniformly, we can choose $N$ such that for $k\geq N,$ and for $\delta>0,$ we have \\ $\mu\Big(\{x\in E:\;\norm{f(x)-f_{n_k}(x)}>\epsilon/2\}\Big)<\delta/2,$ and then we can choose $N_2\geq N$ such that $\mu\Big(\{x\in E:\;\norm{f_{n_k}(x)-f_n(x)}>\epsilon/2\}\Big)<\delta/2.$ Thus for $n>N_2,$ we have \\ $\mu\Big(\{x\in E:\;\norm{f(x)-f_n(x)}>\epsilon\}\Big)<\delta,$}
+\end{prop}
+
+\noindent Let $\{f_n\}$ be a sequence of SIFs, Cauchy for $\norm{\cdot}_1.$ Then $\{f_n\}$ is Cauchy in measure, and it has a subsequence almost uniformly Cauchy, hence converging to some $f$ almost uniformly. Finally, $f_n\rightarrow f$ in measure, where $f$ is unique a.e.
+
+\begin{prop}
+If $\{f_n\}$ and $\{g_n\}$ are Cauchy for $\norm{\cdot}_1,$ and are ``equivalent'' in the sense that $\norm{f_n-g_n}_1\rightarrow 0,$ and if $f_n\rightarrow f$ in measure, then so does $\{g_n\}.$ \\ \\
+\pf{Let $\{h_n\}$ be the sequence $\{f_1,g_1,f_2,g_2,\hdots\}.$ Then clearly $h_n$ is Cauchy for $\norm{\cdot}_1$ and thus has a subsequence, namely, $\{f_n\},$ converging to $f$ in measure, and so $h_n\rightarrow f$ in measure. It follows that $g_n\rightarrow f$ in measure.}
+\end{prop}
+
+\noindent On the space $\MM(X,\Sm,\mu,B)$ of $\mu$-measurable, $B$-valued functions, define $f\sim g$ iff $f=g$ a.e.
+
+\begin{defn}
+$\{f_n\}$ is \ub{mean Cauchy} if it is Cauchy for $\norm{\cdot}_1.$
+\end{defn}
+
+\begin{lemma}
+If $\{h_n\}$ is a mean Cauchy sequence converging to $0$ almost uniformly, then $\norm{h_n}_1\rightarrow 0.$ \\ \\
+\pf{Let $\epsilon>0.$ Choose $N$ such that for $m,n\geq N,\;$ $\norm{h_n-h_m}<\epsilon.$ \\
+Let $E=\{x:\;h_N(x)\neq 0\},$ so $\mu(E)<\infty.$ Now find $F\se E$ with $\mu(F)\neq 0$ so that $\mu(E\setminus F)<\frac{\epsilon}{1+\norm{h_N}_{\infty}},$ and $\{h_n\}$ converges uniformly to $0$ on $F.$ For given $n\geq N,$
+$$\bint_{E^c}\norm{h_n(x)}\;d\mu(x)=\bint_{E^c}\norm{h_n(x)-h_N(x)}\;d\mu(x)\leq\norm{h_n-h_N}_1<\epsilon.$$
+Choose $N_1>N$ so that for $n>N_1$ and $x\in F,$ by uniform convergence, $\norm{h_n(x)}<\frac{\epsilon}{\mu(F)},$ so for $n>N,$ $\bint_F\norm{h_n(x)}\;d\mu(x)\leq\bint_F\frac{\epsilon}{\mu(F)}\;d\mu(x)=\epsilon.$ Therefore,
+$$\bint_{E\setminus F}\norm{h_n(x)}\;d\mu(x)\leq\bint_{E\setminus F}\norm{h_n(x)-h_N(x)}\;d\mu(x)+\bint_{E\setminus F}\norm{h_N(x)}\;d\mu(x)\leq$$
+$$\leq\norm{h_n-h_N}_1+\mu(E\setminus F)\norm{h_N}_{\infty}<2\epsilon+\frac{\epsilon}{1+\norm{h_N}_{\infty}}\cdot\norm{h_N}_{\infty}<4\epsilon.$$
+}
+\end{lemma}
+
+\begin{prop}
+If $\{f_n\}$ and $\{g_n\}$ are mean Cauchy sequences, and if they both converge to the a.e.-same function in measure, then $\{f_n\}$ and $\{g_n\}$ are equivalent Cauchy sequences. \\ \\
+\pf{$\{f_n\}$ and $\{g_n\}$ have subsequences that converge almost uniformly, and the limit is unique a.e. It suffices to show that the subsequences are equivalent Cauchy sequences. Let $h_k=f_{n_k}-g_{n_k}.$ Then $\{h_k\}$ is a mean Cauchy sequence that converges uniformly to $0.$ But by the lemma, it follows that $\{f_{n_k}\}$ and $\{g_{n_k}\}$ are equivalent Cauchy sequences.}
+\end{prop}
+
+\begin{thm}
+Let $f\in\MM(X,\Sm,\mu,B).$ The following are equivalent. There is a mean Cauchy sequence $\{f_n\}$ of SIFs that converges to $f$
+\begin{enumerate}
+\item[(i)] in measure
+\item[(ii)] almost uniformly
+\item[(iii)] almost everywhere
+\end{enumerate}
+\pf{(i) $\implies$ (ii) by Riesz-Weyl. The other two implications are exercises.}
+\end{thm}
+
+\section{The Space $\mathcal{L}^1$}
+\begin{defn}
+Let $\mathcal{L}^1(X,\Sm,\mu,B)$ be the subset of $\MM(X,\Sm,\mu,B)$ of \ub{$\mu$-integrable} functions, where a function is $\mu$-integrable if it satisfies any of properties (i), (ii), (iii) above.
+\end{defn}
+
+\noindent That is, for $f\in\mathcal{L}^1\xsm,$ there is a mean Cauchy sequence of SIFs that converges to $f$ in measure, almost uniformly, and almost everywhere.
+
+\begin{defn}
+Let $\{f_n\}$ be a mean Cauchy sequence converging to $f.$ Then the \ub{integral} of $f$ is
+$$\bint f\;d\mu:=\lim\limits_{n\rightarrow\infty}\bint f_n\;d\mu.$$
+\end{defn}
+
+\noindent The following propositions have easy proofs. 
+
+\begin{prop}
+If $f,g\in\mathcal{L}^1(X,\Sm,\mu, B),$ and $a\in\R{},$ then:
+\begin{enumerate}
+\item[(i)] $\bint f+g\;d\mu=\bint f\;d\mu+\bint g\;d\mu.$
+\item[(ii)] $\bint af\;d\mu=a\bint f\;d\mu.$
+\item[(iii)] If $f\in\mathcal{L}^1,$ then the map $x\mapsto\norm{f(x)}$ is in $\mathcal{L}^1(X,\Sm,\mu,\R{}).$
+\item[(iv)] If $f\in\mathcal{L}^1(X,\Sm,\mu,\R{}),$ and if $f\geq 0$ a.e., then $\bint f\;d\mu\geq 0.$
+\item[(v)] If $f,g\in\mathcal{L}^1(X,\Sm,\mu,\R{}),$ and if $f\geq g$ a.e., then $\bint f\;d\mu\geq\bint g\;d\mu.$
+\item[(vi)] If $f,g\in\mathcal{L}^1(X,\Sm,\mu,\R{}),$ then $\norm{f+g}_1\leq\norm{f}_1+\norm{g}_1.$
+\item[(vii)] If $f\in\mathcal{L}^1,$ and $\{f_n\}$ is a mean Cauchy sequence of SIFs converging to $f,$ then $\norm{f_n}_1\rightarrow\norm{f}_1.$ \\
+Thus, $\mathcal{L}^1(X,\Sm,\mu,B)$ is complete for $\norm{\cdot}_1.$
+\item[(viii)] If $E,F\in\Sm$ and $E\cap F=\varnothing,$ then $\bint_{E\cap F} f\;d\mu=\bint_E f\;d\mu+\bint_F f\;d\mu.$
+\item[(ix)] If $f\in\mathcal{L}^1(X,\Sm,\mu,B),$ and $f\geq 0,$ and if $E,F\in\Sm$ and $F\se E,$ then $\bint_F f\;d\mu\leq\bint_E f\;d\mu.$
+\end{enumerate}
+\pf{\textit{Exercise}.}
+\end{prop}
+
+\begin{defn}
+The \ub{indefinite integral} of $f,$ denoted $\mu_f$ is the function on $\Sm$ defined by
+$$\mu_f(E)=\bint_E f\;d\mu=\bint f\chi_E\;d\mu.$$
+\end{defn}
+
+\noindent In fact, $\mu_f$ is a $B$-valued measure, i.e., countably additive (proven later).
+
+\begin{prop}
+If $f\in\mathcal{L}^1,$ then $\CC(f):=\{x\in X:\;f(x)\neq 0\}$ is $\sigma$-finite. \\ \\
+\pf{Let $\{f_n\}$ be a mean Cauchy sequence of SIFs converging to $f$ a.e. Then $\mu(\{x\in X:\;f_n(x)\neq 0\})<\infty$ for all $n.$ Let $D=\bigcup_{n=1}^{\infty}\{x\in X:\;f_n(x)\neq 0\},$ so $D$ is $\sigma$-finite. Clearly, $\CC(f)\se D,$ except possibly on a null set.}
+\end{prop}
+
+\noindent Thus, we can see that for $f\in\mathcal{L}^1(X,\Sm,\mu,B),\;$ the indefinite integral $\mu_f$ is indeed a $B$-valued measure.
+
+\begin{prop}
+If $f\in\mathcal{L}^1(X,\Sm,\mu,B),$ then for any $\epsilon>0,$ there exists $E\in\Sm$ such that $\mu(E)<\infty$ and $\norm{\bint_{X\setminus E} f\;d\mu}<\epsilon.$ \\ \\
+\pf{Find a SIF $g$ such that $\norm{f-g}_1=\bint_{X\setminus E}\norm{f(x)-g(x)}\;d\mu(x)<\epsilon,$ where $E=\{x:\;g(x)\neq 0\}.$}
+\end{prop}
+
+\begin{prop}
+(Absolute continuity) If $f\in\mathcal{L}^1(X,\Sm,\mu,B),$ then for any $\epsilon>0,$ there exists $\delta>0$ such that if $\mu(E)<\delta,$ then $\norm{\mu_f(E)}<\epsilon.$ \\ \\
+\pf{Choose a SIF $g$ such that $\norm{f-g}_1<\epsilon/2.$ \\
+Then $\norm{f}_1\leq\norm{f-g}_1+\norm{g}_1.$ Therefore if $\mu(E)<\displaystyle\frac{\epsilon}{2\norm{g}_{\infty}},$ then 
+$$\norm{\mu_f(E)}=\norm{\bint_E f\;d\mu}\leq\frac{\epsilon}{2}+\norm{\bint_E g\;d\mu}<\frac{\epsilon}{2}\cdot\mu(E)\cdot\norm{g}_{\infty}<\epsilon.$$}
+\end{prop}
+
+\begin{frame*}
+\noindent\ub{Lebesgue-Dominated Convergence Theorem}: Let $f_n\in\mathcal{L}^1(X,\Sm,\mu,B)$ for each $n,$ and suppose $f_n\rightarrow f$ a.e. If there is a $\R{}$-valued $g\in\mathcal{L}^1$ such that $\norm{f_n(x)}_B\leq g(x)$ a.e. for all $n,$ then $\{f_n\}$ is a mean-Cauchy sequence. \\ \\
+\pf{Let $\epsilon>0.$ Find $E$ such that $\mu(E)<\infty,$ and $\bint_{X\setminus E} g\;d\mu<\epsilon/6.$ Then
+$$\bint_{X\setminus E}\norm{f_n(x)-f_m(x)}_B\;d\mu(x)\leq\bint_{X\setminus E}\norm{f_n(x)}_B+\norm{f_m(x)}_B\;d\mu(x)\leq\bint_{X\setminus E}2g(x)\;d\mu(x)<\frac{\epsilon}{3}.$$
+By absolute continuity of $\mu_g,$ choose $\delta>0$ such that if $\mu(F)<\delta,$ then $\mu_g(F)<\epsilon/6.$ \\
+By Egoroff's Theorem, there exists $G\se E$ such that $\mu(E\setminus G)<\delta,$ and $\{f_n\}$ converges uniformly to $f$ on $G.$ Then
+$$\bint_{E\setminus G}\norm{f_n(x)-f_m(x)}\;d\mu(x)\leq 2\bint_{E\setminus G} g(x)\;d\mu(x)=2\mu_g(E\setminus G)<\frac{\epsilon}{3}.$$
+Then choose $N$ such that for $n,m\geq N,$ we have $\norm{f_n(x)-f_m(x)}\leq\displaystyle\frac{\epsilon}{3\mu(G)},$ where $x\in G.$ Thus, $\bint_G\norm{f_n-f_m}\;d\mu<\epsilon/3.$ \\
+Therefore if $m,n\geq N,$ then $\norm{f_n-f_m}_1<\epsilon.$}
+\end{frame*}
+
+\begin{prop}
+Let $f$ be a $B$-valued $\mu$-measurable function. If there is $g\in\mathcal{L}^1$ that is $\R{}$-valued, with $\norm{f(x)}\leq g(x)$ a.e., then $f\in\mathcal{L}^1.$ \\ \\
+\pf{Since $f$ is measurable, there is a sequence $\{f_n\}$ of SMFs converging to $f$ a.e. Choose increasing $E_n$'s with $\mu(E_n)<\infty,$ and $\bigcup_{n=1}^{\infty} E_n=\{x:\;g(x)\neq 0\}.$ \\
+Set $h_n(x)=\begin{cases} f_n(x),\text{ if }\norm{f_n(x)}<2g(x),\;x\in E_n \\ 0,\text{ o.w.}\end{cases}$ \\
+Since $\{x:\;g(x)\neq 0\}$ is $\sigma$-finite, we see that the support of $h_n$ is measurable, thus $h_n$ is a SIF. Clearly $h_n\rightarrow f$ a.e., and by definition, $\norm{h_n(x)}<2g(x).$ By dominated convergence, $f$ is mean-Cauchy, hence $f\in\mathcal{L}^1.$}
+\end{prop}
+
+\begin{frame*}
+\noindent\ub{Monotone Convergence Theorem}: Let $\{f_n\}$ be a sequence of real-valued integrable functions on $E$ with $f_n\geq 0.$ If $f_{n+1}(x)\geq f_n(x)$ a.e. for all $n,$ and $\sup_n\bint f_n\;d\mu<\infty,$ then $f_n\in\mathcal{L}^1,$ and $\{f_n\}$ is a mean-Cauchy sequence that converges to a finite $f\in\mathcal{L}^1$ a.e. \\ \\
+\pf{$\bint f_{n+1}\;d\mu\geq\bint f_n\;d\mu,$ so the sequence $\Big\{\bint f_n\;d\mu\Big\}_{n=1}^{\infty}$ is monotonically increasing, but since $\sup_n\bint f_n\;d\mu<\infty,$ it follows that it must converge. For a.e. $x,$ we have that $\{f_n(x)\}$ is monotonically increasing, so let $f(x)=\lim f_n(x).$ Clearly, $\bint f_n\;d\mu\leq\bint f\;d\mu$ for all $n.$ \\
+For the reverse inequality, let $\phi$ be any SIF such that $\phi\leq f.$ Let $0<\alpha<1,$ and define $E_n=\{x:\; f_n(x)\geq\alpha\phi(x)\}.$ Then 
+$$\bint f_n\;d\mu\geq\bint_{E_n}f_n\;d\mu\geq\bint_{E_n}\alpha\phi\;d\mu=\alpha\bint_{E_n}\phi\;d\mu.$$
+Note that since $f_n\uparrow f,$ it follows that also $E_n\uparrow E$ a.e. Thus $\lim\bint f_n\;d\mu\geq\alpha\bint\phi\;d\mu.$ \\
+Now since $\alpha\in(0,1)$ was arbitrary, we have $\lim\bint f_n\;d\mu\geq\bint\phi\;d\mu.$ Finally, since $\phi$ was an arbitrary SIF with $\phi\leq f,$ it is easily seen that $\lim\bint f_n\;d\mu\geq\bint f\;d\mu.$}
+\end{frame*}
+
+\noindent Finally, we will show that the indefinite integral of an integrable function is a measure by establishing countable additivity.
+
+\begin{prop}
+Let $f\in\mathcal{L}^1(X,\Sm,\mu,B).$ Then $\mu_f$ is a $B$-valued measure on $X.$ \\ \\
+\pf{We will show countable additivity. \\
+Let $E=\bigoplus_{n=1}^{\infty}.$ Let $\epsilon>0.$ There exists a sequence of SIFs $\{f_n\}$ converging in mean to $f.$ Then choose $N$ such that for $n\geq N,$ we have $\norm{f_n-f}_1<\epsilon.$ \\
+Note that for SIFs $f_n,$ $\mu_{f_n}$ is clearly a measure:
+$$\mu_{f_n}(E)=\sum_{j=1}^{\infty}\mu_{f_n}(E_j)=\lim_{m\rightarrow\infty}\sum_{j=1}^m\mu_{f_n}(E_j).$$
+Then for $m>N,$ 
+$$\norm{\mu_f(E)-\sum_{j=1}^{\infty}\mu_f(E_j)}\leq\norm{\mu_f(E)-\mu_{f_m}(E)}+\norm{\mu_{f_m}(E)-\sum_{j=1}^{\infty}\mu_f(E_j)}.$$
+We have the bounds
+\begin{itemize}
+\item $\displaystyle \norm{\mu_f(E)-\mu_{f_m}(E)}=\norm{\bint_E f-f_m\;d\mu}\leq\norm{f-f_m}_1<\epsilon,$
+\item\ $\displaystyle \norm{\mu_{f_m}(E)-\sum_{j=1}^{\infty}\mu_f(E_j)}=\norm{\sum_{j=1}^{\infty}[\mu_{f_m}(E_j)-\mu_f(E_j)]}=\norm{\lim_{m\rightarrow\infty}\sum_{j=1}^{\infty}\bint_{E_j}f_m-f\;d\mu}=$ \\ $\displaystyle=\norm{\lim_{m\rightarrow\infty}\bint_{\bigoplus_{j=1}^m E_j}f_m-f\;d\mu}\leq\norm{f_n-f}_1<\epsilon.$
+\end{itemize}
+It follows that $\mu_f(E)=\sum_{j=1}^{\infty}\mu_f(E_j),$ as desired.}
+\end{prop}
+
+As we can see, in measure theory, the exact behavior of a function at every particular point often does not matter. This is mainly due to the fact that the integral of a function does not change if we change its values on a set of measure zero.
+
+\begin{defn}
+The space $L^1(X,\SS,\mu, B)$ is the set of equivalence classes of $\mathcal{L}^1(X,\SS,\mu, B),$ where two functions are equivalent if they differ only on a null set.
+\end{defn}
