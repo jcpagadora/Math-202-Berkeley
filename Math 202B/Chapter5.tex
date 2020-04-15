@@ -1,0 +1,169 @@
+\chapter{The Stone-Weierstrass Theorem}
+
+In this chapter, we will develop theory to prove the end result of the Stone-Weierstrass Theorem, an important result that generalizes the Weierstrass polynomial approximation theorem. First, we discuss ordered vector spaces and lattice-ordered groups. We then prove the Kakutani-Krein Theorem, which then yields the Stone-Weierstrass Theorem.
+
+\section{Ordered Vector Spaces}
+Consider $V$ a countable group, and let $\leq$ be a partial order on $V.$
+\begin{defn}
+The order $\leq$ is \ub{compatible} with the group structure if whenever $v\leq w,$ we have that $v+x\leq w+x$ implies $v\leq w$ for all $x.$
+\end{defn}
+
+\noindent Now consider $V$ a vector space with a compatible order $\leq.$
+\begin{prop}
+If $v\leq w,$ then $-w\leq -v.$ \\
+\pf{
+	$$(-w-v)+v\leq (-w-v)+w\implies -w\leq -v.$$
+}
+\end{prop}
+
+\begin{defn}
+Let $X$ be partially ordered. $(X,\leq)$ is a \ub{lattice} if for any two elements $x,y\in X,$ there is a least upper bound, denoted $x\lor y,$ and there is a greatest lower bound, denoted $x\land y.$ That is,
+\begin{itemize}
+	\item $x\lor y\geq x,y$ and if $w\geq x,y,$ then $w\geq x\lor y.$
+	\item $x\land y\leq x,y$ and if $w\leq x,y,$ then $w\leq x\land y.$
+	\end{itemize}
+\end{defn}
+
+\noindent \ub{Ex:} Consider $C_{\mathbb{R}}(X),$ with $f\leq g$ iff $f(x)\leq g(x)$ for all $x.$ It can easily be seen that $f\lor g=\max\{f,g\},$ and $f\land g=\min\{f,g\}.$ \\
+
+\noindent \ub{Ex:} Slightly more tricky to check, but $L^p(X,\mathcal{S},\mu,\mathbb{R})$ is also a lattice.
+
+\section{Properties of Lattice Ordered Groups \& Vector Spaces}
+Here we will list some properties of lattice-ordered groups. We will prove some of these properties, as the rest should be easy to show.
+\begin{frame*}
+\begin{enumerate}
+
+\item[(1)] Given $x,v,w\in V,$ then $x+(v\lor w)=(x+v)\lor(x+w),$ and $x+(v\land w)=(x+v)\land(x+w).$
+\item[(2)] $-(v\lor w)=(-v)\land(-w),$ and $-(v\land w)=(-v)\lor(-w).$ \\
+	\pf{
+	$x\leq(-v)\land(-w)$ iff $x\leq -v$ and $x\leq -w$ iff $(-x\geq v)$ and $(-x\geq w)$ iff $-x\geq v\lor w$ iff $x\leq -(v\lor w).$ The other direction follows similarly.
+	}
+\item[(3)] Let $v^+:=v\lor 0,$ and $v^-:=(-v)\lor 0.$ Then $v=v^+-v^-.$ \\
+	\pf{
+	$v^+-v=(v\lor 0)-v=(v-v)\lor(0-v)=0\lor(-v)=v^-.$
+	}
+\item[(4)] $v^+\land v^-=0.$ \\
+	\pf{
+	$v^+\land v^-=v^+\land(v^+-v)=v^++(0\land (-v))=v^+-(0\lor v)=v^+-v^+=0.$
+	}
+\item[(5)] Let $|v|:=v^++v^-.$ Then $|v|=v^+\lor v^-.$ \\
+	\pf{
+	$v^++v^-=v^++(0\lor (-v))=v^+\lor (v^+-v)=v^+\lor v^-.$
+	}
+\item[(6)] If $x,v,w\geq 0,$ and if $x\leq v+w,$ then there exists $v_1,w_1$ such that $0\leq v_1\leq v$ and $0\leq w_1\leq w$ such that $x=v_1+w_1.$ This is known as the \ub{Riesz Property}.
+
+\end{enumerate}
+\end{frame*}
+
+\noindent *A vector space lattice $V$ is a vector space with a compatible lattice order. For a norm, we also need $\norm{w}\geq\norm{v}$ whenever $w\geq v\geq 0.$ Also, we want $\norm{v}=\norm{|v|}.$
+
+
+\begin{defn}
+Let $V$ be a lattice-ordered vector space. $C\subseteq V$ is a \ub{cone} if $v,w\in C$ implies $v+w\in C,$ and for $t>0,$ $tv\in C.$
+\end{defn}
+
+\begin{thm}
+If $V$ is lattice-ordered, then $V'$ is lattice-ordered (with a norm is $V$ is normed), where $V_+':=\{\varphi\in V':\;\varphi(v)\geq 0,\;\forall v\geq 0\}$ is a cone. \\
+\pf{
+	\begin{enumerate}
+		\item[(1)] ($\varphi\geq 0$ means $\varphi\in V_+'$) If $\varphi\geq 0$ and $\varphi\leq 0$ (i.e. $-\varphi\geq 0$), then for any $v\in V,$ \\ $v\geq 0,\;\varphi(v)\geq 0,$ and $\varphi(v)\leq 0.$ Therefore $V_+'\cap (-V_+')=\{0\},$ since any $v\in V$ has $v=v^+-v^-,$ so $\varphi(v)=0\implies \varphi=0.$
+		\item[(2)] For $\varphi\in V',$ consider $\varphi\lor 0,$ and $\varphi^+$ on $V^+$ by $\varphi^+(v)=\sup\{\varphi(x):\;0\leq x\leq v\}.$ In turns out that if $v,w\geq 0,$ then $\varphi^+(v+w)=\varphi^+(v)+\varphi^+(w).$ \\
+		$\rightarrow$ If $0\leq v_1\leq v$ and $0\leq w_1\leq w,$ then $v_1+w_1\leq v+w,$ so \\ $\varphi(v_1)+\varphi(w_1)=\varphi(v_1+w_1)\leq\varphi^+(v_1+w_1),$ so it follows that \\ $\varphi^+(v)+\varphi^+(w)\leq\varphi^+(v+w),$ by taking supremums on $v_1$ and $w_1.$ \\
+		Conversely, if $0\leq x\leq v+w,$ by the Riesz Property there exists $v_1,w_1$ such that \\ $0\leq v_1\leq v,$ $0\leq w_1\leq w,$ and $x=v_1+w_1.$ Then \\ $\varphi(x)=\varphi(v_1)+\varphi(w_1)\leq\varphi^+(v)+\varphi^+(w).$ Therefore $\varphi^+(v+w)=\varphi^+(v)+\varphi^+(w),$ as desired.
+		\item[(3)] Now define $\varphi^+$ on all of $V$ as follows: if $v=v_1-v_2,$ for $v_1,v_2\geq 0,$ then\\ $\varphi^+(v):=\varphi^+(v_1)-\varphi^+(v_2).$ We must check that this is well-defined, but we will not worry about this here. Now it is easily seen that $\varphi^+(v+w)=\varphi^+(v)+\varphi^+(w)$ for any $v,w\in V.$ \\
+		We claim that $\varphi^+$ is a least-upper bound for $\varphi$ and $0.$ Clearly, $\varphi^+-\varphi\geq 0,$ and $\varphi^+\geq 0.$ Let $\psi\in V',$ $\psi\geq\varphi,$ $\psi\geq 0.$ Then for $v\geq 0,$ and for $0\leq x\leq v,$ we have $\varphi(x)\leq\psi(x)\leq\psi(v),$ and by taking the supremum on $x,$ we have $\varphi^+(v)\leq\psi(v),$ so $\varphi^+$ is indeed a least upper bound for $\varphi.$ \\
+		Given $\varphi,\psi\in V',$ we want $\varphi\lor\psi,$ and we expect this to equal \\ $\psi+(\varphi-\psi)\lor 0=\psi+(\varphi-\psi)^+.$ \\
+		We know that $(\varphi-\psi)\lor 0$ is a least upper bound for $(\varphi-\psi)$ and $0,$ then $\psi+(\varphi-\psi)^+$ is a least upper bound for $\varphi$ and $\psi.$ \\
+		$\implies$ We \textit{define} $\varphi\lor\psi:=\psi+(\varphi-\psi)^+.$ \\
+		We found that $V'$ is an ordered vector space and has least upper bounds, so now we want to find its greatest lower bounds. \\
+		Do first for $\varphi\land 0,$ expect it is $-((-\varphi)\lor 0).$ We show that this is the greatest lower bound for $\varphi$ and $0.$ Clearly $-((-\varphi)\lor 0)\leq 0.$ \\
+		We want $-((-\varphi)\lor 0)\leq\varphi,$ i.e. $0\leq\varphi+((-\varphi)\lor 0)=0\lor\varphi$: \\
+		We also want for any $\psi\leq 0,$ $\psi\leq\varphi,$ then $\psi\leq -((-\varphi)\lor 0),$ i.e. \\
+		$\psi+(-\varphi\lor 0)\leq 0\implies (\psi-\varphi)\lor\psi\leq 0,$ but note that $\psi-\varphi\leq 0.$ \\
+		Finally, we need $\norm{\varphi}=\norm{|\varphi|},$ where $|\varphi|=\varphi^++\varphi^-.$ \\
+		Consider $v\geq 0.$ Then 
+		$$|\varphi(v)|=|\varphi^+(v)-\varphi^-(v)|\leq|\varphi^+(v)+\varphi^-(v)|=|\varphi|(v)\leq\norm{|\varphi|}\norm{v}.$$
+		Then for any $v\in V,$
+		$$|\varphi(v)|=|\varphi(v^+-v^-)|\leq|\varphi(v^+)|+|\varphi(v^-)|\leq|\varphi|(v^+)+|\varphi|(v^-)=|\varphi|(|v|)\leq\norm{|\varphi|}\norm{v}.$$
+		This shows that $\norm{\varphi}\leq\norm{|\varphi|}.$ \\
+		Conversely, consider $v\geq 0.$ Let $\epsilon>0,$ so there is $0\leq w\leq v$ with $\varphi(w)\geq\varphi^+(v)-\epsilon,$ and $0\leq z\leq v$ with $-\varphi(z)\geq\varphi^-(v)-\epsilon.$ Hence $\varphi(w-z)=\varphi(w)-\varphi(z)\geq\varphi^+(v)+\varphi^-(v)-2\epsilon.$ \\
+		On the other hand, note that $w-z\leq v$ and $z-w\leq v,$ so
+		$$(w-z)^+\leq v,\;(z-w)^+\leq v\implies |w-z|=(w-z)^+\lor (z-w)\leq v.$$
+		Then $\varphi(w-z)\leq\varphi(|w-z|)\leq\norm{\varphi}\norm{|w-z|}\leq\norm{\varphi}{v},$ i.e. \\
+		$\norm{\varphi}{v}\geq\varphi^+(v)+\varphi^-(v)-2\epsilon=|\varphi|(v)-2\epsilon,$ so for $v\geq 0,$ $\norm{\varphi}\norm{v}\geq|\varphi|\norm{v}.$ \\
+		Now for any $v\in V,$
+		$$\Big||\varphi|(v)\Big|=\Big||\varphi|(v^+-v^-)\Big|=\Big||\varphi|(v^+)-|\varphi|(v^-)\Big|\leq\max\{|\varphi|(v^+),|\varphi|(v^-)\}\leq\norm{\varphi}\norm{v},$$
+		so we have $\norm{\varphi}\geq\norm{|\varphi|},$ hence $\norm{\varphi}=\norm{|\varphi|}.$
+	\end{enumerate}
+}
+\end{thm}
+
+\section{The Stone-Weierstrass Theorem}
+First, we will prove the Kakutani-Krein Theorem, which has a very theoretical proof. The Stone-Weierstrass Theorem will follow, and its proof is quite technical.
+
+\begin{frame*}
+\noindent\ub{Kakutani-Krein Theorem}: Let $X$ be compact Hausdorff. Let $\mathcal{L}$ be a subspace of $C_{\mathbb{R}}(X)$ such that
+\begin{enumerate}
+	\item[(i)] $\mathcal{L}$ is ``stable'' for the lattice operations, i.e. $f,g\in\mathcal{L}\implies f\lor g,f\land g\in\mathcal{L}.$
+	\item[(ii)] $\mathcal{L}$ \ub{strongly separates points} of $X,$ i.e., if $x,y\in X$ ($x\neq y$), then for any $r,s\in\mathbb{R},$ there exists $f\in\mathcal{L}$ with $f(x)=r$ and $f(y)=s.$
+	\end{enumerate}
+Then $\mathcal{L}$ is dense in $C_{\mathbb{R}}(X)$ for $\norm{\cdot}_{\infty}.$ \\
+\pf{
+	Let $f\in C_{\mathbb{R}}(X),$ and let $\epsilon>0.$ We want to find $g\in\mathcal{L}$ with $|f(x)-g(x)|<\epsilon$ for all $x.$ Now fix $x,$ and for each $y$ choose $h_y$ such that $h_y(x)=f(x)$ and $h_y(y)=f(y).$ Then there is an open neighborhood $U_y$ of $y$ such that $h_y(z)<f(z)+\epsilon$ for all $z\in U_y.$ There must be a finite subcover $U_{y_1},\hdots,U_{y_n}$ of $X.$ \\
+	Let $g_x=h_{y_1}\land\cdots\land h_{y_n}.$ Thus $g_x(x)=f(x),$ and $g_x(y)\leq f(y)+\epsilon.$ Then for each $x,$ there is an open neighborhood $V_x$ of $x$ such that $g_x(z)>f(z)-\epsilon$ for $z\in V_x.$ There must be a finite subcover $V_{x_1},\hdots,V_{x_m}$ of $X.$ Let $g=g_{x_1}\lor\cdots\lor g_{x_m}.$ Then $g(y)\leq f(y)+\epsilon,$ and $g(y)\geq f(y)-\epsilon$ for all $y\in X.$
+}
+\end{frame*}
+
+\begin{frame*}
+\noindent \ub{Stone-Weierstrass Theorem}: Let $X$ be compact Hausdorff. Let $\mathcal{A}$ be a subalgebra of $C_{\mathbb{R}}(X)$ that strongly separates points of $X.$ Then $\mathcal{A}$ is dense in $C_{\mathbb{R}}(X)$ for $\norm{\cdot}_{\infty}.$ \\
+\pf{
+	Let $\overline{\mathcal{A}}$ be the closure of $\mathcal{A}$ in $C_{\mathbb{R}}(X)$ for $\norm{\cdot}_{\infty}.$ Then $\overline{\mathcal{A}}$ is a subalgebra of $C_{\mathbb{R}}(X)$ also, and we claim that $\overline{\mathcal{A}}$ is stable for the lattice operations.
+
+	\vspace{0.1in}
+	\noindent Since $f\lor g=\displaystyle\frac{f+g+|f-g|}{2},$ and $f\land g=\displaystyle\frac{f+g-|f-g|}{2},$ it suffices to show that if $f\in\overline{\mathcal{A}},$ then $|f|\in\overline{\mathcal{A}}.$ \\
+	Now $|f|=\sqrt{f^2},$ and by scaling, it suffices to consider $f$ with $\norm{f}_{\infty}\leq\frac{1}{2}.$ \\
+	Given $\delta>0,$ consider the function $t\mapsto\sqrt{t+\delta},$ for $t\in\mathbb{R}.$
+	This function has a power series about $1/2$ converging in $(-\delta,\;1+\delta),$ so in particular it converges uniformly on $[0,1].$ By truncating the power series, we get a polynomial $q$ that approximates $\sqrt{t+\delta}$ as closely as we want. Set $p=q-q(0).$ Then we can approximate $\sqrt{t+\delta}$ on $[0,1]$ by a polynomial $p$ with $p(0)=0.$ We can choose $\delta$ small enough that $\sqrt{t+\delta}$ approaches $\sqrt{t}$ on $[0,1].$ Thus we can approximate the map $t\mapsto\sqrt{t+\delta}$ by a polynomial $p$ with $p(0)=0$ as accurately as we want. Thus, given $\epsilon>0,$ we can find a polynomial $p_{\epsilon}$ with $p_{\epsilon}(0)=0$ such that $|\sqrt{t}-p(t)|<\epsilon$ for all $t\in[0,1].$ \\
+	Thus, given $f\in\overline{\mathcal{A}},$ $\norm{f}_{\infty}\leq 1/2,$ $|\sqrt{f(x)^2}-p(f(x)^2)|<\epsilon$ for all $t\in[0,1],$ i.e. $\norm{|f|-p(f^2)}_{\infty}<\epsilon$ since $p(f^2)\in\overline{\mathcal{A}}.$ Therefore $|f|\in\overline{\mathcal{A}}.$ The result then follows from the Kakutani-Krein Theorem.
+}
+\end{frame*}
+
+\begin{frame*}
+\noindent\ub{Complex Stone-Weierstrass Theorem}: Let $X$ be compact Hausdorff, and let \\ $\mathcal{A}\subseteq C_{\mathbb{C}}(X)$ be a subalgebra that strongly separates points of $X$ and is stable under complex conjugation, i.e. if $f\in\mathcal{A},$ then $\overline{f}\in\mathcal{A}.$ Then $\mathcal{A}$ is dense in $C_{\mathbb{C}}(X)$ for $\norm{\cdot}_{\infty}.$ \\
+\pf{
+	Observe that $f=\displaystyle\frac{f+\overline{f}}{2}+i\cdot\displaystyle\frac{f-\overline{f}}{2}.$ The $\mathbb{R}$-valued functions are a subalgebra of $C_{\mathbb{R}}(X)$ that strongly separates points. Then Re $\mathcal{A}$ is dense in $C_{\mathbb{R}}(X).$ Similar arguments can be made for Im $\mathcal{A},$ so that $\mathcal{A}$ is dense in $C_{\mathbb{C}}(X).$
+}
+\end{frame*}
+
+Finally, we will show a version of the Stone-Weierstrass Theorem to Hausdorff spaces that are only locally compact.
+
+\begin{thm}
+Let $X$ be locally compact Hausdorff, but not compact. Let $\mathcal{A}$ be a subalgebra of $C_{\infty}(X,\mathbb{R})$ that separates points. If for each $x\in X$ there is $f\in\mathcal{A}$ with $f(x)\neq 0,$ then $\mathcal{A}$ is dense in $C_{\infty}(X)$ for $\norm{\cdot}_{\infty}.$ \\
+\pf{
+	Let $\tilde{X}$ be the one-point compactification of $X$ with $x_{\infty}$ being the added point. Then $\mathcal{A}\subseteq C(X)\subseteq C(\tilde{X}).$ Let $\tilde{\mathcal{A}}$ be $\mathcal{A}$ with $\mathbf{1}\in C(\tilde{X}).$ Then $\tilde{\mathcal{A}}$ separates the points of $\tilde{X},$ and $\tilde{\mathcal{A}}$ contains $\mathbf{1},$ so by the Stone-Weierstrass Theorem, $\tilde{\mathcal{A}}$ is dense in $C(\tilde{X})$ for $\norm{\cdot}_{\infty}.$ Thus, given $f\in C_{\infty}(X)$ and $\epsilon>0,$ there is $h\in\tilde{\mathcal{A}}$ such that $\norm{f-h}_{\infty}<\epsilon/2.$ Then $|h(x_{\infty})|=|h(x_{\infty})-\underbrace{f(x_{\infty}}_{=0})|<\epsilon/2,$ so let $k=h-h(x_{\infty}),$ so $k(x_{\infty})=0,$ i.e. $k\in\mathcal{A}.$
+}
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

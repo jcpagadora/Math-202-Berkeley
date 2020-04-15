@@ -1,0 +1,65 @@
+\chapter{Preliminaries}
+
+\section{Linear Transformations}
+
+Let $V,W$ be normed vector spaces, with $T:V\rightarrow W$ a linear transformation.
+
+\begin{defn}
+$T$ is \ub{bounded} if there exists $c>0$ such that $\norm{T(v)}_W\leq c\norm{v}_V$ for all $v\in V.$
+\end{defn}
+
+\begin{thm}
+The following are equivalent:
+\begin{enumerate}
+\item[(i)] $T$ is continuous.
+\item[(ii)] $T$ is continuous at $0.$
+\item[(iii)] $T$ is bounded.
+\item[(iv)] $T$ is Lipschitz (and thus uniformly continuous)
+\end{enumerate}
+\pf{Note that (4)$\implies$(1)$\implies$(2) is obvious. \\
+(3)$\implies$(4): $\norm{T(v_1)-T(v_2)}=\norm{T(v_1-v_2)}\leq c\norm{v_1-v_2}.$ \\ \\
+(2)$\implies$(3): Consider $B_1(0_W)\subseteq W.$ Then $T^{-1}(B_1(0_W))$ contains a neighborhood of $0_V.$ That is, there is a $\delta>0$ such that $T(B_{\delta}(0_V))\subseteq B_1(T(0_W))=B_1(0_W).$ For any nonzero $v\in V,$
+$$\frac{\norm{T(v)}}{\frac{2}{\delta}\norm{v}}=\norm{T\Big(\frac{\delta v}{2\norm{v}}\Big)}\leq 1,$$
+since $\frac{\delta v}{2\norm{v}}\in B_{\delta}(0_V).$ Therefore $\norm{T(v)}\leq \frac{2}{\delta}\cdot\norm{v}.$
+}
+\end{thm}
+
+Denote $B(V,W)=\{T:V\rightarrow W\;|\;T\text{ is bounded \& linear}\}.$
+We can define a norm on $\{T:V\rightarrow W\;|\;T\text{ is bounded \& linear}\},$ by
+$$\norm{T}=\sup\Big\{\frac{\norm{Tv}_W}{\norm{v}_V}:v\in V\Big\}=\sup\{\norm{Tv}_w\;:\;\norm{v}_V\leq 1\}.$$
+This is called the \ub{operator norm} of $T.$\\
+
+It is easily seen that $B(V,W)$ is a normed vector space with the operator norm. Indeed, for $S,T\in B(V,W)$ and $v\in V,$ we have $\norm{(S+T)v}=\norm{Sv+Tv}\leq(\norm{S}+\norm{T})\norm{v}.$ Therefore, $\norm{S+T}\leq\norm{S}+\norm{T}.$ Furthermore, for any scalar $\alpha,$ we have $\norm{\alpha T}=|\alpha|\cdot\norm{T}.$ \\
+
+If $T\in B(V,W),$ then in fact $T$ is uniformly continuous. If $W$ is complete, then $T$ extends to the completion of $V.$
+
+\begin{prop}
+Let $T\in B(V,W).$ Furthermore, suppose $(X,\mathcal{S},\mu)$ is a measure space. The following propositions are left as exercises:
+\begin{enumerate}
+\item[(i)] If $(f_n)$ is a sequence of ISFs converging to $f$ pointwise, then $(Tf_n)$ converges to $Tf.$
+\item[(ii)] If $(f_n)$ is a sequence of SMFs that is Cauchy in mean, then $(Tf_n)$ is also Cauchy in mean.
+\item[(iii)] If $f$ is integrable, then $Tf$ is integrable. In fact, $\int Tf\;d\mu=T\Big(\int f\;d\mu\Big).$
+\end{enumerate}
+\end{prop}
+
+Note that the map $\Phi_T:\mathcal{L}^1(X,\mathcal{S},\mu,V)\rightarrow\mathcal{L}^1(X,\mathcal{S},\mu,W)$ defined by $\Phi_T(f)=Tf,$ then we can see that $\norm{\Phi_T}\leq\norm{T},$ so that $\Phi_T\in B(\mathcal{L}^1(X,\mathcal{S},\mu,V),\mathcal{L}^1(X,\mathcal{S},\mu,W)).$ \\
+
+\begin{defn}
+If $V$ is a normed vector space, then the \ub{dual space of $V$} is the vector space of all continuous linear functionals on $V,$ denoted $V'.$
+\end{defn}
+
+Let $h$ be a bounded measurable function, $\norm{h}_{\infty}<\infty.$ Define $\varphi_h$ on $V'$ by
+$$\varphi_h(f)=\int h(x)f(x)\;d\mu(x).$$
+Then note that
+$$|\varphi_h(f)|\leq\int|h(x)||f(x)|\;d\mu(x)\leq\norm{h}_{\infty}\norm{f}_1$$
+so that $\norm{\varphi_h}\leq\norm{h}_{\infty}.$
+
+\begin{defn}
+For $g:X\rightarrow V$ measurable, we say that $g$ is \ub{essentially bounded} if there is $c>0$ such that $\mu(\{x:\norm{g(x)}>c\})=0.$
+\end{defn}
+
+Set $\norm{g}_{\infty}=\inf\{c>0\;:\;\mu(\{x:\norm{g(x)}>c\})=0\},$ for $g$ an essentially bounded function.\\ 
+
+Let $\mathcal{L}^{\infty}(X,\mathcal{S},\mu,V)$ denote the vector space of all essentially bounded functions. Then we can check that $\norm{\cdot}_{\infty}$ is a seminorm on $\mathcal{L}^{\infty}(X,\mathcal{S},\mu,V).$ \\
+
+Let $L^{\infty}(X,\mathcal{S},\mu, V)$ denote the equivalence class of functions in $\mathcal{L}^{\infty}$ equal a.e.

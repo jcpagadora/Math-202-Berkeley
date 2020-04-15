@@ -1,0 +1,143 @@
+\chapter{Dual to $L^p$}
+
+Using the theory we have developed on Hilbert spaces, we will first show that the dual to $L^1$ is $L^{\infty}.$ Then, we will prove the Lebesgue Decomposition Theorem and the Radon-Nikodym Theorem. From these theorems, we show that the dual to $L^p$ is $L^q,$ where $p^{-1}+q^{-1}=1.$
+
+\section{Dual to $L^1$}
+
+\noindent Let us first determine the dual space to $L^1(X,\mathcal{S},\mu)$ for $\mu(X)<\infty.$ In this case, we know that $L^2(X,\mathcal{S},\mu)\subseteq L^1(X,\mathcal{S},\mu).$ \\
+\noindent Let $\psi\in L^1(X,\mathcal{S},\mu)'.$ For $f\in L^2,$ we have $|\psi(f)|\leq\norm{\psi}{f}_1\leq\norm{\psi}{f}_2\norm{\mathbf{1}}.$ So $\psi$ as a linear functional of $L^2$ is continuous, so there is $g\in L^2$ such that $\psi(f)=\inp{f}{g}\;\forall f\in L^2,$ i.e., $\psi(f)=\int f\overline{g}\;d\mu.$ \\
+\noindent Recall that we also have $\Big|\int f\overline{g}\;d\mu\Big|\leq\norm{f}_1\norm{\psi}.$ \\
+
+\noindent\underline{Claim}: $g\in L^{\infty}.$ \\
+\noindent Let $E\in S,$ $\mu(E),$ and let $f=\chi_E,$ so we consider $\int_E \overline{g}\;d\mu\leq\norm{\chi_E}_1\norm{\psi}=\mu(E)\norm{\psi}.$
+$$\implies\frac{1}{\mu(E)}\int_E\overline{g}\;d\mu\leq\norm{\psi}.$$
+Recall that $\frac{1}{\mu(E)}\int_E\overline{g}\;d\mu$ is the average value of $\overline{g}$ on $E.$ By the following lemma, we have $\overline{g}(x)\leq\norm{\psi}<\infty$ a.e., so indeed $g\in L^{\infty}(X,\mathcal{S},\mu).$
+\begin{lemma}
+Let $f\in L^1(X,\mathcal{S},\mu, \mathcal{B}).$ Suppose $C\subseteq \mathcal{B}$ is closed, and suppose that for all $E\in\mathcal{S},$ $\mu(E)<\infty,$ and $\frac{1}{\mu(E)}\int_E f\;d\mu\in C.$ Then $f(x)\in C$ a.e. \\
+\pf{
+	We can take $\mathcal{B}$ to be separable, and also $\mu(X)<\infty$ in particular. Let $v\in\mathcal{B}\setminus C.$ Choose $r>0$ such that $B_r(v)\cap C=\varnothing.$ Let $F=\{x:\;f(x)\in B_r(v)\}.$ If $\mu(F)>0,$
+	$$\norm{\frac{1}{\mu(F)}\int_F f\;d\mu-v}=\norm{\frac{1}{\mu(F)}\int_F f\;d\mu-\frac{1}{\mu(F)}\int_Fv\;d\mu}\leq\frac{1}{\mu(F)}\int_F\norm{f(x)-v}\;d\mu(x)<r,$$
+	which means that $\frac{1}{\mu(F)}\int_F f\;d\mu\in B_r(v)\cap C,$ a contradiction. Therefore $\mu(F)=0.$ \\
+	Since $\mathcal{B}$ is separable, $\mathcal{B}\setminus C$ is open in $\mathcal{B}$ and is a countable union of balls $B_{r_j}(v_j)$ with $B_{r_j}(v_j)\cap C=\varnothing.$ It follows that $\mu\Big(f^{-1}(\mathcal{B}\setminus C)\Big)=0.$
+}
+\end{lemma}
+
+\begin{thm}
+Let $(X,\mathcal{S},\mu)$ be a $\sigma$-finite measure space. Then $(L^1)'=L^{\infty}.$ \\
+\pf{
+	Let $\varphi\in L^1(X,\mathcal{S},\mu)'.$ There exists a sequence $\{F_j\}_{j=1}^{\infty}$ with $\mu(F_j)<\infty$ for all $j.$ Define $E_n=\bigcup_{j=1}^n F_j.$ So $E_n\uparrow X.$ In other words $X=\bigcup_{j=1}^{\infty} F_j.$ \\
+	Restrict $\varphi$ to $L^1(E_n,\mathcal{S}_{E_n},\mu_{E_n})\subseteq L^1(X,\mathcal{S},\mu).$ Recall that there is a $g_n\in L^{\infty}(E_n,\mathcal{S}_{E_n},\mu_{E_n})$ with $\varphi(f)=\int_{E_n} g_nf\;d\mu,$ with this inclusion map an isometry. But if $m>n,$ for $f\in L^1(E_n)\subseteq L^1(E_m),$
+	$$\varphi(f)=\int_{E_n}g_nf\;d\mu=\int_{E_m}g_mf\;d\mu, \text{ so } g_m\Big|_{E_n}=g_n\text{ a.e.}$$
+	Thus, up to a null set, get $g\in L^{\infty}(X)$ such that $g\Big|_{E_n}=g_n$ a.e. \\
+	Then for $f\in L^1(X),$ we have $\varphi(f)=\int gf\;d\mu.$ \\
+	Let $f_n=\chi_{E_n}f,$ so $\varphi(f_n)=\int g_nf_n\;d\mu.$ By letting $n\rightarrow\infty,$ we see that $\norm{\varphi}=\norm{g}.$
+}
+\end{thm}
+
+
+\noindent * Remark: We need $(X,\mathcal{S},\mu)$ to be $\sigma$-finite. Indeed, let $X$ be uncountable, and let $\mathcal{S}$ be the $\sigma$-ring of countable sets with counting measure $\mu.$ Then $L^1=\ell^1,$ and \\ $\ell^1(X)'=\ell^{\infty}(X)\neq L^{\infty}(X,\mathcal{S},\mu),$ since, for example, $g(x)=1$ is not $\mathcal{S}$-measurable, so $g\not\in L^{\infty}(X,\mathcal{S},\mu).$
+
+\section{Lebesgue and Radon-Nikodym Theorems}
+
+\begin{defn}
+A function $g$ is \ub{locally measurable} for $\mathcal{S}$ if for any $E\in\mathcal{S},$ we have $\chi_Eg$ is $\mathcal{S}$-measurable.
+\end{defn}
+
+\begin{defn}
+Let $(X,\mathcal{S})$ be a measurable space. Let $\mu$ be a positive measure on $\mathcal{S},$ and let $\nu$ be a $\mathcal{B}$-valued measure, where $\mathcal{B}$ is a Banach space. Then $\nu$ is \ub{absolutely continuous} with respect to $\mu$ if $E\in\mathcal{S}$ with $\mu(E)=0$ implies $\nu(E)=0.$ We write $\nu\ll\mu.$
+\end{defn}
+
+
+\begin{defn}
+$\mu$ and $\nu$ are \ub{mutually singular} if there is $E\in\mathcal{S}$ such that for any $F\subseteq E,$ $\mu(F)=0,$ and for any $G\subseteq E^c,$ $\nu(G)=0.$ We write $\nu\perp\mu.$
+\end{defn}
+
+\begin{thm}
+Let $(X,\mathcal{S})$ be a measurable space, and let $\mu,\nu$ be measures defined on $\mathcal{S}$ that are $\sigma$-finite.
+\begin{enumerate}
+\item[(1)] \ub{Lebesgue Decomposition Theorem:} $\nu=\nu_{\text{ac}}+\nu_{\text{s}},$ where $\nu_{\text{s}}\perp\mu,$ and $\nu_{\text{ac}}\ll\mu.$
+\item[(2)] \ub{Radon-Nikodym Theorem:} If $\nu\ll\mu,$ then there is a measurable $g\geq 0$ such that $\nu(E)=\int_E g\;d\mu.$
+\end{enumerate}
+\pf{
+	First, assume the case $\mu(X)<\infty$ and $\nu(X)<\infty.$ \\
+	Observe that $\mu+\nu$ is a measure, and that for $f\in L^1(\mu+\nu),$
+	$$\int|f|\;d(\mu+\nu)=\int|f|\;d\mu+\int|f|\;d\nu.$$
+	Define $\varphi$ on $L^1(\mu+\nu)$ by $\varphi(f)=\int f\;d\nu.$ Then
+	$$|\varphi(f)|\leq\int|f|\;d\nu=\norm{f}_{1_{\nu}}\leq\norm{f}_{1_{\mu+\nu}}.$$
+	So $\varphi\in(L^1(\mu+\nu))'$ with $\norm{\varphi}\leq 1,$ so there is a $h\in L^{\infty}(X,\mathcal{S},\mu+\nu)$ such that \\ $\varphi(f)=\int fh\;d(\mu+\nu)$ for all $f\in L^1(\mu+\nu),$ and $\norm{h}_{\infty}\leq 1.$ \\
+	Furthermore, $h\geq 0$ a.e. We can also assume $0\leq h\leq 1$ since $h>1$ on a null set. Let $E_s=\{x:\;h(x)=1\},$ and define the measure $\nu_s(E)=\nu(E\cap E_s).$ \\
+	We claim that $\mu\perp\nu_s.$ For any $E\subseteq E_s,$
+	$$\int \chi_E\;d\nu=\int\chi_E h\;d(\mu+\nu)=\int_E h\;d\mu+\int_E h\;d\nu.$$
+	Since $E\subseteq E_s,$ we have $h=1$ on $E,$ so it follows that $\mu(E)=\int\chi_E\;d\mu=0.$ \\
+	For $E\subseteq E_s^c,$ we have $\nu_s(E)=\nu(E\cap E_s)=0,$ since $E\cap E_s=\varnothing.$ \\
+
+	Now, assume that $\nu$ is absolutely continuous with respect to $\mu.$ Since
+	$$\int f\; d\nu=\int fh\;d(\mu+\nu)=\int fh\;d\nu+\int fh\;d\mu),$$
+	with $0\leq h<1,$ it follows that
+	$$\int f(1-h)\;d\nu=\int fh\;d\mu.$$
+	Let $g=\displaystyle\frac{h}{1-h},$ which may be unbounded. Let $E_n=\{x:\;1-h(x)\geq 1/n\}.$ Then $g\chi_{E_n}\in L^{\infty},$ and let $E\subseteq E_n.$ Then $\displaystyle\frac{\chi_E}{1-h}\in L^{\infty},$ and
+	$$\nu(E)=\int (1-h)\frac{\chi_E}{1-h}\;d\nu=\int h\frac{\chi_E}{1-h}\;d\mu=\int_E g\;d\mu.$$
+	For any $E,$ we have $\nu(E)\geq\nu(E\cap E_n)=\int_{E\cap E_n} g\;d\mu\uparrow\int_E g\;d\mu,$ with $g\in L^1(\mu).$ Now for the $\sigma$-finite case, choose $E_n\uparrow X,$ and apply the result to each $E_n.$ The result should then hold for all of $X.$
+
+}
+\end{thm}
+
+\section{The Dual to $L^p$}
+
+Let us now finally prove that for $p>1,$ the dual to $L^p$ is $L^q,$ where $p^{-1}+q^{-1}=1.$
+
+\begin{defn}
+$f\in L^p$ is positive if $f\geq 0.$ $\varphi\in (L^p(X))'$ is a \ub{positive linear functional} if $\varphi(f)\geq 0$ for every positive $f.$
+\end{defn}
+
+\begin{lemma}
+Let $\mu(X)<\infty,$ if $g\in L^1(X),$ and if there exists a $c$ such that $\Big|\int fg\;d\mu\Big|\leq c\norm{f}_p$ for all $f\in L^p,$ then $g\in L^q.$ \\
+\pf{
+	Note that it suffices to have $g\geq 0.$ Let $g_n(x)=\begin{cases} g(x)\text{ if } g(x)\leq n. \\ n\text{ if } g(x)> n\end{cases}$
+
+	\noindent Then $g_n\in L^{\infty}\subseteq L^q.$ For $f\in L^1\cap L^{\infty},$ we have 
+	$$\Big|\int fg_n\;d\mu\Big|\leq\int|fg_n|\;d\mu\leq\norm{f}_p\norm{g_n}_q,$$
+	by Holder's Inequality and the fact that $L^1\cap L^{\infty}$ is dense in $L^p.$ But also, recall that
+	$$\norm{g_n}_q=\sup\Big\{\Big|\int fg_n\;d\mu\Big|:\;\norm{f}_p\leq 1\Big\}\leq c.$$
+	Since this holds for all $n,$ it follows that $g\in L^q.$
+}
+\end{lemma}
+
+\begin{thm}
+Suppose $\mu(X)<\infty,$ and let $\varphi\in (L^p)'$ be positive. Then there exists $g\in L^q$ ($g\geq 0$) such that $\varphi(f)=\int fg\;d\mu$ for all $f\in L^p(X).$ \\
+\pf{
+	For $E\in\mathcal{S},$ define a function $\nu$ on $\mathcal{S}$ by $\nu(E)=\varphi(\chi_E).$ We claim that $\nu$ is a measure. Let $E,F\in\mathcal{S}$ be disjoint. Then
+	$$\nu(E\cup F)=\varphi(\chi_{E\cup F})=\varphi(\chi_E)+\varphi(\chi_F)=\nu(E)+\nu(F).$$
+	Therefore $\nu$ is additive. For countable subadditivity, let $E=\bigcup_{n=1}^{\infty}E_n,$ where $\{E_n\}$ are disjoint sets in $\mathcal{S}.$ Let $F_m=\bigcup_{n=1}^m E_n,$ so that $F_m\uparrow E.$ Clearly, by the Monotone Convergence Theorem, we have $\chi_{F_m}\rightarrow\chi_E,$ so
+	$$\nu(E)=\varphi\Big(\lim_{m\rightarrow\infty}\chi_{F_m}\Big)=\lim_{m\rightarrow\infty}\varphi(\chi_{F_m})=\lim_{m\rightarrow\infty}\nu\Big(\bigcup_{n=1}^m E_n\Big)=\lim_{m\rightarrow\infty}\sum_{n=1}^m\nu(E_n)=\sum_{n=1}^{\infty}\nu(E_n),$$
+	as desired. Furthermore, observe that if $\mu(E)=0,$ then $\varphi(\chi_E)=0,$ since $\chi_E=0$ a.e. in $L^p.$ This means that $\nu\ll\mu,$ so by the Radon-Nikodym Theorem, there exists a measurable $g$ such that $\nu(E)=\int_E g\;d\mu$ for all $E\in\mathcal{S}.$ But by the lemma above, since 
+	$$\Big|\int fg\;d\mu\Big|=|\varphi(f)|\leq\norm{\varphi}\norm{f}_p,$$
+	indeed $g\in L^q.$
+}
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

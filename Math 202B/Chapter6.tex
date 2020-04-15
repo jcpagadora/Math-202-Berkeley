@@ -1,0 +1,184 @@
+\chapter{Positive Radon Measures}
+
+Here we discuss an important link between functional analysis and measure theory, particularly, the link between positive linear functionals and a class of measures called the positive Radon measures. We generalize the regularity of Borel measures on $\mathbb{R}$ to a notion of regularity on locally compact Hausdorff spaces. Thus, throughout this chapter, we will let $X$ denote a locally compacy Hausdorff space. \\
+We will denote $C_c(X)$ to be the continuous functions on $X$ with compact support.
+
+\section{Properties of Locally Compact Hausdorff Spaces}
+\begin{prop}
+Let $C\subseteq X$ be compact. Then there is an open set $V$ with $C\subseteq V$ such that $\overline{V}$ is compact. \\
+\pf{
+	For each $x\in C,$ there is an open set $V_x$ where $\overline{V_x}$ is compact. There is a finite subcover of $C$: $V_{x_1},...V_{x_n}.$ Then $C\subseteq\bigcup_{j=1}^n V_{x_j},$ and a finite union of compact sets is compact. It follows that $\overline{\bigcup_{j=1}^n V_{x_j}}$ is compact.
+}
+\end{prop}
+
+\begin{prop}
+Let $C\subseteq X$ be compact, $U$ open, $C\subseteq U.$ Then there is an open set $V$ such that $C\subseteq V\subseteq \overline{V}\subseteq U.$ \\
+\pf{
+	By the above proposition, it suffices to consider $U$ with compact closure. Let $\tilde{X}$ be the one-point compactification. Then $U^c$ in $\tilde{X}$ is closed and is disjoint from $C.$ By Urysohn's Lemma, there is a continuous function $h:\tilde{X}\rightarrow [0,1]$ with $h(U^c)=0,$ and $h(C)=1.$ Then the support of $h$ is contained in $\overline{U},$ so $h\in C_c(X).$ \\ Set $V:=\{x:\;h(x)>1/2\}=h^{-1}((1/2,\infty)),$ so $V$ is open, and clearly $C\subseteq V\subseteq\overline{V}\subseteq U.$
+}
+\end{prop}
+
+\begin{prop}
+Let $U$ be open, $C$ compact, $C\subseteq U.$ Then there is $f\in C_c(X)$ with $0\leq f\leq 1,$ where $f(C)=1,$ and supp$(f)\subseteq U.$ \\
+\pf{
+	Find $V$ open, $C\subseteq V\subseteq\overline{V}\subseteq U.$ $V^c$ is closed, so there is a continuous function $f:X\rightarrow[0,1]$ such that $f(C)=1,$ $f(V^c)=0.$ Since supp$(f)\subseteq\overline{V},$ $f\in C_c(X).$
+}
+\end{prop}
+
+\begin{frame*}
+\noindent\ub{Partition of Unity}: Let $C\subseteq X$ be compact, and let $U_1,...,U_n$ be open, with \\ $C\subseteq U_1\cup\cdots\cup U_n.$ For each $1\leq j\leq n,$ there is $f_j\in C_c(X),$ $0\leq f_j\leq 1$ where supp$(f_j)\subseteq U_j,$ and $(\sum_{j=1}^n f_j)(C)=1.$ \\
+\pf{
+	We will use the lemma below to obtain compact sets $D_j\subseteq U_j,$ with $C\subseteq\bigcup_{j=1}^n D_j.$ Choose $g_j$ with supp$(g_j)\subseteq U_j,$ $g_j\geq 1,$ on $D_j.$ Let $h=\sum_{j=1}^n g_j,$ so $f_j=g_j/k.$ \\ Then $f_j\geq 0,$ and
+	$$f_j\leq\frac{g_j}{\sum_{j=1}^ng_j\lor\mathbf{1}}\leq\frac{g_j}{\sum_{j=1}^n g_j}\leq 1,$$
+	since $g_j\geq 0.$ Since $k>0$ always, supp$(f_j)=$supp$(g_j)\subseteq U_j.$ Finally, for $x\in C,$
+	$$\sum_{j=1}^n f_j(x)=\frac{1}{k(x)}\sum_{j=1}^n g_j(x)=1,\implies k(x)=\sum_{j=1}^n g_j(x)$$
+	since $h(x)\geq 1$ for $x\in C.$
+}
+\end{frame*}
+
+\begin{lemma}
+Let $C\subseteq X$ be compact, with $U_1,...,U_n$ open, and $C\subseteq\bigcup_{j=1}^n U_j.$ Then there exist compact closed sets $D_1,...,D_n$ where $D_j\subseteq U_j,$ and $C\subseteq\bigcup_{j=1}^n D_j.$ \\
+\pf{
+	For each $x\in C,$ there is $1\leq j\leq n$ such that $x\in U_j.$ We can choose an open $V_x$ such that $x\in V_x\subseteq\overline{V_x}\subseteq U_j.$ There must be a finite subcover $V_{x_1},...,V_{x_p}.$ For $1\leq k\leq p,$ choose $j_k,$ $1\leq j_k\leq n$ such that $V_k\subseteq U_{j_k}.$ Let $W_j=\bigcup\limits_{j_k=j}V_k\subseteq U_j.$ Then let $D_j=\overline{W_j}=\bigcup\limits_{j_k=j}\overline{V_k}.$ Then the $D_j$'s satisfy the given conditions.
+}
+\end{lemma}
+
+\begin{prop}
+Let $U\subseteq X$ be open, and consider $C_c(U).$ Then $\varphi\Big|_{C_c(U)}$ is continuous for $\norm{\cdot}_{\infty}.$ \\
+\pf{
+	Choose $h\in C_c(X)$ with $0\leq h\leq 1,$ and $h=1$ on $\overline{U}.$ Then for any $f\in C_c(U),$ $\norm{f}_{\infty}h\geq f\geq -\norm{f}_{\infty}h.$ Therefore $\norm{f}_{\infty}\varphi(h)\geq\varphi(f)\geq -\norm{f}_{\infty}\varphi(h),$ so that \\ $|\varphi(f)|<\varphi(h)\norm{f}_{\infty},$ i.e. $\norm{\varphi}_{C_c(U)}\leq\varphi(h).$
+}
+\end{prop}
+
+\noindent For each $U\subseteq X$ with $U$ compact, consider the inclusion $C_{\infty}\supseteq C_c(U)\rightarrow C_0(X).$ (Functions of compact support must vanish at infinity.) Then we can put on $C_0(X)$ the strongest topology making all the inclusions continuous: this is called the \ub{inductive limit topology}.
+
+\section{Positive Radon Measures}
+Given a positive linear functional $\varphi$ on $C_c(X),$ define a function $\muf$ on the collection of open subsets of $X$ by
+$$\muf(U)=\sup\{\varphi(f):\;f\in C_c(X),\;0\leq f\leq 1,\;\text{supp}(f)\subseteq U\}, \text{ and } \muf(\varnothing)=0.$$
+
+\begin{frame*}
+\noindent\ub{Properties of $\muf$}
+\begin{enumerate}
+\item[1.] If $\overline{U}$ is compact, then $\muf(U)<\infty.$ \\
+\pf{
+	Follows from the continuity of $\varphi\Big|_{C_c(U)}$ for $\norm{\cdot}_{\infty}.$
+}
+\item[2.] Monotonicity: If $U\subseteq V,$ then $\muf(U)\leq\muf(V).$ \\
+\pf{
+	Follows easily from the definition of $\muf.$
+}
+\item[3.] $\muf$ is countably subadditive. \\
+\pf{
+	Let $f\in C_c(X)$ with $0\leq f\leq 1,$ supp$(f)\subseteq U=\bigcup_{j=1}^{\infty} U_j.$ \\
+	Notice that $\{U_j\}$ covers supp$(f),$ so there is a finite subcover, and thus without loss of generality, suppose supp$(f)\subseteq\bigcup_{j=1}^n U_j.$ Then there is a partition of unity $\{g_j\}_{j=1}^n,$ $0\leq j\leq 1,$ where supp$(f_j)\subseteq U_j,$ and $(\sum g_j)(\text{supp}(f))=1.$ \\
+	Let $f_j=fg_j,$ so supp$(f_j)\subseteq U_j,$ and $\sum_{j=1}^n f_j=f$ ($0\leq f_j\leq 1).$ Then
+	$$\varphi(f)=\varphi(\sum f_j)=\sum_{j=1}^n\varphi(f_j)\leq\sum_{j=1}^n\muf(U_j)\leq\sum_{j=1}^{\infty}\muf(U_j).$$
+	By taking the supremum over all $f\in C_c(X)$ with $0\leq f\leq 1$ and supp$(f)\subseteq U,$ we get $\muf(U)\leq\sum_{j=1}^{\infty}\muf(U_j).$
+}
+\item[4.] If $U,V$ are disjoint, then $\muf(U\cup V)=\muf(U)+\muf(V).$ \\
+\pf{
+	From (3), we have $\muf(U\cup V)\leq\muf(U)+\muf(V).$ \\
+	Conversely, let $f\in C_c(X)$ have $0\leq f\leq 1,$ supp$(f)\subseteq U,$ and $g\in C_c(X)$ have $0\leq g\leq 1,$ supp$(g)\subseteq V.$ Then supp$(f+g)\subseteq U\cup V,$ and observe that since $U,V$ are disjoint, we have $0\leq f+g\leq 1.$ Then $\muf(U\cup V)\geq\varphi(f+g)=\varphi(f)+\varphi(g).$ By taking the supremum over all such $f,g,$ we get $\muf(U\cup V)\geq\muf(U)+\muf(V).$
+}
+\item[5.] For any $U,$ we have $\muf(U)=\sup\{\muf(V):\overline{V}\subseteq U,\;\overline{V}\text{ compact}\}.$ \\
+\pf{
+	Given $U$ and $0\leq f\leq 1,$ supp$(f)\subseteq U,$ there is $V\subseteq U$ with $\overline{V}$ compact, supp$(f)\subseteq V,$ since $U$ is open. Then $\muf(V)\geq\varphi(f).$ It follows that $\muf(V)\geq\muf(U).$ By monotonicity, $\muf(V)\leq\muf(U).$
+}
+\end{enumerate}
+\end{frame*}
+
+\begin{defn}
+A function on open sets to $[0,\infty]$ satisfying properties (1)-(4) is called a \ub{content}.
+\end{defn}
+
+\begin{prop}
+For a content $\mu,$ $\mu^*$ defined by $\mu^*=\inf\{\mu(U):\;U\text{ open},\; A\subseteq U\}$ is an outer measure.\\
+\pf{
+	It suffices to show countable subadditivity. Let $A=\bigcup_{j=1}^{\infty}A_j.$ Let $\epsilon>0.$ For each $j,$ choose $U_j$ such that $A_j\subseteq U_j,$ and $\mu(U_j)\leq\mu^*(A_j)+\epsilon/2^j.$ Then 
+	$$\mu^*(A)\leq\mu\Big(\bigcup_{j=1}^{\infty}U_j\Big)\leq\sum_{j=1}^{\infty}\mu(U_j)\leq\sum_{j=1}^{\infty}\Big(\mu^*(A_j)+\epsilon/2^j\Big)=\sum_{j=1}^{\infty}\mu^*(A_j)+\epsilon.$$
+}
+\end{prop}
+
+\begin{defn}
+Let $\mu$ be a measure or outer measure on $(X,\mathcal{S}).$ Then $\mu$ is \ub{outer regular} if for every $E\in\mathcal{S},$ we have $\mu(E)=\inf\{\mu(U):\;U\text{ open},\; E\subseteq U\}.$ $\mu$ is \ub{inner regular} if $\mu(E)=\sup\{\mu(C):\;C\subseteq E,\;C\text{ compact}\}.$
+\end{defn}
+
+\begin{defn}
+$\mu$ is \ub{inner regular on open sets} if for all open $U,$
+$$\mu(U)=\sup\{\mu(V):\;V\text{ open},\;\overline{V}\text{ compact},\;\overline{V}\subseteq U\}\;\; \text{(i.e., property (5) for $\muf$)}$$
+\end{defn}
+
+\section{The Riesz-Markov Theorem}
+Given a positive linear functional on $C_c(X),$ we call the measure $\muf$ defined in the previous section a \ub{positive Radon measure}. We will see shortly that positive Radon measures correspond precisely to positive linear functionals.  \\
+In this section, we will prove the Riesz-Markov Theorem: If $\varphi$ is a positive linear functional on $C_c(X),$ then for any $f\in C_c(X),$ we have $\varphi(f)=\int f\;d\muf.$
+
+\begin{frame*}
+\noindent\ub{Lemma 1}: If $f\in C_c(X),$ and $f\geq\chi_A$ for some $A\subseteq X,$ then $\varphi(f)\geq\muf^*(A).$ \\
+\pf{
+	First, we will just consider the case that $A$ is open. If $f\geq\chi_A,$ then for any $g$ with supp$(f)\subseteq A$ and $g\leq\chi_A,$ and $f\geq g,$ then $\varphi(f)\geq\varphi(g),$ but
+	$$\muf(A)=\sup\{\varphi(g):\; g\in C_c(X),\; 0\leq g\leq 1,\;\text{supp}(g)\subseteq A\},$$
+	so $\varphi(f)\geq\muf(A).$ \\
+	Now, let's consider any $A.$ We have $\muf^*(A)=\inf\{\muf(A):\;U\text{ open},\; A\subseteq U\}.$ Let $\epsilon>0.$ Let $U=\{x:\;f(x)>1-\epsilon\},$ so $U$ is open and $A\subseteq U.$ Then 
+	$$\frac{1}{1-\epsilon}\cdot f\geq\chi_U,\;\text{ so }\frac{1}{1-\epsilon}\cdot\varphi(f)\geq\muf^*(U)\geq\muf^*(A).$$\\
+	Letting $\epsilon\rightarrow 0$ gives the desired result.
+}
+\end{frame*}
+
+\begin{frame*}
+\noindent\ub{Lemma 2}: If $A\subseteq X,$ and $\chi_A\geq f\in C_c(X),$ then $\muf^*(A)\geq\varphi(f).$ \\
+\pf{
+	Consider $A$ open. $\chi_A\geq f.$ Let $f_n=(f-1/n)\lor 0,$ so supp$(f_n)=\{x:\;f(x)\geq 1/n\},$ which is closed and contained in $A.$ Then $\varphi(f_n)\leq\muf(A).$ But $f_n\uparrow f$ uniformly, and supp$(f_n)\subseteq\text{supp}(f)\subseteq V,$ $\overline{V}$ compact, $V$ open (for inductive limit topology). Therefore $\varphi(f_n)\uparrow\varphi(f)\implies\varphi(f)\leq\muf(f).$ \\
+	Now for any $A,$ proceed as in lemma 1 above to extend to this case.
+}
+\end{frame*}
+
+\begin{frame*}
+\noindent\ub{Riesz-Markov Theorem}: Let $\varphi$ be a positive Radon measure on $X.$ Define the measure $\muf$ as in the previous section. Then for any $f\in C_c(X),$ we have $\varphi(f)=\int f\;d\muf.$ \\
+\pf{
+	It suffices to consider $f\geq 0$ and $\norm{f}_{\infty}\leq 1.$ Let $\epsilon>0,$ and choose $N$ such that $N\epsilon\geq 1.$ \\
+	For $0\leq n\leq N,$ let $f_n=f\land n\epsilon,$ $f_0=0,$ $f_N=f.$ Note that if $n\leq m,$ then $f_n\leq f_m.$ For $0\leq n\leq N-1,$ let $g_n=f_{n+1}-f_n,$ so that $0\leq g_n\leq\epsilon,$ and $\sum_{n=0}^{N-1} g_n=f.$ \\
+	Let $K_0=\text{supp}(f),$ $K_n=\{x:\;f(x)\geq n\epsilon\}.$ \\
+
+	\noindent Then $g_n(x)=\begin{cases}
+	0,\text{ if } x\not\in K_n, \\
+	\epsilon, x\in K_{n+1}, \\
+	\text{b/w $0$ and $\epsilon$},\text{ if } x\in K_n\setminus K_{n+1}
+	\end{cases}$ \\
+
+	\noindent Then $\epsilon\chi_{K_n}\geq g_n\geq\epsilon\chi_{K_{n+1}},$ so by the lemmas, $\epsilon\muf(K_n)\geq\varphi(g_n)\geq\epsilon\muf(K_{n+1}).$ \\
+
+	\noindent Then $\displaystyle\int\epsilon\chi_{K_{n+1}}\;d\mu\leq\int g_n\;d\mu\leq\int\epsilon\chi_{K_n}\;d\mu.$
+
+	$$\implies\Big|\varphi(g_n)-\int g_n\;d\muf\Big|\leq\epsilon\Big(\muf(K_n)-\muf(K_{n+1})\Big)=\epsilon\muf(K_n\setminus K_{n+1}),$$
+	so that
+	$$\Big|\varphi(f)-\int f\;d\muf\Big|=\Big|\varphi\Big(\sum_{n=0}^{N-1} g_n\Big)-\int\sum_{n=0}^{N-1} g_n\;d\muf\Big|\leq\sum_{n=0}^{N-1}\Big|\varphi(g_n)-\int g_n\;d\muf\Big|\leq$$
+	$$\leq\sum_{n=0}^{N-1}\epsilon\muf(K_n\setminus K_{n+1})=\epsilon\muf\Big(\bigcup_{n=0}^{N-1}(K_n\setminus K_{n+1})\Big)=\epsilon\muf(K_0)=\epsilon\cdot\text{supp}(f).$$
+	Since $\epsilon>0$ was arbitrary, it follows that that $\varphi(f)=\int f\;d\muf.$
+}
+\end{frame*}
+
+\noindent In fact, the measure $\muf$ above is essentially unique. This will establish that $C_c(X)'$ is the space of all positive Borel measures which are outer regular and inner regular on open sets.
+
+\begin{thm}
+If $\nu$ is a positive Borel measure on $X$ that is outer regular and inner regular on open sets, such that $\varphi(f)=\int f\;d\nu$ for all $f\in C_c(X),$ where $\varphi$ is a positive linear functional, then $\nu=\muf.$ \\
+\pf{
+	If $K$ is compact, $U$ is open, and $K\subseteq U,$ then the there exists $f\in C_c(X),$ with $0\leq f\leq 1,$ supp$(f)\subseteq U,$ $\chi_K\leq f\leq\chi_U.$ \\
+	Then $\nu(K)\leq\int f\;d\nu\leq\nu(U).$ Since $\nu$ is inner regular on open sets, we have \\
+	$\nu(U)=\sup\Big\{\int f\;d\nu:\; f\leq\chi_U,\;\text{supp}(f)\subseteq U\Big\}=\muf(U),$ since $\varphi(f)=\int f\;d\nu.$
+}
+\end{thm}
+
+\noindent Consider $X$ compact. We know that $C(X)'$ is a lattice Banach space, so any $\varphi\in C(X)'$ has $\varphi=\varphi^+-\varphi^-,$ and $\varphi^+\land\varphi^-=0.$ \\
+From the Riesz-Markov Theorem, we get regular measures $\mu^+,\mu^-$ such that
+$$\varphi^+(f)=\int f\;d\mu^+ \text{ and } \varphi^-(f)=\int f\;d\mu^-$$
+This implies that $\varphi^+(1)=\displaystyle\int d\mu^+=\mu^+(X)<\infty,$ and $\varphi^-(1)=\displaystyle\int d\mu^-=\mu^-(X)<\infty.$ \\
+Let $\mu=\mu^+-\mu^-,$ which is a well-defined measure. Furthermore, note that $\varphi^+-\varphi^-=0$ implies that $\mu^+,\mu^-$ are mutually singular. \\
+
+To see this, consider the Lebesgue decomposition of $\mu^-$ with respect to $\mu^+$:
+$$\mu^-=\mu_{\text{s}}^-+\mu_{\text{ac}}^-, \text{ and } \mu_{\text{ac}}^-(E)=\int_E h\;d\mu^+, \text{ if } h=0.$$
+If $h\neq 0,$ let $k=h\land 1\neq 0,$ and let $\nu(E)=\int_E k\;d\mu^+,$ $\varphi_{\nu}\leq\varphi,$ so $\varphi_{\nu}\leq\varphi^+\land\varphi^-=0,$ because $k\leq h,\;$ $\varphi_{\nu}\leq\varphi_{\text{ac}}^-\leq\varphi^-.$ \\
+
+
+\noindent Consider $X$ locally compact but not compact, and consider $C_0(X),$ the set of continuous functions that vanish at infinity. Then $C_0(X)$ is a Banach algebra. \\
+If $\varphi\in C_0(X)',$ and if $\varphi\geq 0,$ from $\tilde{X}$ the one-point compactification of $X,$ if $g\in C(\tilde{X}),\;$ $g=f+r$ for $f\in C_0(X)$ and $r\in\mathbb{R}.$ \\
+We can extend $\varphi$ to $\tilde{\varphi}$ on $\tilde{X}$ by $\tilde{\varphi}(f+r)=\varphi(f)+r\norm{\varphi},$ and we can check that $\tilde{\varphi}\geq 0.$ So there is a regular measure $\mu_{\tilde{\varphi}}$ which is positive and finite on $\tilde{X}$ with $\tilde{\varphi}(f+r)=\displaystyle\int (f+r)\;d\mu_{\tilde{\varphi}}$ so in particular $\tilde{\varphi}(f)=\displaystyle\int f\;d\mu_{\tilde{\varphi}}$ and $\mu\Big|_X$ gives $\varphi.$

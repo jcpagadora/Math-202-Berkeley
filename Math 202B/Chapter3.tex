@@ -1,0 +1,339 @@
+\chapter{Normed Vector Spaces}
+
+\section{The Hahn-Banach Theorem}
+
+We begin our study of Banach spaces with the Hahn-Banach theorems concerning continuous linear functionals.
+
+\begin{defn}
+Let $V$ be a vector space over $\mathbb{R}.$ A \ub{Minkowski gauge} is a function $p:V\rightarrow\mathbb{R}$ such that
+\begin{enumerate}
+\item[(1)] $p(x+y)\leq p(x)+p(y)$ for all $x,y\in V$
+\item[(2)] If $r\geq 0,$ then $p(rv)=r\cdot p(v).$
+\end{enumerate}
+\end{defn}
+
+\noindent The first theorem we will prove is the Hahn-Banach Extension theorem. Given a vector space $V,$ it is conceivable that linear functionals may not exist, or may be too complicated to be useful at all. This theorem will show us that there are lots of useful linear functionals on $V$ given a simple gauge, i.e., a norm.
+
+\begin{lemma}
+Let $W$ be a subspace of $V,$ and let $p:V\rightarrow\mathbb{R}$ be a gauge on $V.$ Let $\varphi$ be a linear functional on $W$ such that $\varphi(w)\leq p(w)$ for all $w\in W.$ For any $v_0\in V\setminus W,$ let $Z=W+\mathbb{R}v_0.$ Then there is a linear extension $\tilde{\varphi}$ of $\varphi$ to $Z$ such that $\tilde{\varphi}(z)\leq p(z)$ for all $z\in Z.$ \\
+\pf{
+	We will find $\alpha\in\mathbb{R}$ such that if $\tilde{\varphi}(w+rv_0)=\varphi(w)+r\alpha,$ then $\tilde{\varphi}$ is the desired extension. \\
+	Since we need $\tilde{\varphi}(w+v_0)\leq p(w+v_0),$ it follows that we need $\varphi(w)+\alpha\leq p(w+v_0).$ In other words, we have $\alpha\leq p(w+v_0)-\varphi(w)$ for all $w\in W.$ \\
+	For $r>0,$ we need $\tilde{\varphi}(w-rv_0)\leq p(w-rv_0).$ In particular, we have 
+	$$\tilde{\varphi}(w-v_0)\leq p(w-v_0)\implies\varphi(w)-\alpha\leq p(w-v_0)\implies\varphi(w)-p(w-v_0)\leq\alpha.$$
+	Note that for any $w,w'\in W,$
+	$$\varphi(w)+\varphi(w')=\varphi(w+w')\leq p(w+w')\leq p(w+v_0)+p(w'-v_0),\text{ so }$$
+	$$\varphi(w')-p(w'-v_0)\leq p(w+v_0)-\varphi(w).$$
+	Thus, for any fixed $w',$ we have $\varphi(w')-p(w'-v_0)\leq\inf\{p(w+v_0)-\varphi(w)\;:\;w\in W\}.$ Similarly, it follows that 
+	$$\sup\{\varphi(w')-p(w'-v_0)\;:\;w'\in W\}\leq\inf\{p(w+v_0)-\varphi(w)\;:\;w\in W\}.$$
+	Then any $\alpha$ lying between these two values will suffice.
+}
+\end{lemma}
+
+\begin{frame*}
+\noindent\ub{Hahn-Banach Extension Theorem}: Let $W$ be a subspace of $V.$ With the same set up as in the lemma above, there is an extension $\tilde{\varphi}$ of $\varphi$ to $V$ such that $\tilde{\varphi}(v)\leq p(v)$ for all $v\in V.$ \\
+\pf{
+	We can use the lemma above with Zorn's lemma to prove this. \\
+	Let $S$ be the set of all pairs $(U,\varphi_U),$ where $W\subseteq U\subseteq V,$ $U$ is a subspace, and $\varphi_U$ is an extension of $\varphi$ to $U$ satisfying $\varphi(u)\leq p(u)$ for all $u\in U.$ \\
+	Order $S$ by inclusion, i.e., we say $(U,\varphi_U)\leq (U',\varphi_{U'})$ if $U\subseteq U'$ and $\varphi_{U'}$ is an extension of $\varphi_U.$\\
+	Let $\mathcal{T}$ be a totally-ordered subset of $S,$ and let $U_{\TT}=\bigcup\limits_{(U,\varphi_U)\in\TT} U.$ \\
+	Since $\TT$ is totally-ordered, it is easily seen that $U_{\TT}$ is a subspace containing $W.$ Similarly, let $\varphi_{\TT}:=\bigcup\limits_{(U,\varphi_U)\in\TT}\varphi_U$ be a linear functional on $U_{\TT}.$ Note that $\varphi_{\TT}(u)\leq p(u)$ for all $u\in U_{\TT}.$ Clearly, $(U_{\TT},\varphi_{\TT})\geq (U,\varphi_U)\in\TT.$ Therefore by Zorn's Lemma, $S$ has a maximal element, call it $(U_m,\varphi_m).$ By the lemma above, if $U_m\subset V,$ we would be able to make another extension, contradicting the maximality of $U_m.$ Thus $U_m=V,$ and the desired extension is $\varphi_m.$
+}
+\end{frame*}
+
+\noindent It is clear that norms are gauges, so we have the following corollaries.
+
+\begin{cor}
+Let $V$ be a normed vector space, and let $W\subseteq V$ be a subspace. Let $\varphi$ be a continuous linear functional on $W.$ Then there is an extension $\tilde{\varphi}$ of $\varphi$ on $V$ such that $\norm{\tilde{\phi}}=\norm{\varphi}.$
+\end{cor}
+
+\begin{cor}
+Let $V$ be a normed vector space, and let $v_0\in V.$ Then there is $\varphi\in V'$ with $\norm{\varphi}=1$ and $\varphi(v_0)=\norm{v_0}.$ \\
+\pf{
+	Let $W$ be the one-dimensional subspace spanned by $v_0.$ Define $\psi(\alpha v_0)=\alpha\norm{v_0},$ so that $\norm{\psi}=1.$ By the previous corollary, consider $\varphi$ the extension of $\psi$ on $V$ with $\norm{\varphi}=\norm{\psi}=1.$
+}
+\end{cor}
+
+\begin{cor}
+If $V$ is a normed vector space, and $v\in V,$ then 
+$$\norm{v}=\sup\{\norm{\varphi(v)}:\varphi\in V',\; \norm{v}=1\}.$$
+\end{cor}
+
+\section{Quotient Spaces}
+Given a subspace $W\subseteq V,$ we can form $V/W.$ If $V$ has a norm $|\cdot|,$ we define the \ub{quotient (semi-norm)} on $V/W$ by
+$$\norm{v+W}:=\text{dist}(v,W)=\inf\{|v-w|:w\in W\}.$$
+Let $\overline{v}\in V/W.$ If $\norm{\overline{v}}=0,$ then $v\in\overline{W}$ (the closure of $W$). Note that if $W$ is closed, then $\norm{\cdot}$ is a norm on $V/W.$ Otherwise, we can see that $\norm{\cdot}$ is a semi-norm.
+
+\begin{prop}
+Let $V$ be a normed vector space, $W\subset V$ a closed subspace. Then for any $\epsilon>0,$ there is a $v\in V$ such that $|v-w|\geq 1$ for all $w\in W,$ and $|v|<1+\epsilon.$ \\
+\pf{
+	Form $V/W.$ Choose $z\in V/W$ with $\norm{z}=1.$ We can find $v\in V$ such that $[v]=z,$ and $\norm{z}\leq |v-w|,$ hence $|v-w|\geq 1,$ where we use $[\cdot]$ to denote the equivalence class of an element. Since $\norm{[v]}=1,$ there exists $w\in W$ with $|v-w|<1+\epsilon.$ Let $u=v-w.$ Then $\norm{[v]}=\norm{[u]},$ which gives the desired result.
+}
+\end{prop}
+
+\section{Banach Spaces}
+
+\begin{prop}
+Let $V$ be a normed vector space, and let $W$ be a Banach space. Let $B(V,W)$ be the vector space of all bounded linear operators from $V$ to $W$ with the operator norm. Then $B(V,W)$ is complete and is thus a Banach space. \\
+\pf{
+	Let $\{T_n\}$ be a Cauchy sequence of operators in $B(V,W).$ Then for any $v\in V,$ clearly $\{T_n(v)\}$ is Cauchy in $W.$ \\ 
+	Indeed, $\norm{T_n(v)-T_m(v)}\leq\norm{T_n-T_m}\norm{v},$ and $\norm{T_n-T_m}\norm{v}\rightarrow 0$ as $n,m\rightarrow\infty.$ \\
+	Now define $T:V\rightarrow W$ by $T(v)=\lim T_n(v).$ Then for $v,v'\in V,$ we have $T(v+v')=\lim T_n(v+v')=\lim(T_nv+T_nv')=T(v)+T(v').$ \\
+	Similarly, $T(\alpha v)=\alpha T(v),$ so we have $T\in B(V,W).$ Now, recall that all $\norm{T_n}$ are bounded, so let $s=\sup\{\norm{T_n}:n\geq 1\}.$ Then for any $v\in V,$ we have $\norm{Tv}=\lim\norm{T_nv}\leq s\norm{v},$ so $\norm{T}\leq s.$\\
+	Let $\epsilon>0.$ Then there is $N$ such that $n,m>N$ implies $\norm{T_n-T_m}<\epsilon.$\\
+	Then for $n>N,$
+	$$\norm{T_n(v)-T(v)}=\lim_{m\rightarrow\infty}\norm{T_n(v)-T_m(v)}<\epsilon\norm{v},$$
+	hence $\norm{T_n-T}<\epsilon.$ Therefore $T_n\rightarrow T$ in $B(V,W).$
+}
+\end{prop}
+
+\noindent If $V$ is a normed vector space, and if $V$ has a countable subset $\{v_n\}$ whose linear span is dense, then when proving the Hahn-Banach Extension theorem, $W\subseteq V,$ is $\varphi$ is a linear functional on $W,$ use $\{v_n\}$ to use induction to get $\hat{\varphi}$ on $W+\text{span}\{v_n\},$ $\norm{\hat{\varphi}}=\norm{\varphi}.$ By denseness, this easily extends to $V.$ \\ 
+
+\noindent From the proposition, $B(V,\mathbb{R})=V'$ is a Banach space. \\
+Recall that $V$ is indeed isomorphic to $V',$ but there is no natural isomorphism. However, there is a natural isomorphism from $V$ to $V''.$ \\
+Indeed, by defining $J_v:V'\rightarrow\mathbb{R}$ by $J_v(\varphi)=\varphi(v),$ we claim that the map $v\mapsto J_v$ is an ismorphism from $V$ to $V''.$ Indeed,
+$$|J_v(\varphi)|=|\varphi(v)|\leq\norm{\varphi}\norm{v}\implies \norm{J_v}\leq\norm{v}.$$
+But for $v\in V,$ there is a $\varphi\in V'$ with $\norm{\varphi}=1$ and $\varphi(v)=\norm{v},$ thus $\norm{J_v}=\norm{v}.$ This also means that the map $v\mapsto J_v$ is isometric.
+
+\begin{defn}
+A Banach space is \ub{reflexive} if $J:V\rightarrow V''$ is onto.
+\end{defn}
+
+\noindent
+\ub{Ex:} Once we know that for $1<p<q,$ the dual space of $L^p(X,\mathcal{S},\mu)$ is $L^q(X,\mathcal{S},\mu),$ we can then show that $L^p$ is reflexive.\\
+But, unless $X$ is finite, $L^1$ and $L^{\infty}$ are not reflexive.
+
+\section{Weak Topologies}
+Let $V$ be a vector space over $\R{}$ or $\mathbb{C},$ and let $Z$ be any linear subspace of linear functionals on $V.$ \\
+Then the $Z$-topology on $V$ is the weakest topology on $V$ for which all $z\in Z$ are continuous. \\
+A subspace for the neighborhoods $\OO_v$ consists of 
+$$\OO_{\varphi,\epsilon}=\{v\in V:|\varphi(v)|<\epsilon\} \text{ for } \varphi\in Z.$$
+Note that $\OO_{\varphi,\epsilon}$ is convex. Then the base is $\OO_{\varphi_1,...,\varphi_n,\epsilon}=\{v\in V:|\varphi_j(v)|<\epsilon,\;1\leq j\leq n\}.$\\
+
+\noindent Notice that $v\mapsto|\varphi(v)|$ is a semi-norm. So, more generally, if $V$ is a vector space, and if $S$ is a collection of semi-norms on $V,$ we can consider the weakest topology on $V$ for which all the seminorms are continuous. \\
+
+\begin{defn}
+A \ub{topological vector space} is a vector space $V$ with a topology that makes addition and scalar multiplication continuous.
+\end{defn}
+
+\begin{defn}
+A set $A$ in a vector space is \ub{convex} is for any two points $x,y\in A,$ and for all $t\in[0,1],$ the point $tx+(1-t)y\in A.$ That is, the line between $x$ and $y$ is contained in $A.$
+\end{defn}
+
+\begin{defn}
+A topological vector space is \ub{locally convex} if each point has a sub-base for its neighborhood system consisting of convex sets.
+\end{defn}
+
+\noindent From above, we see that the topology determined by a family of semi-norms is locally convex.
+
+\begin{defn}
+If $V$ is a locally convex topological vector space, given any set $A\subseteq V,$ its \ub{convex hull} is the smallest convex set containing $A.$
+\end{defn}
+
+\noindent The following is a useful fact which we will not prove.
+
+\begin{prop}
+For any non-empty open set in $L^p(X,\mathcal{S},\mu),$ its convex hull is all of $L^p(X,\mathcal{S},\mu).$
+\end{prop}
+
+\begin{defn}
+The weakest topology on $V$ making all linear functionals in $V'$ continuous is called the \ub{weak topology}.
+\end{defn}
+
+\begin{defn}
+The \ub{weak-* topology} on $V'$ is the weakest topology determined by elements of $V''.$
+\end{defn}
+
+\noindent Thus, we can see that if $V$ is reflexive, the weak-* topology is the same as the weak topology on $V'.$
+
+\begin{frame*}
+\noindent\ub{Alaoglu's Theorem}: Let $V$ be a normed vector space. The closed unit ball (for norm) of $V'$ is compact for the weak-* topology. \\
+\pf{
+	For each $v\in V,$ let $D_v=\{\alpha\in\mathbb{C}:|\alpha|\leq\norm{v}\},$ so $D_v$ is compact. Let $P=\prod_{v\in V} D_v,$ so by Tychonoff's Theorem, $P$ is compact for its product topology. \\
+	Let $B_1=\overline{B_1(0)}\subset V'.$ For $\varphi\in B_1,$ we have for any $v\in V,$
+	$$|\varphi(v)|\leq\norm{\varphi}\norm{v}\leq\norm{v},\text{ so  } \varphi(v)\in D_v.$$
+	Thus, we have a natural map $S:B_1\rightarrow P$ by $S(\varphi)=\{\varphi(v)\}_{v\in V}.$ Clearly, $S$ is one-to-one. We show that $S(B_1)$ is closed. Suppose $f\in P,$ and suppose that $f$ is in the closure of $S(B_1).$ That is, $f(v)\in D_v\iff |f(v)|\leq\norm{v}.$ We claim that $f$ is a linear functional, and thus $\norm{f}\leq 1.$ \\
+	Let $v_1,v_2\in V.$ Then define
+	$$\OO_{f,v_1,v_2,\epsilon}=\{g\in P:|f(v_1)-g(v_1)|<\epsilon,\;|f(v_2)-g(v_2)|<\epsilon,\;|f(v_1+v_2)-f(v_1)-f(v_2)|<\epsilon\}.$$
+	Since $f\in\overline{S(B_1)},$ there is $\varphi\in B_1,$ such that $S(\varphi)\in\OO_{f,v_1,v_2,\epsilon/3}.$ Thus,
+	$$|f(v_1+v_2)-f(v_1)-f(v_2)|\leq|f(v_1)-\varphi(v_1)|+|f(v_2)-\varphi(v_2)|+|f(v_1+v_2)-\varphi(v_1+v_2)|<\epsilon.$$
+	Therefore $f(v_1+v_2)=f(v_1)+f(v_2),$ and a similar argument shows that $f(\alpha v)=\alpha f(v),$ hence $f$ is a linear functional, and also $f\in S(B_1),$ hence $S(B_1)$ is closed in $P,$ thus $S(B_1)$ is compact.
+}
+\end{frame*}
+
+\noindent Let $B_1\subseteq V'$ be the closed unit ball, and let $C(B_1)$ be the set of continuous functions on $B_1.$ For each $v\in V,$ define $f_v\in C(B_1)$ by $f_v(\varphi)=\varphi(v).$ By definition of the weak-* topology, $f_v$ is continuous, i.e. $f_v\in C(B_1).$ \\
+Note that if $\varphi\in B_1,$ then $|f_v(\varphi)|=|\varphi(v)|\leq\norm{\varphi}{v},$ so $\norm{f_v}_{\infty}\leq\norm{v}.$ But by the Hahn-Banach Extension Theorem, there is a $\varphi\in B_1$ such that $\varphi(v)=\norm{v},$ so $\norm{f_v}_{\infty}=\norm{v}.$ This leads to the following proposition:
+
+\begin{prop}
+The map $v\mapsto f_v$ is an isometric inclusion of $V$ into $C(B_1).$
+\end{prop}
+
+\noindent Let $V$ be a vector space, and let $W$ be a vector space of linear functionals on $V.$ So we can put the weak-* topology on $V.$ Thus, we can ask what are the linear functionals on $V$ that are continuous for $W$ together.
+
+\begin{prop}
+Every $W$-continuous linear functional on $V$ is an element of $W.$
+\end{prop}
+
+\begin{lemma}
+Let $\varphi,\varphi_1,\hdots,\varphi_n$ be linear functionals on $V.$ The following are equivalent:
+\begin{enumerate}
+\item[(i)] $\varphi$ is a linear combination of $\varphi_1,\hdots,\varphi_n.$
+\item[(ii)] There is a constant $c$ such that for all $v\in V,$ we have $|\varphi(v)|\leq c\max_j\{|\varphi_j(v)|\}.$
+\item[(iii)] $\bigcap_{j=1}^n\text{ker }\varphi_j\subseteq\text{ker}\varphi.$
+\end{enumerate}
+\pf{
+	It is easy to see that (i)$\implies$(ii)$\implies$(iii). \\
+	(iii)$\implies$(i):\\
+	Define $T:V\rightarrow\R{n}$ by $T(v)=(\varphi_1(v),\hdots,\varphi_n(v)).$ \\
+	Then ker $T=\bigcap_{j=1}^n\text{ker }\varphi_j\subseteq\text{ker }\varphi.$ \\
+	Then $\varphi$ drops to a linear functional on $V/\bigcap_{j=1}^n\text{ker }\varphi_j,$ so there are scalars $\alpha_1,\hdots,\alpha_n$ so that $\varphi(v)=(Tv)\cdot(\alpha_1,\hdots,\alpha_n)=\alpha_1\varphi_1(v)+\cdots+\alpha_n\varphi_n(v).$ \\
+	Therefore $\varphi=\alpha_1\varphi_1+\cdots+\alpha_n\varphi_n.$
+}
+\end{lemma}
+
+\begin{frame*}
+\noindent\ub{Proof of Prop}: Since $\varphi$ is continuous for the $W$-topology, $\varphi^{-1}((-1,1))$ must contain a $W$-topology open neighborhood of $\OO_v,$ so it contains a basis neighborhood, \\ $\OO_{0,\varphi_1,\hdots,\varphi_n,\epsilon}=\{v:|\varphi_j(v)|<\epsilon,\;1\leq j\leq n\}.$ \\
+Then if $|\varphi_j(v)|<\epsilon$ for $1\leq j\leq n,$ then $|\varphi(v)|\leq 1.$ \\
+Define a semi-norm $M$ on $V$ by $M(v)=\max\{|\varphi_j(v)|:1\leq j\leq n\},$ so that if $M(v)<\epsilon,$ then $|\varphi(v)|<1.$ \\
+Let $v\in V.$ If $M(v)\neq 0,$ then $M\Big(\frac{v}{M(v)}\cdot\frac{\epsilon}{2}\Big)=\epsilon/2<\epsilon,$ so
+$$\Big|\varphi\Big(\frac{v}{M(v)}\cdot\frac{\epsilon}{2}\Big)\Big|\leq 1,\text{ and } \varphi(v)\leq\frac{2M(v)}{\epsilon}=\frac{2\max\{|\varphi_j(v)|:1\leq j\leq n\}}{\epsilon}.$$
+Otherwise, if $M(v)=0,$ then $M(tv)=0,$ so $|\varphi(tv)|=0$ for all $t,$ so $\varphi(v)=0.$ $\;\;\blacksquare$
+\end{frame*}
+
+\section{Convexity}
+Let $V$ be a topological vector space, and let $\OO$ be an open neighborhood of $0$ in $V.$ Now for any $v\in V,$ it is easily seen that there exists $s>0$ such that $sv\in\OO.$ \\ Let $m_{\OO}(v)=\inf\{s>0:s^{-1}v\in\OO\}.$ \\
+If $s^{-1}v\in\OO,$ then $s^{-1}t^{-1}(tv)\in\OO$ for $t>0.$ Thus 
+$$\inf\{st>0:(st)^{-1}(tv)\in\OO\}=t\cdot\inf\{s>0:s^{-1}t^{-1}(tv)\in\OO\}=t\cdot\inf\{s>0:s^{-1}v\in\OO\}=tm_{\OO}(v)$$
+$$\implies\text{For } t>0,\;m_{\OO}(tv)=tm_{\OO}(v).$$
+
+\begin{lemma}
+If $\OO$ is convex, then $m_{\OO}(v+w)\leq m_{\OO}(v)+ m_{\OO}(w),$ so $m_{\OO}$ is a Minkowski gauge. \\
+\pf{
+	If $s^{-1}v\in\OO,$ and $t^{-1}w\in\OO,$ then $\frac{s}{s+t}+\frac{t}{s+t}=1,$ so
+	$$\frac{s}{s+t}(s^{-1}v)+\frac{t}{s+t}(t^{-1}w)\in\OO\text{ by convexity}.$$
+	The expression above equals $\frac{1}{s+t}(v+w),$ so
+	$$m_{\OO}(v+w)\leq s+t\implies m_{\OO}(v+w)\leq m_{\OO}(v)+m_{\OO}(w).$$
+}
+\end{lemma}
+
+\begin{frame*}
+\noindent\ub{Hahn-Banach Separation Theorem}: Let $V$ be a topological vector space, and let $\OO$ be an open convex set in $V.$ Let $C$ be any convex set with $\OO\cap C=\varnothing.$ Then there is a $\varphi\in V'$ and $t_0\in\mathbb{R}$ such that $\varphi(\OO)<t_0\leq\varphi(C),$ i.e., for all $v\in\OO$ and $w\in C,$ we have $\varphi(v)<t_0\leq\varphi(w).$ \\
+\pf{
+	Let $U=\OO-C:=\{v-w:v\in\OO,w\in C\}=\bigcup_{w\in C}\OO-w.$ \\
+	Since $\{\OO-w\}$ is open, it follows that $U$ is open. Furthermore, consider $v_1-w_1,v_2-w_2\in U,$ and $t\in[0,1].$ Then
+	$$t(v_1-w_1)+(1-t)(v_2-w_2)=\underbrace{tv_1+(1-t)v_2}_{\in\OO}-(\underbrace{tw_1+(t-1)w_2}_{\in C})\in U,$$
+	so $U$ is convex. Note that $0\not\in\OO-C,$ since they are disjoint, so choose some $v_0\in\OO-C,$ and redefine $U:=\OO-C-v_0.$ Then $U$ is open, convex, and is an open neighborhood of $0.$ Consider $m_u$ the Minkowski gauge as above. Notice that $-v_0\not\in U,$ so let $Z=\text{span}\{-v_0\}.$ Define $\varphi_0$ on $Z$ by $\varphi_0(-rv_0)=r.$ We want $\varphi_0$ to be dominated by $m_u.$ For $t<0,$ we have $\varphi(t(-v_0))<0\leq m_u(tv_0).$ And for $t\geq 0,$ we have $\varphi(t(-v_0))\leq m_u(tv_0)=tm_u(v_0).$ \\
+	Now, we need $\underbrace{\varphi(-v_0)}_{=1}\leq m_u(-v_0),$ but this is true since $-v_0\not\in U.$ \\
+	By the Hahn-Banach Separation Theorem, there is a linear functional $\varphi$ on $V$ that extends $\varphi_0$ and is dominated by $m_u.$ So for $v\in\OO,\; w\in C,$
+	$$\varphi(v-w-v_0)\leq m_u(v-w-v_0)\leq 1\implies\varphi(v)-\varphi(w)-\underbrace{\varphi(v_0)}_{=1}\leq 1.$$
+	$$\implies \varphi(v)\leq\varphi(w),\;\text{ so } \sup\{\varphi(v):v\in\OO\}\leq\inf\{\varphi(w):w\in C\}.$$
+	Let $t_0\in\mathbb{R}$ lie between these two numbers. Then we have $\varphi(\OO)<t_0\leq\varphi(C),$ since $\OO$ is open, i.e. $\varphi(v)$ for $v\in\OO$ does not attain the supremum on $\OO.$ The proof is finished by showing $\varphi$ is continuous.
+}
+\end{frame*}
+
+\begin{cor}
+If $V$ is a locally convex topological vector space, and if $C$ is a closed convex subset of $V,$ and if $v_0\in V\setminus C,$ then there is a $\varphi\in V'$ and $t_0\in\mathbb{R}$ such that $\varphi(C)\leq t_0<\varphi(v_0).$ \\
+\pf{
+	$C^c$ is open and contains $v_0,$ so there is a convex open set in $C^c$ containing $v_0,$ say, $\OO.$ Apply the Hahn-Banach Separation Theorem on $C$ and $\OO.$
+}
+\end{cor}
+
+\begin{cor}
+Let $V$ be a normed vector space, and let $S$ be a norm-closed convex subset of $V.$ Then $S$ is also closed for the weak topology on $V.$ \\
+\pf{
+	Let $v_0\in V\setminus S.$ Since $S$ is norm-closed, there is a norm-open ball $B$ about $v_0$ that does not intersect $S,$ i.e. $B\cap S=\varnothing.$ So there exists $\varphi\in V'$ with $\varphi(S)\leq t_0\leq\varphi(v_0).$ But $v_0\in\{v:t_0<\varphi(v)\},$ which is open for the weak topology and doesn't meet $S,$ so $v_0$ is not in the weak closure of $S.$
+}
+\end{cor}
+
+\noindent Facts about convex sets (proofs left as exercises):
+\begin{enumerate}
+\item[1.] The intersection of any convex sets is convex.
+\item[2.] Given any subset of $S,$ there is a smallest convex set that contains $S,$ denoted conv$(S).$
+\item[3.] If $S$ is a subset of a topological vector space, there is a smallest closed convex set that contains it, namely, the closure of conv$(S),$ denoted $\overline{\text{conv}}(S).$
+\end{enumerate}
+
+\begin{defn}
+Let $C$ be a convex set. A \ub{face} of $C$ is a convex set $S\subseteq C$ such that if a point in $S$ is in the interior of a line segment between two points in $C,$ then these two points are in $S.$ That is, if $v_0,v_1\in C$ and if there is $t\in[0,1]$ with $tv_0+(1-t)v_1\in S,$ then $v_0,v_1\in S.$
+\end{defn}
+
+\begin{defn}
+A point of $C$ that is a face is called an \ub{extreme point}.
+\end{defn}
+
+\noindent\ub{Ex}: Consider the closed unit disk. Then only faces are the disk itself and the individual points on the boundary, thus they are extreme points. \\
+
+\noindent Sources of Faces:\\
+Let $C$ be a convex set in $V,$ and let $\varphi$ be a linear functional in $V.$\\
+If $\varphi$ attains its maximum or minimum as a function on $C,$ then $\{v\in C:\varphi(v)=m\},$ where $m$ is the max or min, is a face of $C.$ \\
+Indeed, if $v_0,v_1\in C,$ and if $\varphi(tv_0+(t-1)v_1)=m,$ then $t\varphi(v_0)+(1-t)\varphi(v_1)=m.$ Without loss of generality, suppose $m$ is the maximum. Then $\varphi(v_0)\leq m$ and $\varphi(v_1)\leq m,$ so $t$ is either $0$ or $1,$ and in fact $\varphi(v_0)=\varphi(v_1)=m.$ \\
+
+\noindent The following property's proof will be left as an exercise: \\
+If $C$ is convex, and if $F$ is a face of $C,$ and if $G$ is a face of $F,$ then $G$ is a face of $C.$
+
+\begin{frame*}
+\noindent\ub{Krein-Milman Theorem}: Let $V$ be a locally convex topological vector space, and let $C$ be a compact convex subset of $V.$ Let $\mathcal{E}$ be its set of extreme points. Then $\overline{\text{conv}}(\mathcal{E})=C.$ \\
+\pf{
+	Let $\mathcal{F}_C$ be the set of all closed compact faces of $C.$ Put a partial order by reverse inclusion, i.e., if $F_1,F_2\in\mathcal{F}_C,$ then $F_1\geq F_2$ if $F_1\subseteq F_2.$ Let $T$ be a totally-ordered subset of $\mathcal{F}_C,$ and let $F_0=\bigcap_{F\in T} F.$ Then $F_0$ is convex, closed, and nonempty by the finite intersection property. Note that $F_0\in\mathcal{F}_C,$ and $F_0\geq$ all $F$ in $T,$ so $\mathcal{F}_C$ is inductively ordered. By Zorn's Lemma, there are maximal elements in $\mathcal{F}_C,$ i.e. minimal for inclusion. \\
+	We claim that $F_0$ contains only one point. Suppose $v_1,v_2\in F_0,$ with $v_1\neq v_2.$ By Hausdorff and Hahn-Banach separation theorem, there is $\varphi\in V'$ with $\varphi(v_1)\leq\varphi(v_2),$ and $\varphi$ will take its maximum on $F_0.$ \\
+	Let $F'=\{v\in F_0:\varphi(v)=\text{max.}\}.$ Now $F'$ is a face of $C$ not containing $v_1,\; F'\in F_0,$ so $F'\subset F_0,$ a contradiction. Thus, $F_0$ contains only one point, an extreme point. \\
+	Let $D=\overline{\text{conv}}(\mathcal{E}),$ and suppose $D\neq C.$ Then take $v_0\in C\setminus D.$ By the Hahn-Banach Separation theorem, there is $\varphi\in V'$ with $\varphi(D)\leq t_0<\varphi(v_0).$ Let $G$ be the subset of $C$ where $\varphi$ takes its maximum. Then $G$ is a closed face of $C,$ and $G$ contains an extreme point, and thus an extreme point of $C\setminus D.$ Then by continuity of $\varphi,$ this means that $D=\overline{\text{conv}}(\mathcal{E}).$
+}
+\end{frame*}
+
+\section{Hilbert Spaces}
+\begin{defn}
+A \ub{Hilbert space} is a complete inner product space (over $\mathbb{R}$ or $\mathbb{C}$), where completeness is with respect to the norm defined by $\norm{v}=\inp{v}{v}^{1/2}.$
+\end{defn}
+
+Throughout, we will use $\HH$ to denote a Hilbert space.
+
+\begin{frame*}
+\noindent\ub{Parallelogram Rule}: For any $v,w\in\HH,$ we have $\norm{v+w}^2+\norm{v-w}^2=2(\norm{v}^2+\norm{w}^2).$ \\
+\pf{$\inp{v+w}{v+w}+\inp{v-w}{v-w}=2\inp{v}{v}+2\inp{w}{w}=2(\norm{v}^2+\norm{w}^2).$
+}
+\end{frame*}
+
+\begin{prop}
+Let $C$ be a closed convex subset of $\HH$ not containing $0.$ Then there is a unique point $v\in C$ that is closest to $0.$ That is, $\norm{v}\leq\norm{w}$ for all $w\in C.$ \\
+\pf{
+	Let $m=\inf\{\norm{v}:v\in C\}.$ \\
+	Let $\{v_n\}$ be a sequence in $C$ such that $\norm{v_n}\rightarrow m.$ Then
+	$$\norm{\frac{v_m-v_n}{2}}^2=\frac{1}{2}\Big(\norm{v_n}^2+\norm{v_m}^2\Big)-\norm{\frac{v_n+v_m}{2}}^2,$$
+	where we note that $\frac{v_n+v_m}{2}\in C,$ by convexity of $C.$ \\
+	Since $\norm{v_n},\norm{v_m}\rightarrow m,$ and $\norm{\frac{v_n+v_m}{2}}\rightarrow m$ also, we have that $\norm{\frac{v_m-v_n}{2}}^2\rightarrow 0$ as $n,m\rightarrow\infty,$ so it follows that $\{v_n\}$ is Cauchy and thus converges to some $v\in C$ with $\norm{v}=m.$ \\
+	Suppose there were another point $v'\ in C$ that is also closest to $0.$ Then $\norm{v'}=m,$ and thus by the parallelogram rule, $\norm{\frac{v-v'}{2}}=0,$ so that $v=v'.$
+}
+\end{prop}
+
+\begin{cor}
+If $W$ is a subspace of $\HH,$ and $v_0\in\HH\setminus W,$ then there is a closest point $w_0\in W$ to $v_0.$
+\end{cor}
+
+\noindent We will now show the analogous result in $\mathbb{R}^n$ where the closest point $w_0$ in a subspace $W$ to another point $v_0$ outside the subspace is the ``orthogonal projection'' of $v_0$ onto $W$.\\
+
+\noindent For any $w\in W,$ since $w_0\in W,$ we have $\norm{v_0-w_0}^2\leq\norm{v_0-(w_0-w)}^2,$ so
+$$\norm{v_0-w_0}^2\leq\inp{(v_0-w_0)+w}{(v_0-w_0)+w}=\norm{v_0-w_0}^2+2\text{Re}\inp{v_0-w_0}{w}+\norm{w}^2\implies$$
+$$\implies 0\leq 2\text{Re}\inp{v_0-w_0}{w}+\norm{w}^2.$$
+For any $t>0,$ we have $0\leq 2\text{Re}\inp{v_0-w_0}{tw}+\norm{tw}^2,$ so by letting $t\rightarrow 0,$ \\
+we get $0\leq 2\text{Re}\inp{v_0-w_0}{w},$ and $\text{Re}\inp{v_0-w_0}{w}=0.$ Therefore $\inp{v_0-w_0}{w}=0.$ \\
+
+\noindent \underline{Notation}: $W^{\perp}=\{v\in\HH:\;\inp{v}{w}=0\;\forall w\in W\}.$ \\
+
+\noindent $\rightarrow$ From above, $v_0-w_0\in W^{\perp}.$ \\
+\noindent Conversely, if $w_0\in W$ satisfies $v_0-w_0\in W^{\perp},$ then $w_0$ is the closest point in $W$ to $v_0:$ 
+$$\norm{v_0-w}^2=\norm{(\underbrace{v_0-w_0}_{\in W^{\perp}})+(\underbrace{w_0-w}_{\in W})}^2=\norm{v_0-w_0}^2+\norm{w_0-w}^2,$$
+by the Pythagorean Theorem. \\
+
+
+\noindent \ub{Dual Space to a Hilbert Space} \\
+Let $\psi\in\mathcal{H}', \psi\neq 0,$ and $\mathcal{H}$ a Hilbert space. Let $W=\text{ker}(\psi).$ Then $W$ is a closed subspace, not equal to $\mathcal{H}.$ Let $v_1\in W^{\perp},$ with $\psi(v_1)=1.$ Then for any $v\in\mathcal{H},$ we have \\ $\psi(v-\psi(v)v_1)=0.$ This means that $v-\psi(v)v_1\in W.$ Therefore
+$$\inp{v-\psi(v)v_1}{v_1}=0\implies \inp{v}{v_1}=\inp{\psi(v)v_1}{v_1}=\psi(v)\norm{v_1}^2\implies \psi(v)=\frac{\inp{v}{v_1}}{\norm{v_1}^2}.$$
+
+\noindent Conversely, for any $v_0\in W,$ define $\psi_{v_0}$ on $\mathcal{H}$ by $\psi_{v_0}(v)=\inp{v}{v_0}.$ One can easily check that $\norm{\psi_{v_0}}=\norm{v_0}$ by using Cauchy-Schwarz. \\
+\noindent Thus, we see that the map $v_0\mapsto \psi_{v_0}$ from $\mathcal{H}$ to $\mathcal{H}'$ shows that the dual of $\mathcal{H}$ is itself. In particular, $\mathcal{H}$ is reflexive. \\
+
+\noindent * Note that if $\mathcal{H}$ is not complete, then $(\text{ker}(\psi))^{\perp}$ may be empty. For example, look at $C([0,1])$ with $\psi(f)=\int_0^{1/2}f(x)\;dx.$
+
+
+
+

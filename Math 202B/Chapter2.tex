@@ -1,0 +1,83 @@
+\chapter{$L^p$ Spaces}
+\begin{defn}
+Let $\xsm$ be a measure space, and let $0<p<\infty.$ Let $B$ be a Banach space, and let $f:X\rightarrow B$ be measurable. Then $f$ is \ub{$p$-integrable}, denoted $f\in \mathcal{L}^p(X,\mathcal{S},\mu, B),$ if the map $x\mapsto\norm{f(x)}^p$ is in $\mathcal{L}^1(X,\mathcal{S},\mu,\R{}).$ 
+\end{defn}
+
+Let $L^p$ denote the equivalence class of functions in $\mathcal{L}^p$ equal a.e. For now, we write $f\in L^p$ as any function in $\mathcal{L}^p$ equal a.e. to $f.$
+
+\begin{prop}
+$L^p\xsmb{B}$ is a vector space for pointwise operations. \\
+\pf{Let $f,g\in L^p.$ Then 
+$$\norm{f(x)+g(x)}^p\leq(2\cdot\max\{\norm{f(x)},\norm{g(x)}\})^p\leq 2^p(\norm{f(x)}^p+\norm{g(x)}^p)<\infty,$$
+so $f+g\in L^p.$ It is obvious that for $c\in\R{},$ $cf\in L^p.$}
+\end{prop}
+
+For $f\in L^p,$ for now let us write $\norm{f}_p=\Big(\int\norm{f(x)}^p\;d\mu(x)\Big)^{1/p}.$ $\norm{\cdot}_p$ is not in general a norm. However, we will show that it is a norm for $p\geq 1.$
+
+\begin{lemma}
+If $p,q\in(1,\infty),$ and $p^{-1}+q^{-1}=1,$ and if $r>0,\; s>0,$ then $rs\leq\frac{r^p}{p}+\frac{s^q}{q}.$ \\
+\pf{
+	Since log is concave, we have
+	$$\log\Big(\frac{1}{p}\cdot r^p+\frac{1}{q}\cdot s^q\Big)\geq\frac{1}{p}\log(r^p)+\frac{1}{q}\log(s^q)=\log(r)+\log(s)=\log(rs).$$
+}
+\end{lemma}
+
+\begin{frame*}
+\noindent\ub{Holder's Inequality}: If $p,q\in(1,\infty)$ and $p^{-1}+q^{-1}=1,$ and if $f\in L^p,\; g\in L^q,$ then $\int\norm{fg}\;d\mu\leq\norm{f}_p\norm{g}_q.$ \\
+\pf{
+	From the lemma, we have
+	$$\frac{\norm{f(x)}}{\norm{f}_p}\cdot\frac{\norm{g(x)}}{\norm{g}_q}\leq\frac{\norm{f(x)}^p}{p\norm{f}_p^p}+\frac{\norm{g(x)}^q}{q\norm{g}_q^q}.$$
+	Integrating, we get
+	$$\int\frac{\norm{f(x)}}{\norm{f}_p}\cdot\frac{\norm{g(x)}}{\norm{g}_q}\;d\mu(x)\leq\frac{1}{p\norm{f}_p^p}\int\norm{f}^p\;d\mu+\frac{1}{q\norm{g}_q^q}\int\norm{g}^q\;d\mu=\frac{1}{p}+\frac{1}{q}=1.$$
+}
+\end{frame*}
+
+For $g\in L^q,$ we can define $\varphi_g$ by $\varphi_g(f)=\int f(x)g(x)\;d\mu(x)$ for $f\in L^p.$ Then $\varphi_g$ is a linear functional, so its operator norm is $\norm{\varphi_g}\leq\norm{g}_q.$
+
+\begin{prop}
+For any $f\in L^p,$ there is $g\in L^q$, $\norm{g}_q=1,$ such that $\varphi_g(f)=\norm{f}_p.$ \\
+\pf{
+	Observe that $|f(x)|^p=(|f(x)|^{p/q})^q,$ so the map $x\mapsto |f(x)|^{p/q}\in L^q.$ It suffices to assume $\norm{f}_p=1.$ \\
+	Let 
+	$$u(x)=\begin{cases}
+		0,\text{ if } f(x)=0,\\
+		\frac{f(x)}{|f(x)|},\text{ if } f(x)\neq 0
+	\end{cases}$$
+	Then
+	$$|u(x)|=\begin{cases}
+		0,\text{ if } f(x)=0,\\
+		1,\text{ if } f(x)\neq 0
+	\end{cases}$$
+	Let $g(x)=\overline{u(x)}|f(x)|^{p/q}$ so that $g\in L^q.$ Then
+	$$\norm{g}_q=\Big(\int (|f(x)^{p/q})^q\Big)^{1/q}=\norm{f}_p^{p/q}=1,$$
+	and
+	$$\varphi_g(f)=\int\overline{u(x)}|f(x)|^{p/q} f(x)\;d\mu(x)=\int\overline{u(x)}|f(x)|^{p/q}u(x)|f(x)|\;d\mu(x)=$$
+	$$=\int|f(x)|^{1+p/q}\;d\mu(x)=1=\norm{f}_p^p.$$
+}
+\end{prop}
+
+\begin{frame*}
+\noindent\ub{Minkowski's Inequality}: For $f,g\in L^p,$ we have $\norm{f+g}_p\leq\norm{f}_p+\norm{g}_p.$ \\
+\pf{
+	$$\norm{f+g}_p^p=\int|f(x)+g(x)|^p\;d\mu(x).$$
+	By the previous proposition, there is $h\in L^q,$ where $h\geq 0,$ $\norm{h}_q=1,$ and 
+	$$\norm{f+g}_p=\int|f+g|h\;d\mu\leq\int\Big(|f|+|g|\Big)h\;d\mu=\int|f|h\;d\mu+\int|g|h\;d\mu\leq$$
+	$$\leq\norm{f}_p\norm{h}_q+\norm{g}_p\norm{h}_q=\norm{f}_p+\norm{g}_p.$$
+}
+\end{frame*}
+
+\begin{thm}
+$L^p(X,\Sm,\mu,B)$ is complete. \\
+\pf{
+	Let $\{f_n\}$ be a Cauchy sequence for the $p$-norm. We claim that $\{f_n\}$ is Cauchy in measure. For $m,n\in\mathbb{N},$ and $\epsilon>0,$ define
+	$$E_{m,n}^{\epsilon}:=\{x:\norm{f_m(x)-f_n(x)}\geq\epsilon\}.$$
+	For any $\epsilon>0,$ we have $\frac{1}{\epsilon}\chi_{E_{m,n}^{\epsilon}}(x)\leq\norm{f_m(x)-f_n(x)},$ so
+	$$\frac{1}{\epsilon^p}\mu(E_{m,n}^{\epsilon})=\int\Big(\chi_{E_{m,n}^{\epsilon}}\Big)^p\;d\mu\leq\int\norm{f_m(x)-f_n(x)}^p\;d\mu(x)=\norm{f_m-f_n}_p^p\rightarrow 0$$
+	as $m,n\rightarrow\infty.$ By the Riesz-Weyl Theorem, there is a subsequence that converges to some function $f$ a.e. Thus, we can assume without loss of generality that $f_n\rightarrow f$ a.e. \\
+	For fixed $m,$ we have $|f_n(x)-f_m(x)|^p\rightarrow|f(x)-f_m(x)|^p$ as $n\rightarrow\infty,$ and by Fatou's Lemma, we have
+	$$\int |f-f_m|^p\;d\mu\leq\lim\inf_{n\rightarrow\infty}\int|f_n-f_m|^p\;d\mu.$$
+	For fixed $m,$ given $\epsilon>0,$ there is $N$ such that for $m,n\geq N,$
+	$$\norm{f_m-f_n}_p<\epsilon^{1/p},\text{ i.e., } \int|f_n-f_m|^p\;d\mu<\epsilon.$$
+	Therefore $\norm{f-f_n}_p^p<\epsilon,$ and thus $f_n\rightarrow f$ in the $p$-norm.
+}
+\end{thm}
