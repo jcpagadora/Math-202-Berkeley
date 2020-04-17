@@ -1,0 +1,153 @@
+\chapter{Baire Spaces}
+In this chapter we introduce the notion of Baire spaces, which may seem to be a simple concept, but in fact has very interesting implications.
+
+\begin{defn}
+Let $(X,\TT)$ be a topological space. If $\{B_n\}$ is any countable collection of open dense sets, and $\bigcap_{n=1}^{\infty} B_n$ is also dense, then $(X,\TT)$ is called a \ub{Baire space}.
+\end{defn}
+
+\begin{thm}
+If $X$ is a complete metric space, then $X$ is a Baire space. \\
+\pf{
+	We show that if $W$ is a nonempty open set in $X,$ then $W\cap\Big(\bigcap_{n=1}^{\infty} U_n\Big)\neq\varnothing$ whenever $\{U_n\}$ is a sequence of open dense sets in $X.$ Now $U_1$ is open and dense, so $W\cap U_1$ is open and nonempty. Thus $W\cap U_1$ contains an open ball $B_{r_0}(x_0),$ where we take $0<r_0<1.$ For $n\geq 1,$ having chosen $x_0,...,x_{n-1},$ and $r_0,...,r_{n-1},$ note that $B_{r_{n-1}}(x_{n-1})\cap U_n$ is open and nonempty, so choose $x_n,r_n$ such that $0<r_n<2^{-n},$ and $\overline{B_{r_n}(x_n)}\subseteq U_n\cap B_{r_{n-1}}(x_{n-1}).$ Then if $n,m\geq N,$ we have $x_n,x_m\in B_{r_N}(x_N),$ and since $r_n\rightarrow 0$ as $n\rightarrow\infty,$ $\{x_n\}$ is Cauchy, so it converges to some $x\in X.$ Since $x_n\in B_{r_N}(x_N)$ if $n\geq N,$ we have \\ $x\in\overline{B_{r_N}}(x_N)\subseteq U_N\cap B_{r_1}(x_1)\subseteq U_N\cap W$ for all $N.$ Therefore $x\in W\cap\Big(\bigcap_{n=1}^{\infty} U_n\Big).$
+}
+\end{thm}
+
+\begin{defn}
+A \ub{nowhere dense set} is a set whose closure has empty interior.
+\end{defn}
+
+\begin{prop}
+If $X$ is a Baire space, then it is not a countable union of nowhere dense sets. \\
+\pf{
+	Let $\{E_n\}$ be a sequence of nowhere dense sets in $X.$ Then $\{\overline{E_n}^c\}$ is a sequence of open dense sets. Then $\bigcap_{n=1}^{\infty}\overline{E_n}^c$ is dense in $X.$ In particular, $\bigcap_{n=1}^{\infty}\overline{E_n}^c\neq\varnothing,$ so we have $\bigcup_{n=1}^{\infty}E_n\subseteq\bigcup_{n=1}^{\infty}\overline{E_n}\neq X.$
+}
+\end{prop}
+
+\noindent *Remark: Since the conclusion of the theorem above is purely topological, it also holds for spaces homeomorphic to a Baire space.
+
+\begin{defn}
+If $E\subseteq X$ is a counatable union of nowhere dense sets, then we say $E$ is \ub{meager}.
+\end{defn}
+
+\noindent\ub{Ex}: Continuous, nowhere differentiable functions exist. \\
+Let $E_n=\{f\in C([0,1]):\;\exists\;x_0\in[0,1]\text{ such that } |f(x)-f(x_0)|\leq n|x-x_0|\;\forall x\in[0,1]\}.$ \\
+One can show that $E_n$ is nowhere dense in $C([0,1]),$ and if $\mathcal{F}$ denotes the set of nowhere differentiable functions in $C([0,1]),$ then $\mathcal{F}=\Big(\bigcup_{n=1}^{\infty} E_n\Big)^c.$ Since $C([0,1])$ is a Baire space, $\mathcal{F}\neq\varnothing.$ \\
+
+
+\noindent We will now prove several important theorems that come out of the concept of Baire spaces. The first is the open mapping theorem.
+
+\begin{lemma}
+Let $V$ be a normed vector space, $W$ a Banach space. Let $T:V\rightarrow W$ be linear, onto $W.$ Then there is $R>0$ such that $\overline{T(B_R(0))}\supseteq B_1(0_W).$ \\
+\pf{
+	Clearly $W=\bigcup_{n=1}^{\infty}T(B_n(0_V))=\bigcup_{n=1}^{\infty}\overline{T(B_n(0_V))}.$ Since $W$ is a Baire space, there is some $n_*$ such that $\overline{T(B_{n_*}(0_V))}$ has nonempty interior. \\
+	Then there is some $w_*\in W$ and $r>0$ such that $B_r(w_*)\subseteq\overline{T(B_{n_*}(0_V))}.$ Now since $T$ is onto, there exists $v_*\in V$ such that $T(v_*)=w_*.$ \\
+	Then $\overline{T(B_{n_*}(0_V)-v_*)}\supseteq B_r(0_W).$ Then there exists $M>0$ such that $B_{n_*}(0_V)-v_*\subseteq B_M(0_V),$ so $\overline{T(B_M(0_V))}\supseteq B_r(0_W).$ Then $R=M/r$ satisfies the desired result.
+}
+\end{lemma}
+
+\begin{frame*}
+\noindent\ub{Open Mapping Theorem}: Let $V,W$ be Banach spaces, and let $T:V\rightarrow W$ be a bounded linear transformation. If $T$ is onto $W,$ then $T$ is an open map. \\ 
+\pf{
+	It suffices to show that $T(B_1(0_V))$ is open. By the lemma, for any $\epsilon>0$ and $w\in W,$ $\norm{w}\leq 1,$ there is $v\in V$ with $\norm{v}\leq R$ such that $\norm{w-T(v)}<\epsilon.$ Fix \\ $\norm{w}\leq 1.$ Choose $v_0\in V,$ $\norm{v_0}\leq R,$ $\norm{w-T(v_0)}<1/2.$ \\ 
+	Then choose $v_1\in V,$ $\norm{v_1}\leq R/2,$ $\norm{(w-T(v_0))-T(v_1)}\leq 1/4.$ \\
+	Similarly, choose $v_2\in V,$ $\norm{v_2}\leq R/4,$ $\norm{(w-T(v_0)+T(v_1))-T(v_2)}\leq 1/8.$ \\
+	Repeat this process to get $\norm{v_n}\leq R/2^n,$ and $\norm{(w-T(v_0+\cdots +v_{n-1}))-T(v_n)}\leq 1/2^{n+1}.$ \\
+	Let $v=\sum_{j=0}^{\infty}v_j,$ which exists and is well-defined by completeness of $V.$ By continuity, we have $T(v)=w,$ and $\norm{v}\leq\sum_{n=0}^{\infty}(R/2^n)=2R,$ so $B_1(0_W)\subseteq T(B_{2R}(0_V)).$ Then $B_{1/2R}(0_W)\subseteq T(B_1(0_V)),$ and by considering translations, it easily follows that $T(B_1(0_V))$ is open.
+}
+\end{frame*}
+
+\begin{cor}
+If $T:V\rightarrow W$ is bounded and bijective, then $T^{-1}$ is bounded. \\
+\pf{
+	$T$ is open and continuous, so $T^{-1}$ is continuous.
+}
+\end{cor}
+
+\noindent Let $X$ be a Banach space. Let $V,W$ be closed subspaces of $X$ with $V\cap W=\{0\}.$ Choose a norm on $V\oplus W$ (such as $\norm{(v,w)}=(\norm{v}^p+\norm{w}^p)^{1/p}$). Then $V\oplus W$ is complete. Let $T:V\oplus W\rightarrow X$ be defined by $T(v,w)=v+w.$ Then $T$ is a bijection and $T$ is bounded:
+$$\norm{T(v,w)}=\norm{v+w}_X\leq\norm{v}_X+\norm{w}_X\sim\norm{(v,w)}_{V\oplus W}.$$ \\
+By the Open-Mapping Theorem, $T^{-1}$ is continuous.
+
+\begin{center}
+\begin{tikzpicture}
+\node (a) at (-2,0) {$X$};
+\node (b) at (3,0) {$V\oplus W$};
+\node (c) at (3,-3) {$V$};
+\draw[->] (-1.6,0.1) -> (2.1,0.1) node[midway,above] {$T^{-1}$};
+\draw[->] (a) -> (c) node[midway,below] {$P$};
+\draw[->] (2.1,-0.1) -> (-1.6,-0.1) node[midway,below] {$T$};
+\draw[->] (b) -> (c) node[midway,right] {$\pi$};
+\end{tikzpicture}
+\end{center}
+
+$$(v,w)\mapsto v =P(T(v,w))$$ \\
+Let $P$ be the projection of $X$ onto $V$ along $W.$ \\
+\ub{Corollary}: $P$ is bounded. \\
+
+\begin{defn}
+Let $T:V\rightarrow W$ be any function. The \ub{graph} of $T$ is $$\Gamma(T)=\{(v,Tv):\;v\in V\}\subseteq V\times W.$$
+\end{defn}
+
+\noindent We say that $T$ is \ub{closeable} if $\overline{\Gamma(T)}$ is also the graph of some function $T':V\rightarrow W.$
+
+\begin{frame*}
+\noindent\ub{Closed Graph Theorem}: Let $V,W$ be Banach spaces, and let $T:V\rightarrow W$ be linear. If $\Gamma(T)$ is closed in $V\times W,$ then $T$ is bounded. \\
+\pf{
+	Let $\pi_1:\Gamma(T)\rightarrow V$ and $\pi_2:\Gamma(T)\rightarrow W$ be the projections of $\Gamma(T)$ onto $V$ and $W,$ respectively. Since $\Gamma(T)$ is closed, and $T$ is linear, $\Gamma(T)$ is a Banach space for $\norm{\cdot}_{V\oplus W}.$ Clearly, $\pi_1$ is continuous and bijective, so since it is linear, $\pi_1^{-1}$ is bounded. But then $T=\pi_2\circ\pi_1^{-1}$ is bounded.
+}
+\end{frame*}
+
+\noindent Hellinger's Theorem is a useful application of the Closed Graph Theorem.
+
+\begin{thm}
+Let $V$ and $W$ be Banach spaces, and let $T:V\rightarrow W$ be linear. If there is a linear $S:W^*\rightarrow V^*$ such that for all $\psi\in W^*$ and $v\in V,$ we have $\psi(T(v))=(S(\psi))(v),$ then $T$ is bounded. \\
+\pf{
+	We will show that $\Gamma(T)$ is closed. Let $(v_n,Tv_n)$ denote a sequence in $\Gamma(T)$ converging to $(v,w)\in V\oplus W.$ For any $\psi\in W^*,$
+	$$\psi(w)=\lim_{n\rightarrow\infty}=\psi(T(v_n))=\lim_{n\rightarrow\infty} (S(\psi))(v_n)=(S(\psi))(v)=\psi(T(v)).$$
+	Toward contradiction, suppose $w\neq T(v).$ Then by the Hahn-Banach Theorem, there exists a linear functional $\varphi$ such that $\varphi(w-T(v))\neq 0,$ i.e., $\varphi(w)\neq\varphi(T(v)),$ a contradiction. Therefore $w=T(v),$ hence $\Gamma(T)$ is closed.
+}
+\end{thm}
+
+\begin{frame*}
+\noindent\ub{Uniform Boundedness Principle (Banach-Steinhaus)}: Suppose $V$ and $W$ are normed vector spaces and $\{T_{\alpha}\}$ is a collection of linear transformations from $V$ to $W.$
+\begin{enumerate}
+\item[(a)] If $\sup_{\alpha}\norm{T_{\alpha}(x)}<\infty$ for all $x$ in some non-meager subset of $V,$ then $\sup_{\alpha}\norm{T}<\infty.$
+\item[(b)] If $V$ is a Banach space, and $\sup_{\alpha}\norm{T_{\alpha}(x)}<\infty$ for all $x\in V,$ then $\sup_{\alpha}\norm{T}<\infty.$
+\end{enumerate}
+\pf{
+	(b) follows from (a) by Baire's Theorem. \\
+	Let $E_n=\{v\in V:\;\sup_{\alpha}\norm{T_{\alpha}(v)}\leq n\}=\bigcap_{\alpha}\{v\in V:\;\norm{T(v)}\leq n\}.$ Then each $E_n$ is closed, and furthermore some $E_n$ must contain a closed ball $\overline{B_r(x_0)}\neq\{0\}.$ But then $E_{2n}\supseteq\overline{B_r(0)},$ for if $\norm{x}\leq r,$ then $x+x_0\in E_n$ and hence $\norm{T_{\alpha}(x)}\leq\norm{T_{\alpha}(x+x_0)}+\norm{T_{\alpha}(x_0)}\leq 2n.$ \\
+	Therefore we have $\norm{T_{\alpha}(x)}\leq 2n$ whenever $\norm{x}\leq r.$ Thus $\sup_{\alpha}\norm{T_{\alpha}}\leq 2n/r<\infty.$
+}
+\end{frame*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

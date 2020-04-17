@@ -1,0 +1,95 @@
+\documentclass[11pt]{book}
+\usepackage{amsmath, amsthm, amssymb, bm, bbm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{framed}
+\definecolor{timberwolf}{rgb}{0.94, 0.94, 0.94}
+\definecolor{azure}{rgb}{0.9, 0.95, 1.0}
+\colorlet{shadedef}{timberwolf}
+\colorlet{framedef}{timberwolf}
+\colorlet{shadethm}{azure}
+\colorlet{framethm}{azure}
+
+\addtolength{\topmargin}{-1in}
+\addtolength{\textwidth}{1in}
+\addtolength{\evensidemargin}{-0.7in}
+\addtolength{\textheight}{1.25in}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\inp}[2]{\langle #1,#2\rangle}
+\newcommand{\vc}[1]{\textbf{\underline{#1}}}
+\newcommand{\Ex}[0]{\vc{Ex}: }
+\newcommand{\R}[1]{\mathbb{R}^{#1}}
+\newcommand{\C}[1]{\mathbb{C}^{#1}}
+\newcommand{\pf}[1]{\textbf{\underline{Proof}}: #1 $\;\;\blacksquare$}
+\newcommand{\ub}[1]{\textbf{\underline{#1}}}
+\newcommand{\OO}[0]{\mathcal{O}}
+\newcommand{\TT}[0]{\mathcal{T}}
+\newcommand{\CC}[0]{\mathcal{C}}
+\newcommand{\FF}[0]{\mathcal{F}}
+\newcommand{\MM}[0]{\mathcal{M}}
+\newcommand{\LL}[0]{\mathcal{L}}
+\newcommand{\HH}[0]{\mathcal{H}}
+\newcommand{\Sm}[0]{\mathcal{S}}
+\newcommand{\se}[0]{\subseteq}
+\newcommand{\bint}[0]{\displaystyle\int}
+\newcommand{\sif}[0]{\text{SIF}(S,\mu)}
+\newcommand{\xsm}[0]{(X,\Sm,\mu)}
+\newcommand{\xsmb}[1]{(X,\Sm,\mu,{#1})}
+\newcommand{\muf}[0]{\mu_{\varphi}}
+\makeindex
+
+\newenvironment{prop}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framethm}{shadethm}}%
+  \MakeFramed {\FrameRestore}\noindent\textbf{\underline{Proposition}}:}%
+{\endMakeFramed}
+
+\newenvironment{lemma}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framethm}{shadethm}}%
+  \MakeFramed {\FrameRestore}\noindent\textbf{\underline{Lemma}}:}%
+{\endMakeFramed}
+
+\newenvironment{thm}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framethm}{shadethm}}%
+  \MakeFramed {\FrameRestore}\noindent\textbf{\underline{Theorem}}:}%
+{\endMakeFramed}
+
+\newenvironment{cor}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framethm}{shadethm}}%
+  \MakeFramed {\FrameRestore}\noindent\textbf{\underline{Corollary}}:}%
+{\endMakeFramed}
+
+\newenvironment{defn}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framedef}{shadedef}}%
+  \MakeFramed {\FrameRestore}\noindent\textbf{\underline{Def}}:}%
+{\endMakeFramed}
+
+\newenvironment{frame*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framethm}{shadethm}}%
+  \MakeFramed {\FrameRestore}}%
+{\endMakeFramed}
+
+
+\title{Math 202B: Topology and Analysis II Lecture Notes}
+\author{Joseph Pagadora \\ Instructor: Marc Rieffel}
+\date{Spring 2019}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\input{Chapter1}
+\input{Chapter2}
+\input{Chapter3}
+\input{Chapter4}
+\input{Chapter5}
+\input{Chapter6}
+\input{Chapter7}
+\input{Chapter8}
+
+\end{document}
